@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Říčany srdcem — již brzy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --rs-blue-deep: #15568f;
+    --rs-blue: #1f72c2;
+    --rs-blue-light: #4a98d8;
+    --rs-red: #d93434;
+    --rs-red-deep: #b22323;
+    --rs-cream: #fbf6ec;
+    --rs-ink: #0e2a45;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: "PT Serif", Georgia, serif;
+    color: var(--rs-cream);
+    background: radial-gradient(ellipse at 50% 30%, var(--rs-blue-light) 0%, var(--rs-blue) 38%, var(--rs-blue-deep) 100%);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
+    opacity: .45;
+    z-index: 1;
+  }
+
+  .page {
+    position: relative;
+    z-index: 5;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: clamp(20px, 4vw, 48px);
+    gap: clamp(16px, 3vh, 32px);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--rs-cream);
+  }
+  .logo-heart {
+    width: clamp(38px, 5vw, 56px);
+    height: clamp(38px, 5vw, 56px);
+    flex-shrink: 0;
+  }
+  .logo-text {
+    font-family: "PT Serif", Georgia, serif;
+    font-weight: 700;
+    line-height: 1.0;
+    font-size: clamp(20px, 2.4vw, 30px);
+    letter-spacing: -0.01em;
+    text-align: left;
+  }
+  .logo-text span { display: block; }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: clamp(28px, 5vh, 64px);
+    padding: clamp(24px, 6vh, 64px) 0;
+  }
+
+  .heart-stage {
+    position: relative;
+    width: clamp(280px, 46vw, 480px);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .heart-stage::before,
+  .heart-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--rs-red);
+    -webkit-mask: var(--heart-mask);
+            mask: var(--heart-mask);
+    -webkit-mask-size: contain;
+            mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+            mask-position: center;
+    opacity: .35;
+    transform-origin: 50% 55%;
+    animation: ring 2.4s cubic-bezier(.25,.65,.3,1) infinite;
+  }
+  .heart-stage::after {
+    animation-delay: 1.2s;
+  }
+  .heart {
+    position: relative;
+    width: 100%; height: 100%;
+    display: block;
+    filter: drop-shadow(0 18px 40px rgba(11, 31, 56, 0.45));
+    transform-origin: 50% 55%;
+    animation: pulse 1.6s cubic-bezier(.4, 0, .2, 1) infinite;
+  }
+  .heart svg { width: 100%; height: 100%; display: block; }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    20% { transform: scale(1.06); }
+    40% { transform: scale(0.98); }
+    60% { transform: scale(1.04); }
+    80% { transform: scale(1); }
+  }
+  @keyframes ring {
+    0%   { transform: scale(0.85); opacity: .35; }
+    70%  { opacity: 0; }
+    100% { transform: scale(1.55); opacity: 0; }
+  }
+
+  .heart-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--rs-cream);
+    text-align: center;
+    pointer-events: none;
+    padding: 18%;
+  }
+  .heart-label .kicker {
+    font-family: "PT Sans", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: clamp(10px, 1.05vw, 14px);
+    opacity: .92;
+  }
+  .heart-label .big {
+    font-family: "PT Serif", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(22px, 3.4vw, 44px);
+    line-height: 1.05;
+    margin-top: 10px;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  .tagline {
+    max-width: 720px;
+    font-family: "PT Serif", Georgia, serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.1vw, 26px);
+    line-height: 1.4;
+    color: rgba(251, 246, 236, 0.92);
+    text-wrap: balance;
+  }
+  .tagline strong { font-style: normal; font-weight: 700; }
+
+  .countdown {
+    display: flex;
+    gap: clamp(10px, 1.6vw, 22px);
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cd-cell {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 14px;
+    padding: 14px 18px 12px;
+    min-width: clamp(72px, 9vw, 110px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cd-num {
+    font-family: "PT Serif", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 3.6vw, 46px);
+    line-height: 1;
+    color: var(--rs-cream);
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-lbl {
+    font-family: "PT Sans", sans-serif;
+    font-size: clamp(10px, 0.9vw, 12px);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(251, 246, 236, 0.7);
+    margin-top: 6px;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    color: rgba(251, 246, 236, 0.78);
+    font-family: "PT Sans", sans-serif;
+    font-size: clamp(13px, 1.05vw, 15px);
+    text-align: center;
+  }
+
+  @media (max-width: 540px) {
+    .heart-stage { width: 70vw; }
+    .logo-text { font-size: 22px; }
+    .countdown { gap: 8px; }
+    .cd-cell { padding: 10px 12px 8px; min-width: 64px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .heart, .heart-stage::before, .heart-stage::after { animation: none; }
+    .heart-stage::before, .heart-stage::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="header">
+    <a class="logo" href="/" aria-label="Říčany srdcem">
+      <span class="logo-heart" aria-hidden="true">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <path d="M50 92 C 14 68, 2 44, 10 24 C 18 8, 38 6, 48 18 C 49 19, 49.5 20, 50 22 C 50.5 20, 51 19, 52 18 C 62 6, 82 8, 90 24 C 98 44, 86 68, 50 92 Z"
+                fill="#d93434"/>
+        </svg>
+      </span>
+      <span class="logo-text">
+        <span>Říčany</span>
+        <span>srdcem</span>
+      </span>
+    </a>
+  </header>
+
+  <main class="main">
+    <div class="heart-stage" id="heartStage">
+      <div class="heart" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <path d="M50 92 C 14 68, 2 44, 10 24 C 18 8, 38 6, 48 18 C 49 19, 49.5 20, 50 22 C 50.5 20, 51 19, 52 18 C 62 6, 82 8, 90 24 C 98 44, 86 68, 50 92 Z"
+                fill="#d93434"/>
+        </svg>
+      </div>
+      <div class="heart-label">
+        <div class="kicker">Komunální volby</div>
+        <div class="big">9.&nbsp;–&nbsp;10.<br>října 2026</div>
+      </div>
+    </div>
+
+    <p class="tagline">
+      <strong>Již brzy.</strong><br>
+      Připravujeme novou kandidátku pro <strong>komunální volby v Říčanech</strong>.
+    </p>
+
+    <div class="countdown" id="countdown" aria-label="Odpočet do voleb">
+      <div class="cd-cell"><div class="cd-num" data-cd="d">—</div><div class="cd-lbl">dní</div></div>
+      <div class="cd-cell"><div class="cd-num" data-cd="h">—</div><div class="cd-lbl">hodin</div></div>
+      <div class="cd-cell"><div class="cd-num" data-cd="m">—</div><div class="cd-lbl">minut</div></div>
+      <div class="cd-cell"><div class="cd-num" data-cd="s">—</div><div class="cd-lbl">sekund</div></div>
+    </div>
+  </main>
+
+  <footer class="footer" aria-hidden="true"></footer>
+</div>
+
+<script>
+  (function(){
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 92 C 14 68, 2 44, 10 24 C 18 8, 38 6, 48 18 C 49 19, 49.5 20, 50 22 C 50.5 20, 51 19, 52 18 C 62 6, 82 8, 90 24 C 98 44, 86 68, 50 92 Z' fill='black'/></svg>`;
+    const url = "url(\"data:image/svg+xml;utf8," + encodeURIComponent(svg) + "\")";
+    document.documentElement.style.setProperty('--heart-mask', url);
+  })();
+
+  (function(){
+    const target = new Date('2026-10-09T14:00:00+02:00');
+    const set = (k, v) => {
+      const el = document.querySelector(`[data-cd="${k}"]`);
+      if (el) el.textContent = String(v).padStart(2, '0');
+    };
+    function tick(){
+      let diff = Math.max(0, target - new Date());
+      const d = Math.floor(diff / 86400000); diff -= d * 86400000;
+      const h = Math.floor(diff / 3600000);  diff -= h * 3600000;
+      const m = Math.floor(diff / 60000);    diff -= m * 60000;
+      const s = Math.floor(diff / 1000);
+      set('d', d); set('h', h); set('m', m); set('s', s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+</body>
+</html>
