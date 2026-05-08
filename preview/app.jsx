@@ -80,7 +80,7 @@ function Hero() {
             <span className="kicker-line"></span>
             <span>Komunální volby · 9.–10. října 2026</span>
           </div>
-          <h1 className="hero-title">Říčany<br /><em>srdcem.</em></h1>
+          <h1 className="hero-title">Říčany<br /><em>srdcem</em></h1>
           <p className="hero-lead">{D.leader.intro}</p>
           <div className="hero-sign">
             <div className="sig-name">{D.leader.name}</div>
