@@ -3,9 +3,15 @@ export const config = {
 };
 
 export default function middleware(request) {
-  const expected = 'Basic ' + btoa('preview:' + (process.env.PREVIEW_PASSWORD || ''));
-  if (request.headers.get('authorization') === expected) {
-    return;
+  const header = request.headers.get('authorization') || '';
+  if (header.startsWith('Basic ')) {
+    try {
+      const decoded = atob(header.slice(6));
+      const password = decoded.slice(decoded.indexOf(':') + 1);
+      if (password && password === process.env.PREVIEW_PASSWORD) {
+        return;
+      }
+    } catch {}
   }
   return new Response('Authentication required', {
     status: 401,
