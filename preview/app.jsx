@@ -86,14 +86,24 @@ function Hero() {
             <div className="sig-name">{D.leader.name}</div>
             <div className="sig-role">{D.leader.role}</div>
           </div>
-          <a href="#priority" className="hero-cta" onClick={(e) => {
-            e.preventDefault();
-            const el = document.getElementById('priority');
-            if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-          }}>
-            Naše priority
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-          </a>
+          <div className="hero-ctas">
+            <a href="#priority" className="hero-cta" onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById('priority');
+              if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+            }}>
+              Naše priority
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </a>
+            <a href="#tym" className="hero-cta hero-cta-secondary" onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById('tym');
+              if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+            }}>
+              Náš tým
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </a>
+          </div>
         </div>
         <div className="hero-photo">
           <img src={D.leader.photo} alt={D.leader.name} />

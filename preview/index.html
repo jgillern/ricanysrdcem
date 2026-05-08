@@ -140,10 +140,22 @@
   .sig-role { font-size: 14px; color: var(--rs-ink-soft); margin-top: 2px; }
   .hero-cta {
     display: inline-flex; align-items: center; gap: 10px;
-    background: var(--rs-blue); color: #fff; padding: 14px 22px; border-radius: 999px;
-    font-weight: 700; font-size: 15px; transition: background .2s ease, transform .2s ease;
+    background: var(--rs-blue); color: #fff; padding: 12px 20px; border-radius: 999px;
+    font-weight: 700; font-size: 15px;
+    border: 2px solid transparent;
+    transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
   }
   .hero-cta:hover { background: var(--rs-blue-deep); transform: translateY(-1px); }
+  .hero-ctas { display: inline-flex; gap: 12px; flex-wrap: wrap; }
+  .hero-cta-secondary {
+    background: transparent;
+    color: var(--rs-blue);
+    border-color: var(--rs-blue);
+  }
+  .hero-cta-secondary:hover {
+    background: var(--rs-blue);
+    color: #fff;
+  }
 
   .hero-photo {
     position: relative;
