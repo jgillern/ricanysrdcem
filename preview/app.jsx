@@ -305,13 +305,6 @@ function Team({ onOpen }) {
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-inner">
-        <div className="footer-mark">
-          <Heart className="footer-heart" />
-          <span>Říčany srdcem</span>
-        </div>
-        <div className="footer-meta">Komunální volby 9.–10. října 2026</div>
-      </div>
       <div className="footer-partners">
         <span className="footer-partners-label">Společná kandidátka</span>
         <img className="footer-partner-logo footer-partner-logo--top09" src="/preview/top09.png" alt="TOP 09" />
