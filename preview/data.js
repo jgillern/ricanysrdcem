@@ -1,0 +1,354 @@
+// Placeholder data — finální obsah a fotky doplníme.
+// Fotky: Unsplash portréty (na finále budou ateliérové fotky s odebraným pozadím).
+
+window.RS_DATA = {
+  leader: {
+    id: 'eva-novakova',
+    name: 'Mgr. Eva Nováková',
+    role: 'Lídryně kandidátky · kandidátka na starostku',
+    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&h=1100&fit=crop&crop=faces&q=80',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. V Říčanech žije od narození, vystudovala práva na Univerzitě Karlově a posledních deset let se věnuje neziskovému sektoru a místní komunitě. Je matkou dvou dětí a vede spolek pro rozvoj veřejného prostoru.',
+    intro: 'Říčany jsou pro mě domov. Místo, kde znám souseda, kam vodím děti do školy a kde si chci v sobotu sednout s kamarády na náměstí. Posledních pět let sleduju, jak nám naše město utíká mezi prsty — chybí byty pro mladé rodiny, doprava se zadrhává, parky chřadnou. Sešli jsme se proto jako lidé, kteří město skutečně znají, a věříme, že to jde dělat lépe. Otevřeně, slušně, a hlavně srdcem.'
+  },
+
+  top6: [
+    {
+      id: 'petr-svoboda',     n: 2,
+      name: 'Ing. Petr Svoboda',
+      role: 'Doprava a infrastruktura',
+      photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=700&fit=crop&crop=faces&q=80',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dopravní inženýr s patnáctiletou praxí, otec tří dětí a vášnivý cyklista. V Říčanech žije od roku 2008 a roky se věnuje plánování bezpečných cest do škol.'
+    },
+    {
+      id: 'jana-dvorakova',   n: 3,
+      name: 'MUDr. Jana Dvořáková',
+      role: 'Sociální služby a zdraví',
+      photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=700&fit=crop&crop=faces&q=80',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praktická lékařka v říčanské poliklinice, dlouholetá dobrovolnice a předsedkyně sdružení pro pomoc seniorům. Klade důraz na dostupnou péči blízko domova.'
+    },
+    {
+      id: 'tomas-prochazka',  n: 4,
+      name: 'Tomáš Procházka',
+      role: 'Sport, kultura a volný čas',
+      photo: 'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?w=600&h=700&fit=crop&crop=faces&q=80',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Trenér mládeže ve fotbalovém klubu, organizátor letních táborů a člen kulturní komise. Věří, že komunitu drží pohromadě sdílené zážitky.'
+    },
+    {
+      id: 'klara-vesela',     n: 5,
+      name: 'Klára Veselá',
+      role: 'Životní prostředí a zeleň',
+      photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=700&fit=crop&crop=faces&q=80',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Krajinná architektka, podílela se na obnově několika parků na Říčansku. Spoluzakladatelka spolku Olivovy lesy. Záleží jí na tom, aby město dýchalo.'
+    },
+    {
+      id: 'martin-cerny',     n: 6,
+      name: 'Mgr. Martin Černý',
+      role: 'Školství a vzdělávání',
+      photo: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&h=700&fit=crop&crop=faces&q=80',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Učitel matematiky na ZŠ Bezručova, koordinátor doučovacího programu a spoluautor projektu otevřená škola. Otec dvou dětí.'
+    },
+    {
+      id: 'lucie-horakova',   n: 7,
+      name: 'Bc. Lucie Horáková',
+      role: 'Otevřená radnice a digitalizace',
+      photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=700&fit=crop&crop=faces&q=80',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Specialistka na e-government a digitalizaci veřejné správy. Pracovala pro Hlavní město Praha i několik středočeských obcí. Věří v radnici, která rozumí lidem.'
+    }
+  ],
+
+  rest: [
+    { id: 'pavel-kucera',     n:  8, name: 'Pavel Kučera',          role: 'podnikatel, gastronomie' },
+    { id: 'jiri-marek',       n:  9, name: 'Ing. Jiří Marek',       role: 'projektant, územní plánování' },
+    { id: 'hana-holubova',    n: 10, name: 'Mgr. Hana Holubová',    role: 'ředitelka MŠ' },
+    { id: 'jakub-benes',      n: 11, name: 'Jakub Beneš',           role: 'IT konzultant' },
+    { id: 'tereza-fialova',   n: 12, name: 'Tereza Fialová',        role: 'pedagožka volného času' },
+    { id: 'ondrej-krejci',    n: 13, name: 'Ondřej Krejčí',         role: 'truhlář, místní řemeslník' },
+    { id: 'marketa-pokorna',  n: 14, name: 'Mgr. Markéta Pokorná',  role: 'právnička' },
+    { id: 'vojtech-simek',    n: 15, name: 'Vojtěch Šimek',         role: 'student VŠ' },
+    { id: 'anezka-ruzickova', n: 16, name: 'Anežka Růžičková',      role: 'sociální pracovnice' },
+    { id: 'daniel-vlcek',     n: 17, name: 'Daniel Vlček',          role: 'hasič, dobrovolník' },
+    { id: 'barbora-soukupova',n: 18, name: 'Barbora Soukupová',     role: 'zdravotní sestra' },
+    { id: 'filip-hruby',      n: 19, name: 'Filip Hrubý',           role: 'krajinný ekolog' },
+    { id: 'karolina-bartosova',n: 20,name: 'Karolína Bartošová',    role: 'kulturní manažerka' },
+    { id: 'stepan-dolezal',   n: 21, name: 'Štěpán Doležal',        role: 'architekt' },
+    { id: 'petra-vackova',    n: 22, name: 'Petra Vacková',         role: 'majitelka kavárny' },
+    { id: 'adam-zelenka',     n: 23, name: 'Adam Zelenka',          role: 'sportovní trenér' },
+    { id: 'veronika-maskova', n: 24, name: 'Veronika Mašková',      role: 'novinářka' },
+    { id: 'jakub-stehlik',    n: 25, name: 'Jakub Stehlík',         role: 'důchodce, dlouholetý sokol' }
+  ],
+
+  priorities: [
+    {
+      n: 1,
+      title: 'Bezpečná a plynulá doprava',
+      lead: 'Méně tranzitu skrz centrum, lepší parkování pro místní a bezpečné cesty do škol.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Doprava je téma, které trápí prakticky každého obyvatele Říčan. Roky odkládaná řešení vedla k tomu, že se centrum města mění na průjezdovou tepnu pro celé okolí, parkování v okolí nádraží je každodenní zápas a bezpečnost dětí na cestě do školy zůstává sázkou na štěstí.'
+          ]
+        },
+        {
+          heading: 'Cesty do škol bez strachu',
+          paragraphs: [
+            'Vyřešíme chybějící chodníky a přechody na trasách, kterými chodí děti do ZŠ Bezručova, ZŠ u Říčanského lesa i do gymnázia. Prosadíme bezpečnostní opatření v okolí škol — zpomalovací prahy, výrazné značení a v ranní špičce dohled městské policie u nejrizikovějších přechodů.',
+            'Podpoříme školní autobus pro části Pacov, Voděrádky a Strašín, kde dnes děti dojíždějí v nevyhovujících podmínkách.'
+          ]
+        },
+        {
+          heading: 'Parkování pro místní, ne pro průjezd',
+          paragraphs: [
+            'Zavedeme rezidenční zóny v ulicích kolem nádraží a centra, aby místní měli kde zaparkovat. Dokončíme parkovací dům P+R u nádraží, který je v plánech už osmým rokem, a propojíme ho lepším spojem na pražské metro.'
+          ]
+        },
+        {
+          heading: 'Obchvat a tranzit',
+          paragraphs: [
+            'Budeme tvrdě tlačit na dokončení obchvatu Říčan, který odvede tranzitní dopravu z centra. Dokud nebude hotov, prosadíme dočasná opatření, jako je zákaz vjezdu kamionů přes náměstí v pracovních dnech.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 2,
+      title: 'Rozumný rozvoj a územní plán',
+      lead: 'Stop živelné výstavbě. Investice do bydlení i veřejného prostoru tam, kde dávají smysl.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Územní plán musí být nástroj, který chrání kvalitu života — ne dokument, který se mění podle aktuálního developera u jednacího stolu.'
+          ]
+        },
+        {
+          heading: 'Transparentní pravidla pro novou výstavbu',
+          paragraphs: [
+            'Prosadíme jasná, předem zveřejněná pravidla pro novou zástavbu. U projektů nad určitou velikost budeme vyžadovat odpovídající občanskou vybavenost — dostatek míst v MŠ, ZŠ, kapacitu vodovodu a kanalizace, dopravní napojení.',
+            'Žádný developer si nezíská výjimku jen proto, že se starostou hraje tenis.'
+          ]
+        },
+        {
+          heading: 'Ochrana zelených ploch',
+          paragraphs: [
+            'Prosadíme ochranu zelených ploch v centru a na okrajích Říčan. Veřejné pozemky neprodáváme — pronajímáme nebo na nich budujeme obecní bydlení.'
+          ]
+        },
+        {
+          heading: 'Dostupné bydlení pro mladé rodiny',
+          paragraphs: [
+            'Připravíme koncepci obecního bydlení s důrazem na startovací byty pro mladé Říčaňáky. Cílem je, aby se mladí lidé mohli vrátit do Říčan po studiu, aniž by museli sáhnout na hypotéku, kterou nikdy nesplatí.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 3,
+      title: 'Kvalitní školství a kapacity',
+      lead: 'Dost míst v MŠ a ZŠ pro každé říčanské dítě a moderní výukové prostředí.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Kapacity škol jsou pro Říčany dlouhodobá bolest. Každý rok se opakuje stejné drama — nedostatek míst v MŠ, přeplněné první třídy, rodiče, kteří dojíždějí do okolních obcí.'
+          ]
+        },
+        {
+          heading: 'Kapacity MŠ a ZŠ',
+          paragraphs: [
+            'Zajistíme včasnou přípravu rozšíření ZŠ Bezručova a stavby nové MŠ v jižní části Říčan. Budeme jednat s Ministerstvem školství i Středočeským krajem o dotacích, které dnes leží na stole nevyužité.'
+          ]
+        },
+        {
+          heading: 'Podpora pedagogů a žáků',
+          paragraphs: [
+            'Podpoříme školní psychology, asistenty pedagoga a programy pro nadané děti i děti se speciálními potřebami. Ředitelům škol vrátíme zpět rozhodovací pravomoci, místo toho, aby každou drobnost schvalovala radnice.',
+            'Učitelé budou mít zázemí, které si zaslouží — moderní kabinety, technické vybavení a podporu při administrativě.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 4,
+      title: 'Zelené Říčany — péče o lesy a parky',
+      lead: 'Olivovy lesy a parky jako srdce města. Méně asfaltu, víc stínu a vody.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adaptace na klimatické změny začíná u dlažby a stromů na rohu ulice. Říčany mají jedinečné dědictví — Olivovy lesy, šest rybníků, lipové stromořadí. Stojí za to, aby tu byly i pro naše děti.'
+          ]
+        },
+        {
+          heading: 'Modrozelená infrastruktura',
+          paragraphs: [
+            'Postupně budeme nahrazovat zpevněné plochy zelení tam, kde to dává smysl. Zavedeme hospodaření s dešťovou vodou — místo toho, aby všechna voda končila v kanalizaci, ji budeme zachycovat a využívat na zálivku městské zeleně.'
+          ]
+        },
+        {
+          heading: 'Péče o stromořadí a parky',
+          paragraphs: [
+            'Důsledně budeme pečovat o stávající stromořadí — pravidelné odborné prořezy, zalévání nových výsadeb, ochrana před stavebními zásahy. Při kácení pro novou výstavbu budeme vyžadovat náhradní výsadbu v poměru 1:3.',
+            'Parky musí být místa, kam se chce vracet — s lavičkami, vodou, kulturou a jednoduchou údržbou.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 5,
+      title: 'Sport, kultura a komunita',
+      lead: 'Podpora místních spolků a živá kulturní sezóna pro všechny generace.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Říčany žijí díky lidem, kteří dělají věci pro druhé — Sokol, hasiči, ochotníci, hudební klub, spolky maminek.'
+          ]
+        },
+        {
+          heading: 'Férová podpora spolků',
+          paragraphs: [
+            'Zjednodušíme grantovou podporu — místo nepřehledných formulářů a vyjednávání zavedeme jasná, transparentní pravidla. Pro malé spolky bude k dispozici zjednodušený formulář a rychlé rozhodnutí do 30 dnů.'
+          ]
+        },
+        {
+          heading: 'Letní scéna a kulturní dům',
+          paragraphs: [
+            'Obnovíme tradici letní scény v parku. Kulturní dům si zaslouží novou energii — méně formálních akcí pro vybranou společnost, více koncertů, divadel, filmových klubů a komunitních akcí pro rodiny.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 6,
+      title: 'Sociální služby a senioři',
+      lead: 'Důstojné stáří doma — pečovatelská služba, dostupná lékařská péče, klubové centrum.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Senioři tvoří značnou část obyvatel Říčan a zaslouží si péči, která jim umožní zůstat doma co nejdéle.'
+          ]
+        },
+        {
+          heading: 'Terénní pečovatelská služba',
+          paragraphs: [
+            'Rozšíříme terénní pečovatelskou službu o víkendové směny a pohotovost. Zavedeme tísňová tlačítka pro osamělé seniory s napojením na městskou policii.'
+          ]
+        },
+        {
+          heading: 'Komunitní centrum pro seniory',
+          paragraphs: [
+            'Vybudujeme komunitní centrum pro setkávání, kurzy, poradnu i dobrovolnické aktivity. Místo, kam mohou senioři přijít na kávu, zacvičit si jógu nebo si pomoci s vyplněním formuláře.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 7,
+      title: 'Otevřená a transparentní radnice',
+      lead: 'Veřejné zakázky pod lupou, srozumitelný rozpočet a participace, která něco znamená.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Radnice nemusí být šedá krabice, ze které občas vyletí faktura. Je to nástroj, který spravuje peníze nás všech — a my máme nárok vědět, kam jdou.'
+          ]
+        },
+        {
+          heading: 'Otevřená data a smlouvy',
+          paragraphs: [
+            'Zveřejníme všechny smlouvy a zakázky nad 50 000 Kč v otevřených datech, aby se v nich dal vyhledávat. Faktury i platby radnice budou online v reálném čase.'
+          ]
+        },
+        {
+          heading: 'Participativní rozpočet',
+          paragraphs: [
+            'Zavedeme participativní rozpočet ve výši 1 % ročních výdajů — o této částce budou rozhodovat občané formou hlasování o navržených projektech.'
+          ]
+        },
+        {
+          heading: 'Živé přenosy zastupitelstva',
+          paragraphs: [
+            'Zveřejníme živé přenosy zastupitelstva s časovými značkami u jednotlivých bodů, takže si občan najde to, co ho zajímá, bez nutnosti tříhodinového sledování.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 8,
+      title: 'Bezpečné město pro všechny',
+      lead: 'Funkční městská policie, prevence a osvětlení tam, kde dnes chybí.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pocit bezpečí začíná u maličkostí — funkční pouliční osvětlení, ostříhaná zeleň u zastávek, viditelná pěší policie ve večerních hodinách.'
+          ]
+        },
+        {
+          heading: 'Prevence místo represe',
+          paragraphs: [
+            'Vsadíme na prevenci a spolupráci se školami i sociálními pracovníky. Žádné tažení proti komukoliv, jenom péče o veřejný prostor a o lidi v něm.'
+          ]
+        },
+        {
+          heading: 'Osvětlení a údržba',
+          paragraphs: [
+            'Provedeme audit pouličního osvětlení a doplníme svítidla v rizikových místech — okolí škol, parky, zastávky. Zavedeme jednoduchou aplikaci, kde občan nahlásí porouchanou lampu a do týdne má hotovo.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 9,
+      title: 'Chytré investice do infrastruktury',
+      lead: 'Voda, kanalizace, chodníky, veřejné budovy. Méně reklamních akcí, víc skutečné práce.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Připravíme dlouhodobý investiční plán s prioritami, který přečká i změny vedení radnice.'
+          ]
+        },
+        {
+          heading: 'Skryté, ale podstatné',
+          paragraphs: [
+            'Soustředíme se na to, co lidé denně používají — chodníky, kanalizaci, školní budovy. Méně reklamních hřišť na fotce do brožury, víc opravených chodníků v Pacově a Voděrádkách.'
+          ]
+        },
+        {
+          heading: 'Energetické úspory',
+          paragraphs: [
+            'Energetické úspory veřejných budov nám vrátí peníze do dalších projektů. Postupně zateplíme školy, úřad i kulturní dům. Investice se vrátí během 7–10 let.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 10,
+      title: 'Podpora lokálního podnikání',
+      lead: 'Živé centrum s kavárnami, řemesly a farmářským trhem — žádné zatažené rolety.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Místní podnikatelé tvoří charakter města. Kavárnička, hodinář, květinářství, řemeslník — to jsou lidé, kteří dělají Říčany Říčanami.'
+          ]
+        },
+        {
+          heading: 'Méně bariér, víc živého centra',
+          paragraphs: [
+            'Snížíme bariéry pro otevírání provozoven v centru — zjednodušíme schvalování záborů, terasy a venkovní reklamy. Zavedeme zvýhodněné nájemné v obecních prostorech pro řemeslníky a malé prodejce.'
+          ]
+        },
+        {
+          heading: 'Trhy a komunita',
+          paragraphs: [
+            'Podpoříme farmářské a řemeslné trhy v sezóně každou sobotu na náměstí. Budeme chránit přízemní obchodní parter — žádné nové směny obchodů na byty.'
+          ]
+        }
+      ]
+    }
+  ]
+};
