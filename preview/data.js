@@ -71,11 +71,7 @@ window.RS_DATA = {
     { id: 'barbora-soukupova',n: 18, name: 'Barbora Soukupová',     role: 'zdravotní sestra' },
     { id: 'filip-hruby',      n: 19, name: 'Filip Hrubý',           role: 'krajinný ekolog' },
     { id: 'karolina-bartosova',n: 20,name: 'Karolína Bartošová',    role: 'kulturní manažerka' },
-    { id: 'stepan-dolezal',   n: 21, name: 'Štěpán Doležal',        role: 'architekt' },
-    { id: 'petra-vackova',    n: 22, name: 'Petra Vacková',         role: 'majitelka kavárny' },
-    { id: 'adam-zelenka',     n: 23, name: 'Adam Zelenka',          role: 'sportovní trenér' },
-    { id: 'veronika-maskova', n: 24, name: 'Veronika Mašková',      role: 'novinářka' },
-    { id: 'jakub-stehlik',    n: 25, name: 'Jakub Stehlík',         role: 'důchodce, dlouholetý sokol' }
+    { id: 'stepan-dolezal',   n: 21, name: 'Štěpán Doležal',        role: 'architekt' }
   ],
 
   priorities: [
