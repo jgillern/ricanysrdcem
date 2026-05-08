@@ -174,7 +174,7 @@ function Priorities({ onOpen }) {
           <span className="kicker-line"></span>
           <span>10 priorit</span>
         </div>
-        <h2 className="section-title">S&nbsp;čím jdeme do toho</h2>
+        <h2 className="section-title">S&nbsp;čím do toho jdeme</h2>
         <p className="section-sub">
           Konkrétní věci, na kterých se shodneme a&nbsp;za&nbsp;které ručíme. Klikněte na kteroukoliv prioritu pro&nbsp;detail.
         </p>
