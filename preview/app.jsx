@@ -286,7 +286,7 @@ function Team({ onOpen }) {
           <span className="kicker-line"></span>
           <span>Náš tým</span>
         </div>
-        <h2 className="section-title">Naši kandidáti pro&nbsp;Říčany</h2>
+        <h2 className="section-title">Naši kandidáti</h2>
         <p className="section-sub">
           Sousedé, lidé z místních škol, spolků a&nbsp;firem. Lidé, které potkáváte v&nbsp;Říčanech každý den.
         </p>
