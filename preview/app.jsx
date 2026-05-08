@@ -172,7 +172,7 @@ function Priorities({ onOpen }) {
       <div className="section-head">
         <div className="kicker">
           <span className="kicker-line"></span>
-          <span>10 priorit</span>
+          <span>Naše priority</span>
         </div>
         <h2 className="section-title">S&nbsp;čím do toho jdeme</h2>
         <p className="section-sub">
