@@ -156,17 +156,19 @@
   }
   .hero-photo::after {
     content: ""; position: absolute; right: -4px; top: 8%;
-    width: 88px; height: 88px;
+    width: 110px; height: 110px;
     background: var(--rs-red);
     -webkit-mask: var(--heart-mask) center/contain no-repeat;
             mask: var(--heart-mask) center/contain no-repeat;
     transform: rotate(-8deg);
-    animation: pulse 1.8s cubic-bezier(.4,0,.2,1) infinite;
+    animation: pulse 1.5s cubic-bezier(.4,0,.2,1) infinite;
   }
   @keyframes pulse {
-    0%, 100% { transform: rotate(-8deg) scale(1); }
-    30%      { transform: rotate(-8deg) scale(1.08); }
-    60%      { transform: rotate(-8deg) scale(0.98); }
+    0%   { transform: rotate(-8deg) scale(1); }
+    15%  { transform: rotate(-8deg) scale(1.2); }
+    30%  { transform: rotate(-8deg) scale(0.96); }
+    45%  { transform: rotate(-8deg) scale(1.12); }
+    60%, 100% { transform: rotate(-8deg) scale(1); }
   }
 
   @media (max-width: 860px) {
