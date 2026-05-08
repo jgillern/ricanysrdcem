@@ -312,6 +312,12 @@ function Footer() {
         </div>
         <div className="footer-meta">Komunální volby 9.–10. října 2026</div>
       </div>
+      <div className="footer-partners">
+        <span className="footer-partners-label">Společná kandidátka</span>
+        <span className="party party-top09">TOP&nbsp;09</span>
+        <span className="party party-kdu">KDU·ČSL</span>
+        <span className="footer-partners-tail">a&nbsp;nezávislých kandidátů</span>
+      </div>
     </footer>
   );
 }
