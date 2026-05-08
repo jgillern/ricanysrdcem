@@ -97,26 +97,45 @@ window.RS_DATA = {
         {
           heading: null,
           paragraphs: [
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Doprava je téma, které trápí prakticky každého obyvatele Říčan. Roky odkládaná řešení vedla k tomu, že se centrum města mění na průjezdovou tepnu pro celé okolí, parkování v okolí nádraží je každodenní zápas a bezpečnost dětí na cestě do školy zůstává sázkou na štěstí.'
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Doprava je téma, které trápí prakticky každého obyvatele Říčan. Roky odkládaná řešení vedla k tomu, že se centrum města mění na průjezdovou tepnu pro celé okolí, parkování v okolí nádraží je každodenní zápas a bezpečnost dětí na cestě do školy zůstává sázkou na štěstí.',
+            'Přístup k dopravě v Říčanech musí být systematický a dlouhodobý. Žádné izolované zákroky, žádné populistické sliby — jen konkrétní opatření s jasným harmonogramem a měřitelnými výstupy. Zveřejníme dopravní strategii města na pět let dopředu a každoročně vyhodnotíme, co se podařilo a co zůstává.'
           ]
         },
         {
           heading: 'Cesty do škol bez strachu',
           paragraphs: [
             'Vyřešíme chybějící chodníky a přechody na trasách, kterými chodí děti do ZŠ Bezručova, ZŠ u Říčanského lesa i do gymnázia. Prosadíme bezpečnostní opatření v okolí škol — zpomalovací prahy, výrazné značení a v ranní špičce dohled městské policie u nejrizikovějších přechodů.',
-            'Podpoříme školní autobus pro části Pacov, Voděrádky a Strašín, kde dnes děti dojíždějí v nevyhovujících podmínkách.'
+            'Podpoříme školní autobus pro části Pacov, Voděrádky a Strašín, kde dnes děti dojíždějí v nevyhovujících podmínkách.',
+            'Spolu se školami spustíme program „Bezpečně do školy" — mapování rizikových míst přímo dětmi a rodiči, výuka v dopravní výchově, pravidelné cyklokurzy a dohled u přechodů během prvních týdnů školního roku.'
           ]
         },
         {
           heading: 'Parkování pro místní, ne pro průjezd',
           paragraphs: [
-            'Zavedeme rezidenční zóny v ulicích kolem nádraží a centra, aby místní měli kde zaparkovat. Dokončíme parkovací dům P+R u nádraží, který je v plánech už osmým rokem, a propojíme ho lepším spojem na pražské metro.'
+            'Zavedeme rezidenční zóny v ulicích kolem nádraží a centra, aby místní měli kde zaparkovat. Dokončíme parkovací dům P+R u nádraží, který je v plánech už osmým rokem, a propojíme ho lepším spojem na pražské metro.',
+            'Kromě parkovacího domu vybudujeme menší satelitní parkoviště u zastávek autobusů a vyjednáme s Českou poštou a okolními firmami možnost využití jejich parkovacích ploch ve večerních hodinách a o víkendech.',
+            'Pro ulice s rezidenčním režimem zavedeme jednoduchý online systém pro pořízení parkovací karty — bez fronty, bez papírů, bez návštěvy úřadu.'
           ]
         },
         {
           heading: 'Obchvat a tranzit',
           paragraphs: [
-            'Budeme tvrdě tlačit na dokončení obchvatu Říčan, který odvede tranzitní dopravu z centra. Dokud nebude hotov, prosadíme dočasná opatření, jako je zákaz vjezdu kamionů přes náměstí v pracovních dnech.'
+            'Budeme tvrdě tlačit na dokončení obchvatu Říčan, který odvede tranzitní dopravu z centra. Dokud nebude hotov, prosadíme dočasná opatření, jako je zákaz vjezdu kamionů přes náměstí v pracovních dnech.',
+            'Připravíme se na čas, kdy obchvat bude funkční — odpovídající úprava centra, zklidnění hlavních tříd, navrácení prostoru chodcům a cyklistům. Z dnešní průjezdové tepny musí vzniknout živé městské centrum, ne prázdná ulice.'
+          ]
+        },
+        {
+          heading: 'Cyklistika a pěší doprava',
+          paragraphs: [
+            'Postupně doplníme síť cyklostezek, aby propojovala obytné části s nádražím, školami a centrem. Zaměříme se na chybějící úseky — žádné hezké, ale neúplné cesty „odnikud nikam".',
+            'Při každé rekonstrukci ulice budeme posuzovat, zda lze vytvořit prostor pro pěší a cyklisty, ne jen pro auta. Standardem se stane šířka chodníku, na který se vejde rodič s kočárkem a děti vedle sebe.'
+          ]
+        },
+        {
+          heading: 'Veřejná doprava a integrace',
+          paragraphs: [
+            'Budeme jednat s ROPID a Středočeským krajem o vyšších frekvencích autobusů zejména ve špičkách a o nočních spojích na víkendy. Zájem obyvatel je dlouhodobě prokazatelný, jen chybí někdo, kdo to bude tlačit.',
+            'Podpoříme propojení městské hromadné dopravy s přilehlými obcemi a budeme prosazovat férovou tarifní integraci — aby cesta z Pacova do centra Říčan nestála víc než cesta z Říčan do Prahy.'
           ]
         }
       ]
