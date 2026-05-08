@@ -4,7 +4,7 @@
 window.RS_DATA = {
   leader: {
     id: 'eva-novakova',
-    name: 'Mgr. Eva Nováková',
+    name: 'Eva Nováková',
     role: 'Lídryně kandidátky · kandidátka na starostku',
     job: 'ředitelka neziskové organizace',
     photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&h=1100&fit=crop&crop=faces&q=80',
@@ -15,14 +15,14 @@ window.RS_DATA = {
   top6: [
     {
       id: 'petr-svoboda',     n: 2,
-      name: 'Ing. Petr Svoboda',
+      name: 'Petr Svoboda',
       role: 'dopravní inženýr',
       photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dopravní inženýr s patnáctiletou praxí, otec tří dětí a vášnivý cyklista. V Říčanech žije od roku 2008 a roky se věnuje plánování bezpečných cest do škol.'
     },
     {
       id: 'jana-dvorakova',   n: 3,
-      name: 'MUDr. Jana Dvořáková',
+      name: 'Jana Dvořáková',
       role: 'praktická lékařka',
       photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praktická lékařka v říčanské poliklinice, dlouholetá dobrovolnice a předsedkyně sdružení pro pomoc seniorům. Klade důraz na dostupnou péči blízko domova.'
@@ -43,14 +43,14 @@ window.RS_DATA = {
     },
     {
       id: 'martin-cerny',     n: 6,
-      name: 'Mgr. Martin Černý',
+      name: 'Martin Černý',
       role: 'učitel matematiky',
       photo: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Učitel matematiky na ZŠ Bezručova, koordinátor doučovacího programu a spoluautor projektu otevřená škola. Otec dvou dětí.'
     },
     {
       id: 'lucie-horakova',   n: 7,
-      name: 'Bc. Lucie Horáková',
+      name: 'Lucie Horáková',
       role: 'specialistka na e-government',
       photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Specialistka na e-government a digitalizaci veřejné správy. Pracovala pro Hlavní město Praha i několik středočeských obcí. Věří v radnici, která rozumí lidem.'
@@ -60,9 +60,9 @@ window.RS_DATA = {
   rest: [
     { id: 'pavel-kucera',     n:  8, name: 'Pavel Kučera',          role: 'podnikatel, gastronomie',
       photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=700&fit=crop&crop=faces&q=80' },
-    { id: 'jiri-marek',       n:  9, name: 'Ing. Jiří Marek',       role: 'projektant, územní plánování',
+    { id: 'jiri-marek',       n:  9, name: 'Jiří Marek',            role: 'projektant, územní plánování',
       photo: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&h=700&fit=crop&crop=faces&q=80' },
-    { id: 'hana-holubova',    n: 10, name: 'Mgr. Hana Holubová',    role: 'ředitelka MŠ',
+    { id: 'hana-holubova',    n: 10, name: 'Hana Holubová',         role: 'ředitelka MŠ',
       photo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=700&fit=crop&crop=faces&q=80' },
     { id: 'jakub-benes',      n: 11, name: 'Jakub Beneš',           role: 'IT konzultant',
       photo: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?w=600&h=700&fit=crop&crop=faces&q=80' },
@@ -70,7 +70,7 @@ window.RS_DATA = {
       photo: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&h=700&fit=crop&crop=faces&q=80' },
     { id: 'ondrej-krejci',    n: 13, name: 'Ondřej Krejčí',         role: 'truhlář, místní řemeslník',
       photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop&crop=faces&q=80' },
-    { id: 'marketa-pokorna',  n: 14, name: 'Mgr. Markéta Pokorná',  role: 'právnička',
+    { id: 'marketa-pokorna',  n: 14, name: 'Markéta Pokorná',       role: 'právnička',
       photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=700&fit=crop&crop=faces&q=80' },
     { id: 'vojtech-simek',    n: 15, name: 'Vojtěch Šimek',         role: 'student VŠ',
       photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=600&h=700&fit=crop&crop=faces&q=80' },
