@@ -164,7 +164,7 @@ function Priorities({ onOpen }) {
           <span className="kicker-line"></span>
           <span>10 priorit</span>
         </div>
-        <h2 className="section-title">S&nbsp;čím jdeme do toho.</h2>
+        <h2 className="section-title">S&nbsp;čím jdeme do toho</h2>
         <p className="section-sub">
           Konkrétní věci, na kterých se shodneme a&nbsp;za&nbsp;které ručíme. Klikněte na kteroukoliv prioritu pro&nbsp;detail.
         </p>
@@ -276,7 +276,7 @@ function Team({ onOpen }) {
           <span className="kicker-line"></span>
           <span>Kandidátka</span>
         </div>
-        <h2 className="section-title">Náš tým.</h2>
+        <h2 className="section-title">Náš tým</h2>
         <p className="section-sub">
           Sousedé, lidé z místních škol, spolků a&nbsp;firem. Lidé, které potkáváte v&nbsp;Říčanech každý den.
         </p>
