@@ -6,6 +6,7 @@ window.RS_DATA = {
     id: 'eva-novakova',
     name: 'Mgr. Eva Nováková',
     role: 'Lídryně kandidátky · kandidátka na starostku',
+    job: 'ředitelka neziskové organizace',
     photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&h=1100&fit=crop&crop=faces&q=80',
     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. V Říčanech žije od narození, vystudovala práva na Univerzitě Karlově a posledních deset let se věnuje neziskovému sektoru a místní komunitě. Je matkou dvou dětí a vede spolek pro rozvoj veřejného prostoru.',
     intro: 'Říčany jsou pro mě domov. Místo, kde znám souseda, kam vodím děti do školy a kde si chci v sobotu sednout s kamarády na náměstí. Posledních pět let sleduju, jak nám naše město utíká mezi prsty — chybí byty pro mladé rodiny, doprava se zadrhává, parky chřadnou. Sešli jsme se proto jako lidé, kteří město skutečně znají, a věříme, že to jde dělat lépe. Otevřeně, slušně, a hlavně srdcem.'
@@ -15,42 +16,42 @@ window.RS_DATA = {
     {
       id: 'petr-svoboda',     n: 2,
       name: 'Ing. Petr Svoboda',
-      role: 'Doprava a infrastruktura',
+      role: 'dopravní inženýr',
       photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dopravní inženýr s patnáctiletou praxí, otec tří dětí a vášnivý cyklista. V Říčanech žije od roku 2008 a roky se věnuje plánování bezpečných cest do škol.'
     },
     {
       id: 'jana-dvorakova',   n: 3,
       name: 'MUDr. Jana Dvořáková',
-      role: 'Sociální služby a zdraví',
+      role: 'praktická lékařka',
       photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praktická lékařka v říčanské poliklinice, dlouholetá dobrovolnice a předsedkyně sdružení pro pomoc seniorům. Klade důraz na dostupnou péči blízko domova.'
     },
     {
       id: 'tomas-prochazka',  n: 4,
       name: 'Tomáš Procházka',
-      role: 'Sport, kultura a volný čas',
+      role: 'trenér mládeže, organizátor',
       photo: 'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Trenér mládeže ve fotbalovém klubu, organizátor letních táborů a člen kulturní komise. Věří, že komunitu drží pohromadě sdílené zážitky.'
     },
     {
       id: 'klara-vesela',     n: 5,
       name: 'Klára Veselá',
-      role: 'Životní prostředí a zeleň',
+      role: 'krajinná architektka',
       photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Krajinná architektka, podílela se na obnově několika parků na Říčansku. Spoluzakladatelka spolku Olivovy lesy. Záleží jí na tom, aby město dýchalo.'
     },
     {
       id: 'martin-cerny',     n: 6,
       name: 'Mgr. Martin Černý',
-      role: 'Školství a vzdělávání',
+      role: 'učitel matematiky',
       photo: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Učitel matematiky na ZŠ Bezručova, koordinátor doučovacího programu a spoluautor projektu otevřená škola. Otec dvou dětí.'
     },
     {
       id: 'lucie-horakova',   n: 7,
       name: 'Bc. Lucie Horáková',
-      role: 'Otevřená radnice a digitalizace',
+      role: 'specialistka na e-government',
       photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=700&fit=crop&crop=faces&q=80',
       bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Specialistka na e-government a digitalizaci veřejné správy. Pracovala pro Hlavní město Praha i několik středočeských obcí. Věří v radnici, která rozumí lidem.'
     }
