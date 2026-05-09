@@ -114,7 +114,9 @@ window.RS_DATA = {
     name:  'Eva Nováková',                                // bez titulů
     role:  'Lídryně kandidátky · kandidátka na starostku',
     job:   'ředitelka neziskové organizace',              // 1-4 slova malými písmeny
-    photo: 'URL nebo /preview/photos/...',                // 4:5 portrét
+    photo: 'URL nebo /preview/photos/...',                // výchozí 4:5 portrét — použije se všude, kde není override
+    photoHero: '...',                                      // VOLITELNÉ — fotka jen pro Hero (úvod)
+    photoTeam: '...',                                      // VOLITELNÉ — fotka jen pro kartu v Týmu + modal
     bio:   '...',                                          // medailonek v modálu, 3-4 věty
     intro: '...'                                           // úvodní slovo v Hero, ~5 vět
   },

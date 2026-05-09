@@ -116,7 +116,7 @@ function Hero() {
           </div>
         </div>
         <div className="hero-photo">
-          <img src={D.leader.photo} alt={D.leader.name} />
+          <img src={D.leader.photoHero || D.leader.photo} alt={D.leader.name} />
         </div>
       </div>
     </section>
@@ -255,10 +255,11 @@ function MemberModal({ member, onClose }) {
 }
 
 function TeamCardLeader({ leader, onOpen }) {
+  const photo = leader.photoTeam || leader.photo;
   return (
-    <button className="team-leader" onClick={onOpen}>
+    <button className="team-leader" onClick={() => onOpen({ ...leader, photo })}>
       <div className="team-leader-photo">
-        <img src={leader.photo} alt={leader.name} />
+        <img src={photo} alt={leader.name} />
       </div>
       <div className="team-leader-text">
         <div className="team-num">01</div>
@@ -315,7 +316,7 @@ function Team({ onOpen }) {
         </p>
       </div>
 
-      <TeamCardLeader leader={D.leader} onOpen={() => onOpen(D.leader)} />
+      <TeamCardLeader leader={D.leader} onOpen={onOpen} />
 
       <div className="team-grid">
         {D.top6.map(m => (
