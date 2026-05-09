@@ -2,6 +2,16 @@
 const { useState, useEffect, useRef } = React;
 const D = window.RS_DATA;
 
+function renderRichText(text) {
+  if (!text.includes('**')) return text;
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
+    if (part.length > 4 && part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
 function Heart({ className, fill = '#d93434' }) {
   return (
     <svg className={className} viewBox="0 0 100 100" aria-hidden="true">
@@ -157,7 +167,7 @@ function PriorityDrawer({ priority, onClose }) {
                   {s.heading && <h4 className="drawer-section-h">{s.heading}</h4>}
                   {s.paragraphs.map((item, j) => {
                     if (typeof item === 'string') {
-                      return <p key={j} className="drawer-p">{item}</p>;
+                      return <p key={j} className="drawer-p">{renderRichText(item)}</p>;
                     }
                     if (item && item.image) {
                       return (

@@ -97,7 +97,7 @@ window.RS_DATA = {
         {
           heading: null,
           paragraphs: [
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Doprava je téma, které trápí prakticky každého obyvatele Říčan. Roky odkládaná řešení vedla k tomu, že se centrum města mění na průjezdovou tepnu pro celé okolí, parkování v okolí nádraží je každodenní zápas a bezpečnost dětí na cestě do školy zůstává sázkou na štěstí.',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Doprava je téma, které **trápí prakticky každého obyvatele Říčan**. Roky odkládaná řešení vedla k tomu, že se centrum města mění na průjezdovou tepnu pro celé okolí, parkování v okolí nádraží je každodenní zápas a bezpečnost dětí na cestě do školy zůstává sázkou na štěstí.',
             'Přístup k dopravě v Říčanech musí být systematický a dlouhodobý. Žádné izolované zákroky, žádné populistické sliby — jen konkrétní opatření s jasným harmonogramem a měřitelnými výstupy. Zveřejníme dopravní strategii města na pět let dopředu a každoročně vyhodnotíme, co se podařilo a co zůstává.'
           ]
         },
@@ -117,7 +117,7 @@ window.RS_DATA = {
         {
           heading: 'Parkování pro místní, ne pro průjezd',
           paragraphs: [
-            'Zavedeme rezidenční zóny v ulicích kolem nádraží a centra, aby místní měli kde zaparkovat. Dokončíme parkovací dům P+R u nádraží, který je v plánech už osmým rokem, a propojíme ho lepším spojem na pražské metro.',
+            'Zavedeme rezidenční zóny v ulicích kolem nádraží a centra, aby místní měli kde zaparkovat. Dokončíme **parkovací dům P+R u nádraží**, který je v plánech už osmým rokem, a propojíme ho lepším spojem na pražské metro.',
             'Kromě parkovacího domu vybudujeme menší satelitní parkoviště u zastávek autobusů a vyjednáme s Českou poštou a okolními firmami možnost využití jejich parkovacích ploch ve večerních hodinách a o víkendech.',
             'Pro ulice s rezidenčním režimem zavedeme jednoduchý online systém pro pořízení parkovací karty — bez fronty, bez papírů, bez návštěvy úřadu.'
           ]
@@ -125,7 +125,7 @@ window.RS_DATA = {
         {
           heading: 'Obchvat a tranzit',
           paragraphs: [
-            'Budeme tvrdě tlačit na dokončení obchvatu Říčan, který odvede tranzitní dopravu z centra. Dokud nebude hotov, prosadíme dočasná opatření, jako je zákaz vjezdu kamionů přes náměstí v pracovních dnech.',
+            'Budeme tvrdě tlačit na dokončení **obchvatu Říčan**, který odvede tranzitní dopravu z centra. Dokud nebude hotov, prosadíme dočasná opatření, jako je zákaz vjezdu kamionů přes náměstí v pracovních dnech.',
             'Připravíme se na čas, kdy obchvat bude funkční — odpovídající úprava centra, zklidnění hlavních tříd, navrácení prostoru chodcům a cyklistům. Z dnešní průjezdové tepny musí vzniknout živé městské centrum, ne prázdná ulice.'
           ]
         },
