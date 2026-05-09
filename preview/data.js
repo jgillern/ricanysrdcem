@@ -105,6 +105,11 @@ window.RS_DATA = {
           heading: 'Cesty do škol bez strachu',
           paragraphs: [
             'Vyřešíme chybějící chodníky a přechody na trasách, kterými chodí děti do ZŠ Bezručova, ZŠ u Říčanského lesa i do gymnázia. Prosadíme bezpečnostní opatření v okolí škol — zpomalovací prahy, výrazné značení a v ranní špičce dohled městské policie u nejrizikovějších přechodů.',
+            {
+              image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&h=500&fit=crop&q=80',
+              alt: 'Ilustrační obrázek — silnice a přechod',
+              caption: 'Ilustrační obrázek: rizikové přechody u škol jsou prioritou č. 1.'
+            },
             'Podpoříme školní autobus pro části Pacov, Voděrádky a Strašín, kde dnes děti dojíždějí v nevyhovujících podmínkách.',
             'Spolu se školami spustíme program „Bezpečně do školy" — mapování rizikových míst přímo dětmi a rodiči, výuka v dopravní výchově, pravidelné cyklokurzy a dohled u přechodů během prvních týdnů školního roku.'
           ]

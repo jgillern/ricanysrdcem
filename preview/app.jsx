@@ -155,7 +155,20 @@ function PriorityDrawer({ priority, onClose }) {
               {priority.sections.map((s, i) => (
                 <div key={i} className="drawer-section">
                   {s.heading && <h4 className="drawer-section-h">{s.heading}</h4>}
-                  {s.paragraphs.map((para, j) => <p key={j} className="drawer-p">{para}</p>)}
+                  {s.paragraphs.map((item, j) => {
+                    if (typeof item === 'string') {
+                      return <p key={j} className="drawer-p">{item}</p>;
+                    }
+                    if (item && item.image) {
+                      return (
+                        <figure key={j} className="drawer-figure">
+                          <img src={item.image} alt={item.alt || ''} />
+                          {item.caption && <figcaption>{item.caption}</figcaption>}
+                        </figure>
+                      );
+                    }
+                    return null;
+                  })}
                 </div>
               ))}
             </div>
