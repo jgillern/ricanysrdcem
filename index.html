@@ -223,12 +223,19 @@
   .footer {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     gap: 14px;
     color: rgba(251, 246, 236, 0.78);
     font-family: "PT Sans", sans-serif;
     font-size: clamp(13px, 1.05vw, 15px);
-    text-align: center;
+  }
+  .disclaimer {
+    margin: 0;
+    font-family: "PT Sans", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(251, 246, 236, 0.45);
   }
 
   @media (max-width: 540px) {
@@ -289,7 +296,9 @@
     </div>
   </main>
 
-  <footer class="footer" aria-hidden="true"></footer>
+  <footer class="footer">
+    <p class="disclaimer">Politická reklama · Říčany srdcem</p>
+  </footer>
 </div>
 
 <script>
