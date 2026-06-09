@@ -45,12 +45,8 @@ function Nav() {
   return (
     <header className={'nav ' + (scrolled ? 'is-scrolled' : '')}>
       <div className="nav-inner">
-        <a className="nav-logo" href="#uvod" onClick={(e) => click(e, 'uvod')}>
-          <Heart className="nav-heart" />
-          <span className="nav-name">
-            <span>Říčany</span>
-            <span>srdcem</span>
-          </span>
+        <a className="nav-logo" href="#uvod" onClick={(e) => click(e, 'uvod')} aria-label="Říčany srdcem">
+          <img className="nav-logo-img" src="/preview/logo.jpg" alt="Říčany srdcem" />
         </a>
         <div className="nav-end">
           <nav className={'nav-links ' + (open ? 'open' : '')}>
