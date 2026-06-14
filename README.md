@@ -17,10 +17,11 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 4. [Datový model](#datový-model)
 5. [Jak měnit obsah](#jak-měnit-obsah)
 6. [Práce s fotkami](#práce-s-fotkami)
-7. [Import textů z Wordu](#import-textů-z-wordu)
-8. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
-9. [Plány do budoucna](#plány-do-budoucna)
-10. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
+7. [Import textů priorit z Confluence (Rovo MCP)](#import-textů-priorit-z-confluence-rovo-mcp)
+8. [Import textů z Wordu](#import-textů-z-wordu)
+9. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
+10. [Plány do budoucna](#plány-do-budoucna)
+11. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
 
 ---
 
@@ -233,7 +234,62 @@ Drop do `preview/images/` jako JPG/WebP, šířka ≥ 1200 px, poměr 16:9 nebo 
 
 ---
 
+## Import textů priorit z Confluence (Rovo MCP)
+
+**Toto je standardní (primární) způsob aktualizace textů priorit.** Finální texty priorit píší autoři v Confluence; odtud je taháme přes **Atlassian Rovo MCP** konektor a mapujeme do pole `priorities` v `preview/data.js`.
+
+### Zdroj v Confluence
+
+- **Site:** `top09ricany` (`https://top09ricany.atlassian.net`), prostor *TOP 09 Říčany*
+- **Rodičovská stránka:** „Našich 10 priorit pro Říčany", **page ID `71204865`**
+- **Pod ní jsou podstránky — co priorita, to jedna podstránka.** Pořadí podstránek (Confluence `childPosition`) určuje pořadí priorit (`n`) na webu.
+- Nevyplněné podstránky (prázdný *Název priority* / *Anotace* / *Hlavní text*) se **přeskočí** a na jejich místě v `data.js` zůstává stávající placeholder.
+
+### Jak má vypadat podstránka v Confluence
+
+Aby šel obsah namapovat bez ručního dolaďování, drží autoři tuto strukturu nadpisů:
+
+| Confluence | → mapuje se na |
+|---|---|
+| `## Název priority` + text pod ním | `priority.title` (3–5 slov) |
+| `## Anotace` + text pod ní | `priority.lead` (1 věta) |
+| `## Hlavní text`, první odstavec (bez `###`) | `sections[0]` s `heading: null` |
+| `### Subnadpis` + odstavce pod ním | další `sections[]` (`heading` + `paragraphs`) |
+| **Tučné** (Ctrl+B) | markdown `**…**` v `paragraphs` |
+
+**Co se do webu nepřenáší / vynechává:**
+- řádky **Garant / Autor** a `@zmínky` nahoře (interní metadata)
+- autorské poznámky a otázky vložené do textu (např. „Funguje to takhle?")
+- obrázky vložené jen jako interní `blob:` URL z editoru — nejsou veřejně dostupné; obrázek je potřeba zvlášť exportovat do `preview/images/` a doplnit ručně (viz [Obrázky uvnitř priorit](#obrázky-uvnitř-priorit))
+
+### Postup (krok za krokem)
+
+1. **Ověř dostupnost Rovo MCP** — musí být k dispozici nástroje `mcp__Atlassian_Rovo__*` (Confluence). Pokud nejsou, dál nepokračuj naslepo.
+2. **Vylistuj podstránky** — `getConfluencePageDescendants` na `pageId: 71204865` (`cloudId: top09ricany.atlassian.net`), `depth: 1`.
+3. **Stáhni obsah** každé podstránky přes `getConfluencePage` s `contentFormat: "markdown"` a urči, které jsou vyplněné.
+4. **Namapuj** obsah na strukturu z [Datového modelu](#datový-model): `title`, `lead`, `sections[].{heading, paragraphs}`. Pořadí `n` podle `childPosition`.
+5. **Typografie:** české uvozovky `„…"`, em‑dash `—`, nezalomitelná mezera (` `, U+00A0) po jednopísmenných předložkách/spojkách (`k s v z o u a i`). Nezalomitelnou mezeru aplikuj **jen v upravovaných prioritách**, ať nevzniká šum v nezměněných částech souboru.
+6. **Zachovej všech 10 položek** v `priorities` — měň jen vyplněné, prázdné nech jako placeholder.
+7. **Commit + push** na pracovní branch (`git push -u origin <branch>`), **bez** otevírání PR, pokud o něj není výslovně požádáno. Do commit message stručně, které priority se nahrály.
+8. **Reportuj** zpět: které priority naplněné, které zůstaly placeholder, a cokoliv, co v Confluence chybělo nebo nešlo jednoznačně namapovat (chybějící anotace, 2větné `lead`, garbled text, vynechané obrázky/poznámky, drobné opravené překlepy).
+
+### Kontrola po importu
+
+```sh
+# Ověření, že data.js je validní a má 10 priorit
+node -e 'global.window={}; require("./preview/data.js");
+  const d=global.window.RS_DATA;
+  console.log("priorit:", d.priorities.length);
+  d.priorities.forEach(p=>console.log("n"+p.n, p.title));'
+```
+
+Hlídej [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů) — zejména `title` ≤ 6 slov, `lead` ≤ 25 slov a součet `sections` ≤ 600 slov. Confluence texty bývají delší; co výrazně přetéká, nahlas v reportu k doladění.
+
+---
+
 ## Import textů z Wordu
+
+**Alternativní (záložní) cesta** pro případ, že texty nedorazí přes Confluence, ale jako Word soubory (typicky medailonky a úvodní slovo; priority primárně přes [Confluence](#import-textů-priorit-z-confluence-rovo-mcp)).
 
 Až dorazí Word soubory s finálními texty (priorit, medailonků, úvodního slova), napíšu skript `tools/import-docx.py` (Python + `python-docx`), který:
 
@@ -272,7 +328,7 @@ Ucelená verze tohoto je v chatu, tady stručná tabulka:
 
 Seřazeno přibližně podle priority:
 
-- [ ] **Reálné texty** od kandidátů (Word import)
+- [ ] **Reálné texty** priorit z Confluence (Rovo MCP), medailonky/úvod z Wordu
 - [ ] **Reálné fotky** — top7 ze studia, ostatní vlastní (foto pipeline)
 - [ ] **Reálné URL Facebooku a Instagramu** v navigaci
 - [ ] **Kontaktní e‑mail** (kontaktní sekce nebo footer)
