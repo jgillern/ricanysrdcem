@@ -338,7 +338,7 @@ function Footer() {
       <div className="footer-partners">
         <span className="footer-partners-label">Společná kandidátka</span>
         <img className="footer-partner-logo footer-partner-logo--top09" src="/preview/top09.png" alt="TOP 09" />
-        <img className="footer-partner-logo footer-partner-logo--kdu" src="/preview/kducsl.png" alt="KDU·ČSL" />
+        <img className="footer-partner-logo footer-partner-logo--kdu" src="/preview/lidovci_logo_rgb_black-kdu.svg" alt="KDU·ČSL" />
         <span className="footer-partners-tail">a&nbsp;nezávislých kandidátů</span>
       </div>
     </footer>
