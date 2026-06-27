@@ -208,6 +208,8 @@ Pro 95 % změn stačí editovat **`preview/data.js`** a pushnout. Vercel zdeteku
 | Lídryně + top6 | Studio | bílé (čisté) | 7 |
 | Kandidáti 8–21 | Vlastní | různé | 14 |
 
+> **Lídryně má dvě různé fotky:** jednu pro **Hero** (úvod nahoře) a jinou pro **kartu mezi kandidáty + modal**. V `data.js` se mapují na `leader.photoHero` a `leader.photoTeam` (viz [Datový model](#datový-model)). `leader.photo` je společný fallback, použije se jen tam, kde override chybí.
+
 ### Workflow při importu
 
 Po dropnutí surových fotek do `preview/uploads/` napíšu skript `tools/process-photos.py` (Python + Pillow + rembg + face_recognition), který udělá:
@@ -217,9 +219,10 @@ Po dropnutí surových fotek do `preview/uploads/` napíšu skript `tools/proces
 2. Detekce obličeje pro chytrý crop (hlava do horní třetiny)
 3. Crop na poměr **4:5**
 4. Resize do tří velikostí:
-   - lídryně: **1200 × 1500 px** (Hero)
+   - lídryně Hero: **1200 × 1500 px** → `leader-hero.webp` (`leader.photoHero`)
+   - lídryně tým: **800 × 1000 px** → `leader-team.webp` (`leader.photoTeam`)
    - top6: **800 × 1000 px** (grid)
-5. Uložení do `preview/photos/<id>.png` (transparentní)
+5. Uložení do `preview/photos/<id>.webp` (transparentní WebP — alfa kanál jako PNG, ale ~10× menší; `<img src>` ho bere ve všech moderních prohlížečích, projekt už WebP používá i pro logo)
 
 **Pro kandidáty 8–21:**
 1. Auto‑crop na **4:5** (přes střed nebo s detekcí obličeje, pokud je rozpoznatelný)
