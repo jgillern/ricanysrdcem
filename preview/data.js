@@ -10,7 +10,7 @@ window.RS_DATA = {
     photo: '/preview/photos/leader-team.webp',
     photoHero: '/preview/photos/leader-hero.webp',
     bio: '',
-    intro: 'Říčany jsou pro mě domov. Místo, kde znám souseda, kam vodím děti do školy a kde si chci v sobotu sednout s kamarády na náměstí. Posledních pět let sleduju, jak nám naše město utíká mezi prsty — chybí byty pro mladé rodiny, doprava se zadrhává, parky chřadnou. Sešli jsme se proto jako lidé, kteří město skutečně znají, a věříme, že to jde dělat lépe. Otevřeně, slušně, a hlavně srdcem.'
+    intro: 'Říčany jsou pro mě domov. Místo, kde znám souseda, kam vodím děti do školy a kde si chci v sobotu sednout s kamarády na náměstí. Mám tohle město ráda a věřím v jeho lidi i v jeho potenciál. Přeju si živé náměstí pro setkávání, víc zeleně a stínu v ulicích a radnici, která s vámi mluví na rovinu a zapojuje vás do rozhodování. Proto jsme se sešli jako lidé, kteří město znají a mají ho rádi, a jsme připraveni pro něj pracovat. Otevřeně, slušně, a hlavně srdcem.'
   },
 
   top6: [
