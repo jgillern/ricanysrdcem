@@ -7,7 +7,7 @@ window.RS_DATA = {
     name: 'Eva Nováková',
     role: 'Lídryně kandidátky · kandidátka na starostku',
     job: 'ředitelka neziskové organizace',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&h=1100&fit=crop&crop=faces&q=80',
+    photo: '/preview/photos/leader.png',
     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. V Říčanech žije od narození, vystudovala práva na Univerzitě Karlově a posledních deset let se věnuje neziskovému sektoru a místní komunitě. Je matkou dvou dětí a vede spolek pro rozvoj veřejného prostoru.',
     intro: 'Říčany jsou pro mě domov. Místo, kde znám souseda, kam vodím děti do školy a kde si chci v sobotu sednout s kamarády na náměstí. Posledních pět let sleduju, jak nám naše město utíká mezi prsty — chybí byty pro mladé rodiny, doprava se zadrhává, parky chřadnou. Sešli jsme se proto jako lidé, kteří město skutečně znají, a věříme, že to jde dělat lépe. Otevřeně, slušně, a hlavně srdcem.'
   },
