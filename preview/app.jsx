@@ -285,16 +285,27 @@ function TeamCard({ m, onOpen }) {
 }
 
 function TeamRow({ m, onOpen }) {
-  return (
-    <button className="team-row" onClick={onOpen}>
+  // Klikací (s medailonkem v modalu) je řádek jen když má vyplněný bio.
+  // Fotka chybět může, na proklik nemá vliv.
+  const hasBio = !!(m.bio && m.bio.trim());
+  const content = (
+    <>
       <span className="team-row-num">{String(m.n).padStart(2, '0')}</span>
       <span className="team-row-name">{m.name}</span>
       <span className="team-row-dots" aria-hidden="true"></span>
       <span className="team-row-role">{m.role}</span>
-      <span className="team-row-arrow" aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </span>
-    </button>
+      {hasBio && (
+        <span className="team-row-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      )}
+    </>
+  );
+  if (!hasBio) {
+    return <div className="team-row team-row--static">{content}</div>;
+  }
+  return (
+    <button className="team-row" onClick={onOpen}>{content}</button>
   );
 }
 
