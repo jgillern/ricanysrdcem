@@ -138,7 +138,7 @@ window.RS_DATA = {
           heading: 'Transparentní zastupitelstvo',
           paragraphs: [
             'Naším klíčovým závazkem je **zveřejňování veškerých podkladů** pro jednání zastupitelstva a výborů minimálně s týdenním předstihem. Získáte tak reálný čas se s materiály v klidu seznámit, připravit si k nim připomínky a smysluplně tak ovlivnit výsledek jednání. Výrazně zrychlíme také zveřejňování zápisů a usnesení, které budou dostupné v přehledném webovém prostředí nejpozději do sedmi dnů.',
-            'Toto nové webové prostředí nabídne rychlé fulltextové vyhledávání ve všech zápisech a usneseních napříč volebními obdobími a u každého usnesení jasně uvidíte, **jak konkrétní zastupitelé hlasovali**. Zápis bude navíc vždy propojen přímo s videozáznamem. Jako samozřejmost vnímáme, že veškerá data budou poskytována i v otevřených formátech, aby s nimi mohly pracovat analytické nástroje a aplikace (např. v souladu s metodikou „Hlídač státu“).'
+            'Toto nové webové prostředí nabídne rychlé fulltextové vyhledávání ve všech zápisech a usneseních napříč volebními obdobími a u každého usnesení jasně uvidíte, **jak hlasovali jednotliví zastupitelé i celé zastupitelské kluby**. Zápis bude navíc vždy propojen přímo s videozáznamem. Jako samozřejmost vnímáme, že veškerá data budou poskytována i v otevřených formátech, aby s nimi mohly pracovat analytické nástroje a aplikace (např. v souladu s metodikou „Hlídač státu“).'
           ]
         },
         {
@@ -152,6 +152,74 @@ window.RS_DATA = {
     },
     {
       n: 3,
+      title: 'Koncepční rozvoj dopravy na základě dat',
+      lead: 'Skoncujeme s nahodilými dopravními experimenty. Vytvoříme moderní plán mobility, který se opře o reálná data a zapojení občanů.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Doprava ve městě už nesmí fungovat jako laboratoř pro nahodilé experimenty. Chceme trvale opustit drahou metodu „pokus-omyl“, kdy se nejrůznější opatření a zákazy zavádějí naslepo a následně se s dalšími náklady zase ruší. Městu dlouhodobě chybí jasná a ucelená dopravní vize. Než začneme cokoliv dalšího měnit v ulicích, musíme svá rozhodnutí opřít o tvrdá data a skutečné potřeby obyvatel.'
+          ]
+        },
+        {
+          heading: 'Strategie, která má jasný standard',
+          paragraphs: [
+            'Řešení přitom existuje a my nemusíme vymýšlet nic nového. Vytvoříme **Plán udržitelné městské mobility**, což je osvědčený evropský standard pro moderní města. Tento strategický dokument jasně a odborně určí, jak se bude doprava v Říčanech dlouhodobě vyvíjet.',
+            'Jeho největší silou je, že neřeší pouze auta, ale **zahrnuje naprosto všechny módy dopravy** a přináší spravedlivý pohled na celý městský prostor: pomůže chodcům s bezpečnými přechody, cyklistům se systematickým propojováním stezek a řidičům s plynulejším průjezdem. Celý plán přitom nestojí na pocitech politiků, ale je založen na dopravním modelu vytvořeném na základě komplexního měření dopravních toků a na spolupráci s veřejností.'
+          ]
+        },
+        {
+          heading: 'Od přesných dat k participaci',
+          paragraphs: [
+            'Příprava plánu začne důkladným **měřením dopravních toků** po celém městě. Z těchto reálných informací následně vytvoříme přesný počítačový dopravní model Říčan, ve kterém si každou zamýšlenou změnu nejprve nanečisto nasimulujeme.',
+            'Zároveň do celého procesu **aktivně zapojíme veřejnost formou participace**. Kvalitní plán nemůže vzniknout jen od stolu za zavřenými dveřmi. Chceme od vás jasně slyšet, kde a jak vás doprava pálí nejvíce, abychom modelová řešení přizpůsobili skutečnému životu v ulicích.'
+          ]
+        },
+        {
+          heading: 'Další rozšíření říčanské MHD',
+          paragraphs: [
+            'Mezi naše další priority patří další rozšíření provozu říčanské MHD v souladu s aktuálně platným Plánem dopravní obslužnosti.',
+            'Stejně jako u plánu mobility se i zde budeme řídit tvrdými daty. Konkrétní nastavení linek a časů spojů určíme na základě **analýzy dat z počítadel cestujících** přímo v autobusech na stávajících linkách a na základě participace, díky které zjistíme, v jakých lokalitách lidem jaké spojení nejvíc chybí.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 4,
+      title: 'Klidnější centrum díky jižnímu obchvatu',
+      lead: 'Masarykovo náměstí má patřit lidem, ne kolonám aut. Maximálně urychlíme přípravu jižního obchvatu a odvedeme tranzitní dopravu z centra.',
+      sections: [
+        {
+          heading: null,
+          paragraphs: [
+            'Masarykovo náměstí má být tepajícím srdcem Říčan, místem pro setkávání, odpočinek a bezpečný pohyb chodců. Dnes ho ale bohužel dusí tranzitní doprava a nekonečné kolony aut. Jsme přesvědčeni, že tento stav není nutným zlem, se kterým se musíme smířit. Chceme centrum města postupně zklidnit a vrátit mu jeho původní, společenskou funkci. Klíčem k tomuto cíli je odvedení tranzitu za hranice města.'
+          ]
+        },
+        {
+          heading: 'Chybějící propojení',
+          paragraphs: [
+            'Centrum Říčan dnes nese dopravní zátěž, která do něj dlouhodobě nepatří. Masarykovo náměstí a Jizerská ulice slouží jako hlavní propojení mezi Říčanskou a Širokou, a proto se tudy soustředí velká část průjezdné dopravy.',
+            'O propojení mimo centrum se mluví už desítky let. Původní představa jižního obchvatu počítala zejména se Solnou stezkou a napojením na Pražský okruh. Solná stezka ale dlouhodobě nemá podporu okolních obcí a její napojení na Pražský okruh už není reálné. Pro město proto musí být absolutní prioritou prověřit možnost jiné alternativní spojnice. Jako nejjednodušší a nejefektivnější řešení se nabízí lokální varianta jižního obchvatu, která by Říčanskou a Širokou propojila mimo hranice města.'
+          ]
+        },
+        {
+          heading: 'Jižní obchvat musí být prioritou',
+          paragraphs: [
+            'Jižní obchvat Říčan vnímáme jako naprostou prioritu pro dopravní úlevu celého města. Nebudeme vám slibovat vzdušné zámky ani to, že se zítra začne stavět, rozhodně ale nebudeme ztrácet čas. V nejkratším možném termínu zadáme zpracování odborné studie, která potvrdí účelnost stavby a zároveň prověří možné varianty trasování.',
+            'Jakmile studie potvrdí tu nejlepší možnou variantu, urychlíme všechny navazující přípravné procesy a neprodleně zahájíme intenzivní jednání se Středočeským krajem o financování samotné výstavby.'
+          ]
+        },
+        {
+          heading: 'Oživení Masarykova náměstí',
+          paragraphs: [
+            'Vznik jižního obchvatu konečně umožní upravit provoz na náměstí tak, aby místo tranzitu sloužilo primárně místním obyvatelům. Možných cest je celá řada a konečné rozhodnutí musí vzejít z kombinace odborných studií, veřejných diskuzí a architektonické soutěže.',
+            'Jednou z variant by mohla být například takzvaná sdílená zóna — model, ve kterém jeden zklidněný prostor společně sdílí chodci, cyklisté, auta i autobusy a jsou si v něm rovni. V České republice se jedná o novinku, ale v řadě západoevropských zemí se tento model velmi osvědčil a uplatňuje se v centrech měst nejčastěji.'
+          ]
+        }
+      ]
+    },
+    {
+      n: 5,
       title: 'Město bez bariér pro každého',
       lead: 'Vytvoříme bezpečný a dostupný veřejný prostor, kde věk ani zdravotní omezení nebudou překážkou pro plnohodnotný a aktivní život.',
       sections: [
@@ -190,7 +258,7 @@ window.RS_DATA = {
       ]
     },
     {
-      n: 4,
+      n: 6,
       title: 'Moderní a dostupné sociální služby',
       lead: 'Vybudujeme moderní a spolehlivou síť péče, díky které nezůstane žádný občan ve složité životní situaci nebo ve stáří bez pomoci.',
       sections: [
@@ -224,7 +292,7 @@ window.RS_DATA = {
       ]
     },
     {
-      n: 5,
+      n: 7,
       title: 'Zelené město odolné proti horku',
       lead: 'Ochráníme město před letním horkem. Přineseme do ulic více stínu, osvěžující vodní prvky a podpoříme omezování odpadu.',
       sections: [
@@ -263,7 +331,7 @@ window.RS_DATA = {
       ]
     },
     {
-      n: 6,
+      n: 8,
       title: 'Živý veřejný prostor',
       lead: 'Vytvoříme živý a kultivovaný veřejný prostor, který nabídne místa pro setkávání, kulturu i odpočinek všem generacím.',
       sections: [
@@ -306,7 +374,7 @@ window.RS_DATA = {
       ]
     },
     {
-      n: 7,
+      n: 9,
       title: 'Kvalita od školky po školu',
       lead: 'Dáme školám jasný standard, rodičům lepší informace a dětem prostředí, kde se učí v klidu.',
       sections: [
@@ -345,7 +413,7 @@ window.RS_DATA = {
       ]
     },
     {
-      n: 8,
+      n: 10,
       title: 'Podpora místních podnikatelů',
       lead: 'Podpora lokálních živnostníků a firem je klíčová pro oživení města. Vytvoříme moderní a partnerské prostředí s minimem byrokracie.',
       sections: [

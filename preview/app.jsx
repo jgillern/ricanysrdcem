@@ -34,7 +34,8 @@ function Nav() {
   const items = [
     { id: 'uvod', label: 'Úvod' },
     { id: 'priority', label: 'Priority' },
-    { id: 'tym', label: 'Náš tým' }
+    { id: 'tym', label: 'Náš tým' },
+    { id: 'kontakt', label: 'Kontakt' }
   ];
   const click = (e, id) => {
     e.preventDefault();
@@ -343,6 +344,24 @@ function Team({ onOpen }) {
   );
 }
 
+function Contact() {
+  return (
+    <section id="kontakt" className="section section-contact">
+      <div className="section-head">
+        <div className="kicker">
+          <span className="kicker-line"></span>
+          <span>Kontakt</span>
+        </div>
+        <h2 className="section-title">Chcete se nás na&nbsp;cokoli zeptat?</h2>
+        <p className="section-sub">
+          Neváhejte nás kontaktovat na&nbsp;
+          <a href="mailto:info@ricanysrdcem.cz">info@ricanysrdcem.cz</a>.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="footer">
@@ -366,6 +385,7 @@ function App() {
         <Hero />
         <Priorities onOpen={setPriority} />
         <Team onOpen={setMember} />
+        <Contact />
       </main>
       <Footer />
       <MemberModal member={member} onClose={() => setMember(null)} />
