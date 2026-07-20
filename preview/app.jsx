@@ -2,6 +2,13 @@
 const { useState, useEffect, useRef } = React;
 const D = window.RS_DATA;
 
+// Plausible custom event (cookieless). No-op, pokud skript ještě nenaběhl nebo je blokovaný.
+function track(name, props) {
+  if (typeof window.plausible === 'function') {
+    window.plausible(name, props ? { props } : undefined);
+  }
+}
+
 function renderRichText(text) {
   if (!text.includes('**')) return text;
   return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
@@ -56,12 +63,12 @@ function Nav() {
             ))}
           </nav>
           <div className="nav-social">
-            <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer" onClick={() => track('Social: Facebook')}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
               </svg>
             </a>
-            <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer" onClick={() => track('Social: Instagram')}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
@@ -96,6 +103,7 @@ function Hero() {
           <div className="hero-ctas">
             <a href="#priority" className="hero-cta" onClick={(e) => {
               e.preventDefault();
+              track('Hero CTA: Priority');
               const el = document.getElementById('priority');
               if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
             }}>
@@ -104,6 +112,7 @@ function Hero() {
             </a>
             <a href="#tym" className="hero-cta hero-cta-secondary" onClick={(e) => {
               e.preventDefault();
+              track('Hero CTA: Tým');
               const el = document.getElementById('tym');
               if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
             }}>
@@ -355,7 +364,7 @@ function Contact() {
         <h2 className="section-title">Chcete se nás na&nbsp;cokoli zeptat?</h2>
         <p className="section-sub">
           Neváhejte nás kontaktovat na&nbsp;
-          <a href="mailto:info@ricanysrdcem.cz">info@ricanysrdcem.cz</a>.
+          <a href="mailto:info@ricanysrdcem.cz" onClick={() => track('Kontakt e-mail')}>info@ricanysrdcem.cz</a>.
         </p>
       </div>
     </section>
@@ -378,13 +387,15 @@ function Footer() {
 function App() {
   const [member, setMember] = useState(null);
   const [priority, setPriority] = useState(null);
+  const openPriority = (p) => { track('Priorita: ' + p.title, { n: p.n, title: p.title }); setPriority(p); };
+  const openMember = (m) => { track('Kandidát otevřen', { name: m.name }); setMember(m); };
   return (
     <>
       <Nav />
       <main>
         <Hero />
-        <Priorities onOpen={setPriority} />
-        <Team onOpen={setMember} />
+        <Priorities onOpen={openPriority} />
+        <Team onOpen={openMember} />
         <Contact />
       </main>
       <Footer />

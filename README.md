@@ -310,6 +310,52 @@ Až dorazí Word soubory s finálními texty (priorit, medailonků, úvodního s
 
 ---
 
+## Analytics (Plausible)
+
+Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)** — **cookieless**, bez ukládání čehokoli do prohlížeče, takže **není potřeba cookie lišta ani souhlas** (ČR má od 1. 1. 2022 opt-in režim, § 89 zák. č. 127/2005 Sb.). Data jsou v EU, unikáty se počítají přes denně rotující anonymní hash.
+
+### Jak je to zapojené
+
+- **Skript** (`<script defer data-domain="ricanysrdcem.cz" src="https://plausible.io/js/script.js">`) je v `<head>` obou stránek — `index.html` (teaser) i `preview/index.html`. Na `/preview` je navíc inicializační fronta pro `window.plausible`.
+- **Custom events** se posílají z `preview/app.jsx` přes helper `track(name, props)` (no-op, když skript nenaběhne / je blokovaný adblockem). Web je v podstatě jedna stránka a priority/kandidáti se otevírají v draweru/modálu **bez změny URL**, takže bez těchto událostí by se prokliky nezměřily.
+
+### Události, které se posílají
+
+| Událost (event name) | Kdy | Poznámka |
+|---|---|---|
+| `Priorita: <název priority>` | otevření karty priority | 10 samostatných událostí, název = titulek priority |
+| `Kandidát otevřen` | otevření medailonku kandidáta | jméno je v props (rozpad jen na Business tarifu) |
+| `Hero CTA: Priority` / `Hero CTA: Tým` | klik na tlačítka v Hero | |
+| `Social: Facebook` / `Social: Instagram` | klik na ikony v navigaci | funguje i po doplnění reálných URL |
+| `Kontakt e-mail` | klik na kontaktní e-mail | |
+
+### Co je potřeba udělat v účtu Plausible (jednorázově, ruční)
+
+1. Založit účet, přidat web **`ricanysrdcem.cz`**, zvolit tarif (základní **Growth** stačí).
+2. V **Site Settings → Goals → + Add goal → Custom event** přidat tyto názvy (musí sedět **přesně**, jinak se událost nezobrazí):
+   - `Priorita: Otevřená a naslouchající radnice`
+   - `Priorita: Transparentní a digitální radnice`
+   - `Priorita: Koncepční rozvoj dopravy na základě dat`
+   - `Priorita: Klidnější centrum díky jižnímu obchvatu`
+   - `Priorita: Město bez bariér pro každého`
+   - `Priorita: Moderní a dostupné sociální služby`
+   - `Priorita: Zelené město odolné proti horku`
+   - `Priorita: Živý veřejný prostor`
+   - `Priorita: Kvalita od školky po školu`
+   - `Priorita: Podpora místních podnikatelů`
+   - `Kandidát otevřen`
+   - `Hero CTA: Priority`
+   - `Hero CTA: Tým`
+   - `Social: Facebook`
+   - `Social: Instagram`
+   - `Kontakt e-mail`
+
+> ⚠️ Názvy priorit v událostech = titulky z `data.js`. **Když prioritu přejmenuješ** (např. při importu z Confluence), uprav i název odpovídajícího goalu v Plausible (nebo přidej nový). Aktuální titulky ověříš příkazem z [kontroly po importu](#kontrola-po-importu).
+
+> Rozpad `Kandidát otevřen` podle konkrétního jména (a property-rozpady obecně) je až na tarifu **Business**; na Growth uvidíš souhrnné počty. Prokliky priorit fungují na Growth plně, protože název je přímo v události.
+
+---
+
 ## Limity a doporučené délky textů
 
 Ucelená verze tohoto je v chatu, tady stručná tabulka:
@@ -337,8 +383,8 @@ Seřazeno přibližně podle priority:
 - [ ] **Kontaktní e‑mail** (kontaktní sekce nebo footer)
 - [ ] **OG image + SEO meta** pro náhled na sociálních sítích (1200×630, srdce + nadpis)
 - [ ] **Sitemap.xml + robots.txt** pro produkci
-- [ ] **Analytics** — Plausible nebo Google Analytics 4 (s ohledem na GDPR)
-- [ ] **Cookie banner**, pokud bude analytics nasazená
+- [x] **Analytics** — nasazen **Plausible** (cookieless, EU) na teaseru i `/preview`, viz [Analytics (Plausible)](#analytics-plausible)
+- [x] **Cookie banner** — **není potřeba**, Plausible je cookieless (žádné cookies ani localStorage)
 - [ ] **Lightoptimalizace** — náhrada React+Babel CDN za buildovaný bundle (Vite + esbuild) — sníží time‑to‑interactive z ~1.5s na ~200ms
 - [ ] **Image lazy loading** + `srcset`/`sizes` pro responsivní fotky
 - [ ] **A11y audit** — kontrast, focus states, aria atributy, screen reader test
@@ -375,7 +421,7 @@ Až dorazí čas přepnout `ricanysrdcem.cz` z teaseru na finální stránku (cc
 - [ ] Vytvořit `robots.txt` (povolit indexaci)
 - [ ] Vytvořit `sitemap.xml` (root, vč. `#priority`, `#tym`)
 - [ ] Submit do Google Search Console + Bing Webmaster Tools
-- [ ] Přidat analytics (Plausible doporučeno, GDPR friendly bez cookie banneru)
+- [x] Přidat analytics — **Plausible** nasazen (cookieless, bez cookie banneru); zbývá jen založit účet + přidat goals, viz [Analytics (Plausible)](#analytics-plausible)
 
 ### Cutover (samotné přepnutí)
 - [ ] **Git tag** `v-pre-launch` na aktuálním commitu (možnost rollbacku)
