@@ -426,17 +426,21 @@ Až dorazí čas přepnout `ricanysrdcem.cz` z teaseru na finální stránku (cc
 ### Cutover (samotné přepnutí)
 - [ ] **Git tag** `v-pre-launch` na aktuálním commitu (možnost rollbacku)
 - [ ] Sloučit `preview/index.html` → root `index.html` (původní teaser zazálohovat jako `teaser.html` nebo smazat)
+  - [ ] **Analytics:** ve výsledném `index.html` nechat Plausible skript **právě jednou** — bývalé `preview/index.html` ho už obsahuje (vč. inicializační fronty `window.plausible`), skript ze starého teaseru zmizí s ním. Ověřit, že tam není dvakrát.
 - [ ] Updatovat všechny absolutní cesty v `app.jsx` a `data.js`: `/preview/...` → `/...`
+  - [ ] **Analytics:** `src` Plausible skriptu je absolutní URL na `plausible.io` — přepisu cest se **netýká**, nech ho být. Custom events v `app.jsx` jsou nezávislé na cestě, taky se nemění.
 - [ ] Přesunout `preview/app.jsx`, `preview/data.js`, `preview/photos/`, `preview/images/`, `preview/top09.png`, `preview/kducsl.png` do rootu nebo do `assets/`
 - [ ] **Smazat `middleware.js`** (nebo upravit matcher na nějakou staging cestu, kdyby chtěl klient nadále mít heslem chráněnou „pracovní" verzi)
 - [ ] **Smazat env var `PREVIEW_PASSWORD`** ve Vercelu (a `PREVIEW_SECRET`, pokud byla)
 - [ ] Smazat `package.json` (pokud nebudou potřeba další build dependencies)
 - [ ] Push do `main` (nebo merge `claude/...` → `main`) a redeploy
 - [ ] Otestovat `ricanysrdcem.cz` v inkognito okně (žádné cache, žádné cookie)
+  - [ ] **Analytics:** v *DevTools → Network* ověřit request na `plausible.io/api/event` (status 202) a v Plausible *Realtime* živého návštěvníka; kliknout na prioritu a ověřit, že dorazí event `Priorita: …`.
 
 ### Po spuštění
 - [ ] Na sociálních sítích sdílet odkaz a ověřit OG preview (Facebook Sharing Debugger, Twitter Card Validator)
 - [ ] Sledovat Vercel Analytics nebo Plausible pro chyby a anomálie
+- [ ] **Analytics — kontinuita dat:** `data-domain` zůstává `ricanysrdcem.cz`, takže historie navazuje. V „Top Pages" se návštěvy jen přesunou z `/preview` na `/` (cíle/prokliky priorit jsou na cestě nezávislé, neutrpí). Pokud po cutoveru `/preview` úplně zanikne, přestane se do statistik počítat interní testovací provoz — čísla se tím zpřesní.
 - [ ] Připravit „post‑volební" verzi stránky (poděkování, výsledky, …) — minimálně mít hrubou šablonu, ať není tlak po volbách
 
 ### Co NEŘEŠIT (Vercel to dělá za nás)
