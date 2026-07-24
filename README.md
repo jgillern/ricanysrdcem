@@ -19,9 +19,11 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 6. [Práce s fotkami](#práce-s-fotkami)
 7. [Import textů priorit z Confluence (Rovo MCP)](#import-textů-priorit-z-confluence-rovo-mcp)
 8. [Import textů z Wordu](#import-textů-z-wordu)
-9. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
-10. [Plány do budoucna](#plány-do-budoucna)
-11. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
+9. [Prohlášení o transparentnosti (TTPA)](#prohlášení-o-transparentnosti-ttpa--nařízení-eu-2024900)
+10. [Analytics (Plausible)](#analytics-plausible)
+11. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
+12. [Plány do budoucna](#plány-do-budoucna)
+13. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
 
 ---
 
@@ -45,6 +47,9 @@ Všechen finální obsah na `/preview` je zatím **placeholder** (Lorem ipsum, f
 ├── index.html                 # teaser stránka (veřejná)
 ├── middleware.js              # Vercel Edge Middleware — gate na /preview
 ├── package.json               # marker pro Vercel, žádné deps
+├── ttpa/                      # prohlášení o transparentnosti (nařízení EU 2024/900)
+│   ├── rengl.pdf              # → ricanysrdcem.cz/ttpa/rengl.pdf
+│   └── maks.pdf               # → ricanysrdcem.cz/ttpa/maks.pdf
 └── preview/
     ├── index.html             # shell stránky (CSS, React+Babel CDN, mount point)
     ├── app.jsx                # React komponenty (Nav, Hero, Priorities, Team, Footer …)
@@ -307,6 +312,35 @@ Až dorazí Word soubory s finálními texty (priorit, medailonků, úvodního s
 - Tučné dělali přes Ctrl+B (nikoliv CAPSLOCKEM)
 - Pro subnadpisy používali Wordové styly *Nadpis 2*, *Nadpis 3*
 - Nedávali komentáře / track changes do exportu
+
+---
+
+## Prohlášení o transparentnosti (TTPA — nařízení EU 2024/900)
+
+Nařízení EU o **transparentnosti a cílení politické reklamy** (Regulation (EU) 2024/900, „TTPA") vyžaduje, aby z volebních materiálů (letáky, inzeráty, online reklama) vedl odkaz na **prohlášení o transparentnosti**. Tyto PDF dokumenty jsou v repu ve složce **`ttpa/`** a servírují se přímo Vercelem jako statika:
+
+| Soubor v repu | Veřejná URL |
+|---|---|
+| `ttpa/rengl.pdf` | `www.ricanysrdcem.cz/ttpa/rengl.pdf` |
+| `ttpa/maks.pdf` | `www.ricanysrdcem.cz/ttpa/maks.pdf` |
+
+### Proč `ttpa/` v rootu
+
+- **Odkazy jsou stabilní přes celý životní cyklus webu.** Cesta `/ttpa/…` žije v rootu repa, **mimo** teaser (`index.html`) i náhled (`preview/`). [Cutover z teaseru na finální web](#checklist-pro-spuštění-do-produkce) se složky `ttpa/` **vůbec nedotkne** — URL na letácích tak fungují dnes i po přepnutí, **bez jakékoli úpravy**.
+- **Middleware je mimo hru.** `middleware.js` má matcher jen na `/preview` — `/ttpa/*` není heslem chráněné, je veřejně dostupné (tak to má být).
+
+### Aktualizace částek / obsahu (stejný název souboru)
+
+Dokumenty jsou zatím **předběžné** (budou se aktualizovat částky). Postup při nové verzi:
+
+1. Nahraj nový PDF **se stejným názvem** (`rengl.pdf` / `maks.pdf`) do složky `ttpa/` (přes GitHub „upload files" nebo `git`).
+2. Push → Vercel redeployne (~30 s) a na stejné URL začne servírovat novou verzi. **URL na letácích měnit netřeba.**
+
+> Cache: Vercel při každém deploji servíruje aktuální verzi (CDN se invaliduje na nový deployment). Prohlížeč si starou verzi může krátce držet, ale odkaz i cesta zůstávají stejné.
+
+### Přidání dalších formulářů do budoucna
+
+Stačí dropnout další PDF do `ttpa/` — bude hned dostupné na `www.ricanysrdcem.cz/ttpa/<nazev>.pdf`. Žádná konfigurace ani routing navíc.
 
 ---
 
