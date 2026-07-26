@@ -18,12 +18,13 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 5. [Jak měnit obsah](#jak-měnit-obsah)
 6. [Práce s fotkami](#práce-s-fotkami)
 7. [Import textů priorit z Confluence (Rovo MCP)](#import-textů-priorit-z-confluence-rovo-mcp)
-8. [Import textů z Wordu](#import-textů-z-wordu)
-9. [Prohlášení o transparentnosti (TTPA)](#prohlášení-o-transparentnosti-ttpa--nařízení-eu-2024900)
-10. [Analytics (Plausible)](#analytics-plausible)
-11. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
-12. [Plány do budoucna](#plány-do-budoucna)
-13. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
+8. [Import medailonků z Confluence](#import-medailonků-z-confluence)
+9. [Import textů z Wordu](#import-textů-z-wordu)
+10. [Prohlášení o transparentnosti (TTPA)](#prohlášení-o-transparentnosti-ttpa--nařízení-eu-2024900)
+11. [Analytics (Plausible)](#analytics-plausible)
+12. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
+13. [Plány do budoucna](#plány-do-budoucna)
+14. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
 
 ---
 
@@ -35,7 +36,7 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 | `ricanysrdcem.cz/preview` | **Plnohodnotný náhled** finálního webu (Hero, Priority, Tým, Footer) | heslo `Volby2026!` (jen heslo, jméno se ignoruje) |
 | `ricanysrdcem.cz/preview/login` | login form pro `/preview` | volné GET, POST validuje heslo |
 
-Všechen finální obsah na `/preview` je zatím **placeholder** (Lorem ipsum, fiktivní jména, Unsplash fotky). Reálné texty + fotky doplníme později.
+Obsah na `/preview` je z velké části reálný — priority i seznam kandidátů jsou finální, fotky a medailonky doplňujeme průběžně (viz [Plány do budoucna](#plány-do-budoucna)).
 
 ---
 
@@ -50,12 +51,19 @@ Všechen finální obsah na `/preview` je zatím **placeholder** (Lorem ipsum, f
 ├── ttpa/                      # prohlášení o transparentnosti (nařízení EU 2024/900)
 │   ├── rengl.pdf              # → ricanysrdcem.cz/ttpa/rengl.pdf
 │   └── maks.pdf               # → ricanysrdcem.cz/ttpa/maks.pdf
+├── brand/                     # logo v křivkách (SVG/PDF/PNG) + manuál, viz brand/README.md
+├── tools/                     # pomocné skripty (nejsou součástí webu)
+│   ├── process-photos.py      # ořez fotek kandidátů 8+ na 4:5 → preview/photos/
+│   └── gen_logo.py, export_logo.py
 └── preview/
     ├── index.html             # shell stránky (CSS, React+Babel CDN, mount point)
     ├── app.jsx                # React komponenty (Nav, Hero, Priorities, Team, Footer …)
     ├── data.js                # veškerý obsah (window.RS_DATA)
+    ├── photos/                # hotové portréty použité na webu (<id>.webp / <id>.jpg)
+    ├── uploads/               # surové fotky, ze kterých se ty hotové generují
+    ├── logo-new.webp          # logo v navigaci
     ├── top09.png              # logo TOP 09 (footer)
-    └── kducsl.png             # logo KDU·ČSL (footer)
+    └── lidovci_logo_rgb_black-kdu.svg   # logo KDU·ČSL (footer)
 ```
 
 **Žádný build krok** — soubory se servírují přímo Vercelem jako statika; React/Babel se načítají z CDN, JSX se transformuje za běhu v prohlížeči (vhodné pro tuto velikost projektu, viz [Plány do budoucna](#plány-do-budoucna)).
@@ -86,7 +94,7 @@ Render flow:
 | `Hero` | „Říčany srdcem", úvodní slovo lídryně, fotka, dvě CTA (priority / tým) |
 | `Priorities` + `PriorityCard` | Mřížka 10 karet (číslo, titulek, anotace) |
 | `PriorityDrawer` | Pravostranný drawer s detailem priority (head fixed, body scrolluje) |
-| `Team` + `TeamCardLeader` + `TeamCard` + `TeamRow` | Velká karta lídryně, grid kandidátů 2–7, řádkový list 8–21 |
+| `Team` + `TeamCardLeader` + `TeamCard` + `TeamRow` | Velká karta lídryně, grid kandidátů 2–7, řádkový list 8–21 (řádky 8–10 jsou klikací — mají fotku/medailonek) |
 | `MemberModal` | Centrovaný modal s portrétem + medailonkem |
 | `Footer` | „Společná kandidátka [TOP 09] [KDU·ČSL] a nezávislých kandidátů" |
 
@@ -143,10 +151,12 @@ window.RS_DATA = {
       id: 'pavel-kucera', n: 8,
       name: 'Pavel Kučera',
       role: 'podnikatel, gastronomie',
-      photo: '...'                                          // jen pro modal, vlastní fotka kandidáta
-      // bio může být prázdný — modal použije fallback text
+      photo: '...',                                         // jen pro modal, vlastní fotka kandidáta
+      bio:   '...'                                          // medailonek; může být prázdný → fallback text
     },
-    // … kandidáti č. 9–21
+    // … kandidáti č. 9, 10 (fotka + medailonek)
+    { id: 'pavla-ruzickova', n: 11, name: '…', role: '…' }, // č. 11+ jen jméno a profese
+    // … kandidáti č. 12–21
   ],
 
   priorities: [
@@ -181,6 +191,8 @@ window.RS_DATA = {
 ```
 
 **Konvence:**
+- **Fotky a medailonky máme jen u top10** (lídryně + č. 2–10) — tak jsme se dohodli. Kandidáti od č. 11 dál mají v `rest` jen `name` + `role`.
+- V řádkovém seznamu je kandidát **klikací (otevře modal se šipkou na konci řádku), jakmile má fotku nebo medailonek** — v praxi tedy č. 8–10. Ostatní řádky jsou statické. Logika je v `TeamRow` v `app.jsx`.
 - `id` slugify z jména (kebab‑case ASCII)
 - `n` = pořadí na kandidátce (1 = lídryně, neopakuje se v `top6`)
 - **Bez akademických titulů** v `name` (rozhodli jsme dříve)
@@ -206,18 +218,32 @@ Pro 95 % změn stačí editovat **`preview/data.js`** a pushnout. Vercel zdeteku
 
 ## Práce s fotkami
 
-### Co dorazí
+### Co je potřeba
 
-| Skupina | Zdroj | Pozadí | Počet |
-|---|---|---|---|
-| Lídryně + top6 | Studio | bílé (čisté) | 7 |
-| Kandidáti 8–21 | Vlastní | různé | 14 |
+**Fotky sbíráme jen u top10** (lídryně + č. 2–10). Kandidáti od č. 11 dál jsou na webu jen jako řádek se jménem a profesí.
+
+| Skupina | Zdroj | Pozadí | Počet | Stav |
+|---|---|---|---|---|
+| Lídryně + top6 | Studio | bílé → odebrané (transparentní WebP) | 7 | ✅ hotovo |
+| Kandidáti 8–10 | Vlastní | různé (ponechané) | 3 | ✅ hotovo |
 
 > **Lídryně má dvě různé fotky:** jednu pro **Hero** (úvod nahoře) a jinou pro **kartu mezi kandidáty + modal**. V `data.js` se mapují na `leader.photoHero` a `leader.photoTeam` (viz [Datový model](#datový-model)). `leader.photo` je společný fallback, použije se jen tam, kde override chybí.
 
 ### Workflow při importu
 
-Po dropnutí surových fotek do `preview/uploads/` napíšu skript `tools/process-photos.py` (Python + Pillow + rembg + face_recognition), který udělá:
+Surové fotky patří do `preview/uploads/` pod názvem `<id>-raw.jpg` (`<id>` = `id` kandidáta z `data.js`), hotové do `preview/photos/`.
+
+**Pro kandidáty 8+** je na to skript `tools/process-photos.py` (Python + Pillow) — ořízne na 4:5, zmenší na 600 × 750 px a uloží jako JPEG:
+
+```sh
+pip install Pillow
+python3 tools/process-photos.py preview/uploads/dominik-bren-raw.jpg dominik-bren
+# volitelně: --face-x 0.48 (vodorovný střed obličeje) a --top 0.3 (svislé posazení výřezu)
+```
+
+Pak už jen doplnit `photo: '/preview/photos/<id>.jpg'` do `data.js`.
+
+**Pro top7** (ateliér, odebrané pozadí) skript není — vznikaly zvlášť přes [`rembg`](https://github.com/danielgatis/rembg), postup níže:
 
 **Pro top7:**
 1. Odebrání pozadí přes [`rembg`](https://github.com/danielgatis/rembg) → transparentní PNG
@@ -228,13 +254,6 @@ Po dropnutí surových fotek do `preview/uploads/` napíšu skript `tools/proces
    - lídryně tým: **800 × 1000 px** → `leader-team.webp` (`leader.photoTeam`)
    - top6: **800 × 1000 px** (grid)
 5. Uložení do `preview/photos/<id>.webp` (transparentní WebP — alfa kanál jako PNG, ale ~10× menší; `<img src>` ho bere ve všech moderních prohlížečích, projekt už WebP používá i pro logo)
-
-**Pro kandidáty 8–21:**
-1. Auto‑crop na **4:5** (přes střed nebo s detekcí obličeje, pokud je rozpoznatelný)
-2. Resize na **600 × 750 px**
-3. Uložení do `preview/photos/<id>.jpg` (zachovat původní pozadí, modal má bílou kartu)
-
-**Pak:** update cest v `data.js` z Unsplash placeholderů na `/preview/photos/<id>.{png,jpg}`.
 
 ### Obrázky uvnitř priorit
 
@@ -292,6 +311,37 @@ node -e 'global.window={}; require("./preview/data.js");
 ```
 
 Hlídej [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů) — zejména `title` ≤ 6 slov, `lead` ≤ 25 slov a součet `sections` ≤ 600 slov. Confluence texty bývají delší; co výrazně přetéká, nahlas v reportu k doladění.
+
+---
+
+## Import medailonků z Confluence
+
+Medailonky kandidátů sbírají autoři ve stejném prostoru Confluence jako priority, na stránce **„Medailonky kandidátů“, page ID `105086977`** (podstránka stránky se seznamem kandidátů). Tahá se stejným Rovo MCP konektorem jako priority.
+
+**Sbíráme je jen za top10** (lídryně + č. 2–10) — na stránce je pro každého z nich jeden nadpis `## <příjmení>`, pod ním text medailonku. Prázdný nadpis = medailonek zatím nedorazil, v `data.js` zůstane `bio: ''`.
+
+### Postup
+
+1. `getConfluencePage` na `pageId: 105086977` (`cloudId: top09ricany.atlassian.net`), `contentFormat: "markdown"`.
+2. Každý neprázdný blok namapovat na `bio` odpovídajícího kandidáta — `leader.bio`, `top6[].bio`, `rest[].bio`.
+3. **Vynechat** `@zmínky` u nadpisů (interní metadata pro autory) a případné poznámky.
+4. Text vložit jako **jeden odstavec** (`.modal-bio` je jedno `<p>`) — zalomení řádků z copy‑paste spojit mezerou.
+5. Typografie stejná jako u priorit: české uvozovky `„…"`, em‑dash `—`, nezalomitelná mezera po jednopísmenných předložkách/spojkách (`k s v z o u a i`).
+6. Hlídat [délku](#limity-a-doporučené-délky-textů) (ideál 30–45 slov, max 60). Co přetéká, **nezkracovat na vlastní pěst** — je to autorský text o konkrétním člověku; nahlásit to a nechat rozhodnutí na kandidátovi.
+7. Commit + push na pracovní branch, bez PR (pokud o něj není výslovně požádáno).
+
+> Existuje ještě starší stránka **„Medailonky“ (ID `102858761`)**, kterou si založil Vojtěch Vytiska, než vznikla ta oficiální. Jsou na ní medailonky Ondřeje Tomáše (č. 4) a Vojtěcha Vytisky (č. 16). Při importu se hodí do ní kouknout — na oficiální stránce může stejný text chybět.
+
+### Kontrola po importu
+
+```sh
+node -e 'global.window={}; require("./preview/data.js");
+  const d=global.window.RS_DATA;
+  [d.leader, ...d.top6, ...d.rest].forEach(m => console.log(
+    String(m.n || 1).padStart(2), m.name,
+    "| foto:", m.photo ? "ano" : "—",
+    "| medailonek:", m.bio && m.bio.trim() ? m.bio.trim().split(/\s+/).length + " slov" : "—"));'
+```
 
 ---
 
@@ -411,8 +461,9 @@ Ucelená verze tohoto je v chatu, tady stručná tabulka:
 
 Seřazeno přibližně podle priority:
 
-- [ ] **Reálné texty** priorit z Confluence (Rovo MCP), medailonky/úvod z Wordu
-- [ ] **Reálné fotky** — top7 ze studia, ostatní vlastní (foto pipeline)
+- [x] **Reálné texty priorit** z Confluence (Rovo MCP) — všech 10 nahráno
+- [ ] **Medailonky** z Confluence — hotovo č. 2, 3, 4, 7, 9; **chybí lídryně a č. 5, 6, 8, 10**
+- [x] **Reálné fotky top10** — top7 ze studia (transparentní WebP), č. 8–10 vlastní (JPG)
 - [ ] **Reálné URL Facebooku a Instagramu** v navigaci
 - [ ] **Kontaktní e‑mail** (kontaktní sekce nebo footer)
 - [ ] **OG image + SEO meta** pro náhled na sociálních sítích (1200×630, srdce + nadpis)
@@ -433,8 +484,8 @@ Seřazeno přibližně podle priority:
 Až dorazí čas přepnout `ricanysrdcem.cz` z teaseru na finální stránku (cca pár měsíců před volbami):
 
 ### Příprava obsahu
-- [ ] Všechny placeholder texty (Lorem ipsum) přepsané reálnými
-- [ ] Všechny placeholder fotky (Unsplash) nahrazené reálnými v `preview/photos/`
+- [ ] Doplněné zbývající medailonky top10 (lídryně, č. 5, 6, 8, 10) — viz [Import medailonků](#import-medailonků-z-confluence)
+- [x] Fotky top10 v `preview/photos/` (od č. 11 se fotky ani medailonky nedělají)
 - [ ] Reálné URL u FB/IG ikon v `app.jsx` (Nav komponenta)
 - [ ] Kontaktní e‑mail doplněn (footer / kontaktní sekce)
 - [ ] Termíny voleb (9.–10. října 2026) zkontrolované všude (Hero kicker, Footer)

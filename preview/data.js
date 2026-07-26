@@ -1,5 +1,6 @@
-// Placeholder data — finální obsah a fotky doplníme.
-// Fotky: Unsplash portréty (na finále budou ateliérové fotky s odebraným pozadím).
+// Obsah webu. Texty priorit přicházejí z Confluence, medailonky ze stránky
+// „Medailonky kandidátů“ — viz README.
+// Fotky a medailonky máme jen u top10 kandidátů (lídryně + č. 2–10).
 
 window.RS_DATA = {
   leader: {
@@ -19,21 +20,21 @@ window.RS_DATA = {
       name: 'Jan Gillern',
       role: 'produktový manažer, člen výboru pro dopravu',
       photo: '/preview/photos/jan-gillern.webp',
-      bio: ''
+      bio: 'Vystudoval jsem politologii na Karlově univerzitě a během studia jsem působil jako analytik think-tanku Evropské hodnoty, kde jsem se mimo jiné zaměřoval na boj s proruskou propagandou v Česku. Aktuálně pracuji na pozici produktového manažera a jsem zodpovědný za rozvoj digitálních produktů naší společnosti. Poslední čtyři roky zároveň působím v říčanském výboru pro dopravu. V Říčanech jsem prožil téměř celý svůj dosavadní život a na našem městě mi velmi záleží. Proto jsem se rozhodl kandidovat s chutí pro Říčany pracovat. Mezi mé hlavní priority patří koncepční rozvoj dopravy, urychlení přípravy jižního obchvatu a větší využití nových technologií pro efektivnější řízení města.'
     },
     {
       id: 'irena-moudra',   n: 3,
       name: 'Irena Moudrá',
       role: 'specialistka v domově seniorů, vedoucí Klubu Senior',
       photo: '/preview/photos/irena-moudra.webp',
-      bio: ''
+      bio: 'Žiji v Říčanech už jako třetí generace. Vystudovala jsem Gymnázium Říčany a Střední školu sociálně-právní v Praze. V současné době pracuji v Domově pro seniory. Celý svůj profesní i osobní život spojuji s prací pro lidi, komunitu a rozvoj našeho města. Stála jsem u založení Okrašlovacího spolku v Říčanech a Seniocentra Říčany. Více než dvacet let připravuji programy a setkávání pro seniory a podporuji mezigenerační spolupráci. Do práce pro město přináším dlouholeté zkušenosti ze sociální oblasti, znalost potřeb místních obyvatel i chuť hledat praktická řešení. Chci, aby se v Říčanech dobře žilo dětem, rodinám, lidem v produktivním věku i seniorům.'
     },
     {
       id: 'ondrej-tomas',  n: 4,
       name: 'Ondřej Tomáš',
       role: 'student politologie',
       photo: '/preview/photos/ondrej-tomas.webp',
-      bio: ''
+      bio: 'Jmenuji se Ondřej Tomáš, je mi 21 let a v Říčanech žiji už více než 15 let. Studuji politologii a veřejnou politiku na Fakultě sociálních věd Univerzity Karlovy a jsem členem mládežnické organizace TOP tým. Chci přispět k tomu, aby Říčany zůstaly skvělým místem pro život i pro mladou generaci.'
     },
     {
       id: 'jaromir-zilka',     n: 5,
@@ -54,15 +55,34 @@ window.RS_DATA = {
       name: 'Pavel Šramota',
       role: 'brand manažer',
       photo: '/preview/photos/pavel-sramota.webp',
-      bio: ''
+      bio: 'Říčany jsou moje srdeční záležitost. Šest let žiji v našem městě a šestnáct let v něm také pracuji. Záleží mi na tom, jak se bude dál rozvíjet, a proto kandiduji s cílem podporovat spolupráci, rozumná řešení a otevřený dialog. Společně hledat cestu vpřed.'
     }
   ],
 
   rest: [
-    // Fotky a medailonky doplníme později — modal zatím zobrazí zástupné srdce.
-    { id: 'sylvie-kubalkova',  n:  8, name: 'Sylvie Kubálková',  role: 'učitelka, majitelka kočičího hotelu' },
-    { id: 'peter-vercimak',    n:  9, name: 'Peter Verčimák',    role: 'projektový manažer' },
-    { id: 'dominik-bren',      n: 10, name: 'Dominik Břeň',      role: 'psycholog' },
+    // Fotky a medailonky máme jen u top10 (č. 8–10 níže) — ti mají klikací řádek
+    // s modalem. Od č. 11 dál zůstává řádek statický, bez fotky i medailonku.
+    {
+      id: 'sylvie-kubalkova',  n:  8,
+      name: 'Sylvie Kubálková',
+      role: 'učitelka, majitelka kočičího hotelu',
+      photo: '/preview/photos/sylvie-kubalkova.jpg',
+      bio: ''
+    },
+    {
+      id: 'peter-vercimak',    n:  9,
+      name: 'Peter Verčimák',
+      role: 'projektový manažer',
+      photo: '/preview/photos/peter-vercimak.jpg',
+      bio: 'V Říčanech žiji s rodinou už 25 let a za tu dobu se pro mě staly skutečným domovem. S manželkou jsme zde vychovali dva syny a dobře víme, co je pro kvalitní život ve městě důležité. Říčany jsme si vybrali jako místo, kde chceme založit rodinu, a toto město a lokalitu jsme si natolik oblíbili, že ani po pětadvaceti letech bychom určitě neměnili. Profesně pracuji jako projektový manažer v oblasti rozsáhlých infrastrukturních projektů pro akademickou a vědeckou sféru. Mám dlouholeté zkušenosti s přípravou a řízením projektů financovaných z evropských fondů, s veřejnými zakázkami i dohledem nad efektivním využíváním veřejných prostředků. Věřím, že tyto zkušenosti s přípravou investičních projektů, evropským financováním a kontrolou veřejných zakázek mohou být přínosem i při rozhodování o budoucím rozvoji našeho města.'
+    },
+    {
+      id: 'dominik-bren',      n: 10,
+      name: 'Dominik Břeň',
+      role: 'psycholog',
+      photo: '/preview/photos/dominik-bren.jpg',
+      bio: ''
+    },
     { id: 'pavla-ruzickova',   n: 11, name: 'Pavla Růžičková',   role: 'nepedagogická pracovnice ve školství' },
     { id: 'martina-machova',   n: 12, name: 'Martina Machová',   role: 'personální ředitelka' },
     { id: 'simon-babicek',     n: 13, name: 'Šimon Karel Babíček', role: 'student farmacie' },
