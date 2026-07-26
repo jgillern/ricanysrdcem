@@ -251,7 +251,7 @@ function MemberModal({ member, onClose }) {
             <h3 className="modal-name">{member.name}</h3>
             <div className="modal-role">{member.role || ''}</div>
             <p className="modal-bio">
-              {member.bio || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Krátký medailonek doplníme po obdržení podkladů od kandidáta.'}
+              {member.bio || 'Medailonek zatím připravujeme, brzy ho tu najdete.'}
             </p>
           </div>
         </div>
@@ -295,23 +295,23 @@ function TeamCard({ m, onOpen }) {
 }
 
 function TeamRow({ m, onOpen }) {
-  // Klikací (s medailonkem v modalu) je řádek jen když má vyplněný bio.
-  // Fotka chybět může, na proklik nemá vliv.
-  const hasBio = !!(m.bio && m.bio.trim());
+  // Klikací (s modalem) je řádek, jakmile má kandidát fotku nebo medailonek —
+  // v praxi top10, tj. č. 8–10. Ostatní řádky zůstávají statické.
+  const hasDetail = !!(m.photo || (m.bio && m.bio.trim()));
   const content = (
     <>
       <span className="team-row-num">{String(m.n).padStart(2, '0')}</span>
       <span className="team-row-name">{m.name}</span>
       <span className="team-row-dots" aria-hidden="true"></span>
       <span className="team-row-role">{m.role}</span>
-      {hasBio && (
+      {hasDetail && (
         <span className="team-row-arrow" aria-hidden="true">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       )}
     </>
   );
-  if (!hasBio) {
+  if (!hasDetail) {
     return <div className="team-row team-row--static">{content}</div>;
   }
   return (
