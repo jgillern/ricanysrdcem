@@ -439,16 +439,27 @@
     border-radius: 20px;
     max-width: 720px; width: 100%; max-height: calc(100vh - 48px); overflow: auto;
     position: relative;
+    display: flex; flex-direction: column;
     animation: pop .25s cubic-bezier(.2,.7,.4,1.2);
   }
+  /* Medailonky mají různou délku — modal se jí přizpůsobuje ve třech stupních
+     (viz `size` v MemberModal): širší modal + větší fotka, ať dlouhý text
+     nezůstane v úzkém sloupci vedle malé fotky a řádek nemá přes 75 znaků. */
+  .modal.is-long { max-width: 880px; }
+  .modal.is-xlong { max-width: 980px; }
   @keyframes pop { from { transform: translateY(12px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
+  /* Sticky, aby křížek zůstal po ruce i u dlouhého medailonku, který se roluje.
+     Záporný spodní margin = v toku nezabírá výšku, layout je stejný jako dřív. */
   .modal-close {
-    position: absolute; top: 16px; right: 16px; width: 36px; height: 36px;
+    position: sticky; top: 16px; align-self: flex-end; flex: none;
+    margin: 16px 16px -52px 0; width: 36px; height: 36px;
     border-radius: 50%; background: var(--rs-bg-soft); display: flex; align-items: center; justify-content: center;
     color: var(--rs-ink); z-index: 2; transition: background .15s ease;
   }
   .modal-close:hover { background: var(--rs-blue-tint); }
-  .modal-grid { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 36px; }
+  .modal-grid { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 36px; align-items: start; }
+  .modal.is-long .modal-grid { grid-template-columns: 260px 1fr; gap: 40px; }
+  .modal.is-xlong .modal-grid { grid-template-columns: 300px 1fr; gap: 44px; }
   .modal-photo { aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center; }
   .modal-photo img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
   .modal-photo-placeholder {
@@ -456,6 +467,8 @@
     display: flex; align-items: center; justify-content: center;
   }
   .modal-photo-heart { width: 64px; height: 64px; opacity: .55; }
+  /* Rezerva vpravo, ať text nikdy nezmizí pod sticky křížkem. */
+  .modal-text { padding-right: 20px; }
   .modal-num {
     font-family: "PT Serif", Georgia, serif; font-style: italic; font-weight: 700;
     color: var(--rs-blue); font-size: 22px; margin-bottom: 8px;
@@ -467,10 +480,19 @@
   }
   .modal-role { color: var(--rs-ink-soft); font-size: 15px; margin-bottom: 16px; }
   .modal-bio { color: var(--rs-ink-soft); font-size: 16px; line-height: 1.6; margin: 0; text-wrap: pretty; }
+  .modal-bio + .modal-bio { margin-top: 14px; }
 
+  /* Užší okno → zpět na základní šířku sloupců, ať se fotka a text vejdou. */
+  @media (max-width: 1000px) {
+    .modal.is-long .modal-grid,
+    .modal.is-xlong .modal-grid { grid-template-columns: 220px 1fr; gap: 32px; }
+  }
   @media (max-width: 640px) {
-    .modal-grid { grid-template-columns: 1fr; padding: 24px; gap: 20px; }
-    .modal-photo { max-width: 220px; margin: 0 auto; }
+    .modal-grid,
+    .modal.is-long .modal-grid,
+    .modal.is-xlong .modal-grid { grid-template-columns: 1fr; padding: 24px; gap: 20px; }
+    .modal-photo { max-width: 200px; margin: 0 auto; }
+    .modal-text { padding-right: 28px; }
   }
 
   .footer {
