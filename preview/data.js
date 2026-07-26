@@ -6,7 +6,7 @@ window.RS_DATA = {
   leader: {
     id: 'lenka-babickova',
     name: 'Lenka Babíčková',
-    role: 'Lídryně kandidátky · kandidátka na starostku',
+    role: 'Lídryně kandidátky',
     job: 'ředitelka MAS Říčansko, galeristka',
     photo: '/preview/photos/leader-team.webp',
     photoHero: '/preview/photos/leader-hero.webp',

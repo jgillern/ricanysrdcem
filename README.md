@@ -126,12 +126,12 @@ window.RS_DATA = {
   leader: {
     id:    'eva-novakova',
     name:  'Eva Nováková',                                // bez titulů
-    role:  'Lídryně kandidátky · kandidátka na starostku',
+    role:  'Lídryně kandidátky',                            // bez „kandidátka na starostku“ — tak jsme se dohodli
     job:   'ředitelka neziskové organizace',              // 1-4 slova malými písmeny
     photo: 'URL nebo /preview/photos/...',                // výchozí 4:5 portrét — použije se všude, kde není override
     photoHero: '...',                                      // VOLITELNÉ — fotka jen pro Hero (úvod)
     photoTeam: '...',                                      // VOLITELNÉ — fotka jen pro kartu v Týmu + modal
-    bio:   '...',                                          // medailonek v modálu, 3-4 věty
+    bio:   '...',                                          // medailonek v modálu; odstavce oddělit prázdným řádkem (\n\n)
     intro: '...'                                           // úvodní slovo v Hero, ~5 vět
   },
 
@@ -327,7 +327,7 @@ Medailonky kandidátů sbírají autoři ve stejném prostoru Confluence jako pr
 3. **Vynechat** `@zmínky` u nadpisů (interní metadata pro autory) a případné poznámky.
 4. Text vložit jako **jeden odstavec** (`.modal-bio` je jedno `<p>`) — zalomení řádků z copy‑paste spojit mezerou.
 5. Typografie stejná jako u priorit: české uvozovky `„…"`, em‑dash `—`, nezalomitelná mezera po jednopísmenných předložkách/spojkách (`k s v z o u a i`).
-6. Hlídat [délku](#limity-a-doporučené-délky-textů) (ideál 30–45 slov, max 60). Co přetéká, **nezkracovat na vlastní pěst** — je to autorský text o konkrétním člověku; nahlásit to a nechat rozhodnutí na kandidátovi.
+6. Hlídat [délku](#limity-a-doporučené-délky-textů) — modal se přizpůsobí do ~130 slov, nad to už je lepší text zkrátit. Co přetéká, **nezkracovat na vlastní pěst** — je to autorský text o konkrétním člověku; nahlásit to a nechat rozhodnutí na kandidátovi.
 7. Commit + push na pracovní branch, bez PR (pokud o něj není výslovně požádáno).
 
 > Existuje ještě starší stránka **„Medailonky“ (ID `102858761`)**, kterou si založil Vojtěch Vytiska, než vznikla ta oficiální. Jsou na ní medailonky Ondřeje Tomáše (č. 4) a Vojtěcha Vytisky (č. 16). Při importu se hodí do ní kouknout — na oficiální stránce může stejný text chybět.
@@ -452,8 +452,18 @@ Ucelená verze tohoto je v chatu, tady stručná tabulka:
 | `priority.sections` (hlavní text celkem) | 250–400 slov | 600 slov |
 | Jeden odstavec | 30–70 slov | 100 slov |
 | Subnadpis | 2–5 slov | — |
-| `leader.bio` (medailonek lídryně) | 40–60 slov | 80 slov |
-| `top6[].bio` / `rest[].bio` | 30–45 slov | 60 slov |
+| `leader.bio` (medailonek lídryně) | 40–60 slov | 130 slov |
+| `top6[].bio` / `rest[].bio` | 30–45 slov | 130 slov |
+
+**Medailonky chodí různě dlouhé, takže se jim modal přizpůsobuje** — podle počtu slov přepne mezi třemi šířkami (`MemberModal` v `app.jsx` nasadí třídu, zbytek je CSS v `preview/index.html`):
+
+| Délka `bio` | Třída | Šířka modalu | Fotka |
+|---|---|---|---|
+| do 65 slov | — | 720 px | 220 px |
+| 66–110 slov | `is-long` | 880 px | 260 px |
+| 111+ slov | `is-xlong` | 980 px | 300 px |
+
+Cílem je držet řádek v čitelných ~55–75 znacích a nenechat dlouhý text ve úzkém sloupci vedle malé fotky. Nad ~130 slov už se modal roluje (křížek je sticky, takže zůstává po ruce) a text začne vizuálně přebíjet fotku — tam už je lepší medailonek zkrátit. Delší text se dobře čte rozdělený na odstavce: v `data.js` je stačí oddělit prázdným řádkem (`\n\n`).
 
 ---
 

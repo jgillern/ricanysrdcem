@@ -230,9 +230,15 @@ function MemberModal({ member, onClose }) {
   }, [member, onClose]);
   if (!member) return null;
   const num = member.n != null ? String(member.n).padStart(2, '0') : '01';
+  const bio = (member.bio || '').trim();
+  // Medailonky chodí různě dlouhé — podle počtu slov se modal rozšíří (CSS).
+  const words = bio ? bio.split(/\s+/).length : 0;
+  const size = words > 110 ? ' is-xlong' : words > 65 ? ' is-long' : '';
+  // Odstavce lze v data.js oddělit prázdným řádkem.
+  const paragraphs = bio ? bio.split(/\n\s*\n/) : [];
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <div className={'modal' + size} onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Zavřít">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6l12 12M18 6l-12 12"/></svg>
         </button>
@@ -250,9 +256,9 @@ function MemberModal({ member, onClose }) {
             <div className="modal-num">{num}</div>
             <h3 className="modal-name">{member.name}</h3>
             <div className="modal-role">{member.role || ''}</div>
-            <p className="modal-bio">
-              {member.bio || 'Medailonek zatím připravujeme, brzy ho tu najdete.'}
-            </p>
+            {paragraphs.length
+              ? paragraphs.map((p, i) => <p key={i} className="modal-bio">{p}</p>)
+              : <p className="modal-bio">Medailonek zatím připravujeme, brzy ho tu najdete.</p>}
           </div>
         </div>
       </div>
