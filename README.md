@@ -472,6 +472,13 @@ Klíčová otázka byla, **kam ukládat údaje, aby to bylo bezpečné**. Zvolen
 V `soutez/index.html` zbývají dvě místa označená `[DOPLNIT: …]` — **popis výhry**
 a **datum platnosti pravidel** (= den vydání volebních novin).
 
+**A jedna věc k potvrzení: kdo je pořadatel a správce.** V textu je předvyplněná TOP 09,
+ale to je jen default — rozhodnout to musí skutkový stav, ne preference. Kontrolní otázka:
+*kdo bude mít přístup do databáze odpovědí, kdo bude losovat výherce a kdo data po soutěži
+smaže?* Pokud to dělá lokální tým TOP 09 z rozpočtu strany, sedí TOP 09. Pokud si to celé
+odbaví jeden konkrétní člověk, patří tam on. Pokud o tom rozhodují TOP 09 i KDU-ČSL
+společně, jde o společné správce a je k tomu potřeba dohoda mezi stranami.
+
 Pořadatel i správce osobních údajů jsou vyplnění jako **TOP 09, IČO 71339728,
 Opletalova 1603/57, 110 00 Praha 1**.
 
