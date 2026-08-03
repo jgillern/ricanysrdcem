@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Křížovka se soutěží — Říčany srdcem</title>
+<meta name="description" content="Vyluštili jste tajenku křížovky z volebních novin Říčany srdcem? Pošlete nám ji a hrajte o ceny.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 92 C 14 68, 2 44, 10 24 C 18 8, 38 6, 48 18 C 49 19, 49.5 20, 50 22 C 50.5 20, 51 19, 52 18 C 62 6, 82 8, 90 24 C 98 44, 86 68, 50 92 Z' fill='%23d93434'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Plausible Analytics — cookieless, bez cookie lišty (souhlasu netřeba) -->
+<script defer data-domain="ricanysrdcem.cz" src="https://plausible.io/js/script.js"></script>
+<script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) };</script>
+
+<style>
+  /* Design tokeny jsou shodné s preview/index.html — stránka má vypadat
+     jako součást finálního webu, ale je samostatná (žádná závislost na React/JSX). */
+  :root {
+    --rs-bg: #f0f7fc;
+    --rs-bg-soft: #e3eef8;
+    --rs-bg-card: #ffffff;
+    --rs-blue: #2492d6;
+    --rs-blue-deep: #1872aa;
+    --rs-blue-tint: #d6ebf8;
+    --rs-red: #d93434;
+    --rs-red-deep: #b22323;
+    --rs-ink: #142235;
+    --rs-ink-soft: #4a5a72;
+    --rs-line: #d8e6f1;
+    --max: 1180px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--rs-bg);
+    color: var(--rs-ink);
+    font-family: "PT Sans", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--rs-blue); }
+  button { font: inherit; }
+
+  .nav { border-bottom: 1px solid var(--rs-line); background: var(--rs-bg); }
+  .nav-inner {
+    max-width: var(--max); margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; color: var(--rs-ink); text-decoration: none; }
+  .nav-heart { width: 38px; height: 38px; flex-shrink: 0; }
+  .nav-name {
+    font-family: "PT Serif", Georgia, serif; font-weight: 700; line-height: 0.95;
+    font-size: 22px; letter-spacing: -0.01em; display: flex; flex-direction: column;
+  }
+  .nav-name span:last-child { color: var(--rs-blue); font-style: italic; }
+  .nav-back { font-weight: 700; font-size: 15px; text-decoration: none; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 24px; }
+
+  .kicker {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em;
+    font-size: 12px; color: var(--rs-blue);
+  }
+  .kicker-line { width: 28px; height: 2px; background: var(--rs-red); display: inline-block; }
+  h1 {
+    font-family: "PT Serif", Georgia, serif; font-weight: 700;
+    font-size: clamp(36px, 5vw, 56px); line-height: 1.04;
+    margin: 18px 0 18px; letter-spacing: -0.015em;
+  }
+  h1 em { font-style: italic; color: var(--rs-blue); }
+  .lead { font-size: 19px; color: var(--rs-ink-soft); text-wrap: pretty; margin: 0; }
+
+  .card {
+    background: var(--rs-bg-card);
+    border: 1px solid var(--rs-line);
+    border-radius: 20px;
+    padding: 32px;
+    margin-top: 40px;
+  }
+  .field { margin-bottom: 22px; }
+  .field:last-of-type { margin-bottom: 26px; }
+  label { display: block; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .hint { font-size: 14px; color: var(--rs-ink-soft); margin: 0 0 8px; }
+  input[type="email"], input[type="text"] {
+    width: 100%; padding: 13px 15px; font: inherit;
+    background: var(--rs-bg);
+    border: 1px solid var(--rs-line); border-radius: 12px;
+    color: var(--rs-ink);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  input:focus-visible {
+    outline: none; border-color: var(--rs-blue);
+    box-shadow: 0 0 0 3px var(--rs-blue-tint);
+  }
+  input[type="text"].answer { letter-spacing: 0.04em; font-size: 18px; }
+  /* Honeypot — pro lidi neviditelné, boti ho typicky vyplní. */
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .consent {
+    font-size: 14px; line-height: 1.5; color: var(--rs-ink-soft);
+    margin: 0 0 18px; text-wrap: pretty;
+  }
+  .consent a { font-weight: 700; }
+
+  .submit {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--rs-blue); color: #fff; border: 2px solid transparent;
+    padding: 13px 26px; border-radius: 999px; font-weight: 700; font-size: 16px;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease, opacity .2s ease;
+  }
+  .submit:hover:not(:disabled) { background: var(--rs-blue-deep); transform: translateY(-1px); }
+  .submit:disabled { opacity: .55; cursor: default; }
+
+  .msg { margin: 18px 0 0; font-size: 15px; line-height: 1.5; text-wrap: pretty; }
+  .msg:empty { margin: 0; }
+  .msg.ok { color: var(--rs-blue-deep); font-weight: 700; }
+  .msg.err { color: var(--rs-red-deep); }
+
+  .done { text-align: center; padding: 8px 0 4px; }
+  .done-heart { width: 56px; height: 56px; margin: 0 auto 14px; animation: pop .35s cubic-bezier(.2,.7,.4,1.2); }
+  @keyframes pop { from { transform: scale(.7); opacity: 0; } to { transform: none; opacity: 1; } }
+  .done h2 { font-family: "PT Serif", Georgia, serif; font-size: 26px; margin: 0 0 8px; }
+  .done p { color: var(--rs-ink-soft); margin: 0; }
+
+  /* Pravidla + GDPR — složená v decentních rozbalovačkách, aby nepřebila formulář. */
+  .docs { margin: 36px 0 0; }
+  details {
+    border-top: 1px solid var(--rs-line);
+    padding: 0;
+  }
+  details:last-child { border-bottom: 1px solid var(--rs-line); }
+  summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 18px 4px;
+    font-weight: 700; font-size: 16px; color: var(--rs-ink);
+    transition: color .15s ease;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--rs-blue); }
+  summary:focus-visible { outline: 2px solid var(--rs-blue); outline-offset: 2px; border-radius: 6px; }
+  .chev {
+    flex: none; width: 18px; height: 18px; color: var(--rs-blue);
+    transition: transform .2s ease;
+  }
+  details[open] .chev { transform: rotate(180deg); }
+  .doc-body {
+    padding: 0 4px 24px;
+    font-size: 15px; line-height: 1.65; color: var(--rs-ink-soft);
+  }
+  .doc-body h3 {
+    font-family: "PT Serif", Georgia, serif; font-size: 17px; color: var(--rs-ink);
+    margin: 20px 0 6px;
+  }
+  .doc-body h3:first-child { margin-top: 0; }
+  .doc-body p { margin: 0 0 10px; text-wrap: pretty; }
+  .doc-body ol, .doc-body ul { margin: 0 0 10px; padding-left: 20px; }
+  .doc-body li { margin-bottom: 6px; }
+  .doc-body strong { color: var(--rs-ink); }
+
+  .footer { border-top: 1px solid var(--rs-line); margin-top: 56px; }
+  .footer-inner {
+    max-width: var(--max); margin: 0 auto; padding: 28px 24px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    flex-wrap: wrap; text-align: center;
+    color: var(--rs-ink-soft); font-size: 14px;
+  }
+  .disclaimer { color: var(--rs-ink-soft); opacity: .7; font-size: 12px; }
+
+  @media (max-width: 620px) {
+    .wrap { padding-top: 36px; }
+    .card { padding: 24px 20px; border-radius: 16px; }
+    .nav-back { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/" aria-label="Říčany srdcem — domů">
+      <span class="nav-heart" aria-hidden="true">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <path d="M50 92 C 14 68, 2 44, 10 24 C 18 8, 38 6, 48 18 C 49 19, 49.5 20, 50 22 C 50.5 20, 51 19, 52 18 C 62 6, 82 8, 90 24 C 98 44, 86 68, 50 92 Z" fill="#d93434"/>
+        </svg>
+      </span>
+      <span class="nav-name"><span>Říčany</span><span>srdcem</span></span>
+    </a>
+    <a class="nav-back" href="/">Zpět na web</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="kicker"><span class="kicker-line"></span><span>Soutěž</span></div>
+  <h1>Křížovka <em>s tajenkou</em></h1>
+  <p class="lead">
+    Vyluštili jste křížovku z&nbsp;našich volebních novin? Pošlete nám tajenku
+    a&nbsp;budete zařazeni do&nbsp;slosování o&nbsp;ceny. Stačí e‑mail
+    a&nbsp;vyluštěná tajenka — nic víc po&nbsp;vás nechceme.
+  </p>
+
+  <section class="card" aria-labelledby="form-heading">
+    <h2 id="form-heading" class="kicker" style="margin-bottom:18px"><span class="kicker-line"></span><span>Odeslat tajenku</span></h2>
+
+    <form id="contest-form" novalidate>
+      <div class="field">
+        <label for="email">Váš e‑mail</label>
+        <p class="hint">Použijeme ho jen k&nbsp;vyrozumění výherců. Nikam ho nepřidáváme.</p>
+        <input id="email" name="email" type="email" required autocomplete="email"
+               inputmode="email" maxlength="254" placeholder="jmeno@email.cz">
+      </div>
+
+      <div class="field">
+        <label for="answer">Tajenka křížovky</label>
+        <p class="hint">Přepište tajenku tak, jak vám vyšla. Na&nbsp;velikosti písmen ani diakritice nezáleží.</p>
+        <input id="answer" name="answer" type="text" class="answer" required maxlength="200"
+               autocomplete="off" placeholder="Znění tajenky">
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="web">Nevyplňujte toto pole</label>
+        <input id="web" name="web" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="consent">
+        Odesláním formuláře potvrzuji, že jsem se seznámil/a s&nbsp;<a href="#pravidla" data-open="pravidla">pravidly soutěže</a>
+        a&nbsp;<a href="#gdpr" data-open="gdpr">informacemi o&nbsp;zpracování osobních údajů</a>.
+      </p>
+
+      <button class="submit" type="submit" id="submit">
+        Odeslat tajenku
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h13M13 6l6 6-6 6"/>
+        </svg>
+      </button>
+
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="done" id="done" hidden>
+      <div class="done-heart" aria-hidden="true">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <path d="M50 92 C 14 68, 2 44, 10 24 C 18 8, 38 6, 48 18 C 49 19, 49.5 20, 50 22 C 50.5 20, 51 19, 52 18 C 62 6, 82 8, 90 24 C 98 44, 86 68, 50 92 Z" fill="#d93434"/>
+        </svg>
+      </div>
+      <h2>Tajenku máme, díky!</h2>
+      <p>Pokud vyhrajete, ozveme se vám na&nbsp;zadaný e‑mail do&nbsp;5.&nbsp;října&nbsp;2026.</p>
+    </div>
+  </section>
+
+  <div class="docs">
+    <details id="pravidla">
+      <summary>
+        <span>Pravidla soutěže</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <div class="doc-body">
+        <!-- KE KONTROLE PŘED TISKEM NOVIN: pořadatel, výhry, termíny.
+             Stejné údaje musí sedět i v novinách u křížovky. -->
+        <h3>Pořadatel</h3>
+        <p>
+          Soutěž pořádá <strong>[DOPLNIT: název pořadatele, IČO, sídlo]</strong>, kandidátka
+          <strong>Říčany srdcem</strong> (společný projekt TOP&nbsp;09, KDU·ČSL a&nbsp;nezávislých kandidátů).
+          Kontakt: <a href="mailto:info@ricanysrdcem.cz">info@ricanysrdcem.cz</a>.
+        </p>
+
+        <h3>Kdo se může zúčastnit</h3>
+        <p>
+          Soutěže se může zúčastnit každá fyzická osoba starší 15&nbsp;let s&nbsp;doručovací adresou
+          v&nbsp;České republice. Ze soutěže jsou vyloučeni kandidáti kandidátky Říčany srdcem
+          a&nbsp;osoby podílející se na&nbsp;přípravě soutěže.
+        </p>
+
+        <h3>Jak se soutěží</h3>
+        <ol>
+          <li>Vyluštěte tajenku křížovky z&nbsp;volebních novin Říčany srdcem.</li>
+          <li>Odešlete ji spolu se svým e‑mailem přes formulář na&nbsp;této stránce.</li>
+          <li>Odeslání je zdarma, soutěž není podmíněna žádným nákupem ani jiným plněním.</li>
+        </ol>
+        <p>
+          Jeden e‑mail = jedna účast. Pokud odešlete formulář vícekrát, počítá se
+          <strong>poslední odeslaná odpověď</strong>.
+        </p>
+
+        <h3>Termín</h3>
+        <p>
+          Soutěž běží od&nbsp;vydání volebních novin do&nbsp;<strong>30.&nbsp;září&nbsp;2026, 23:59</strong>.
+          Na&nbsp;odpovědi doručené později nelze brát zřetel.
+        </p>
+
+        <h3>Výhry a losování</h3>
+        <p>
+          Ze všech správných odpovědí vylosujeme <strong>3&nbsp;výherce</strong>. Losování proběhne
+          <strong>2.&nbsp;října&nbsp;2026</strong> za&nbsp;přítomnosti dvou zástupců pořadatele.
+          Výhrou je <strong>[DOPLNIT: popis výhry]</strong>.
+        </p>
+        <p>
+          Výherce vyrozumíme e‑mailem nejpozději <strong>5.&nbsp;října&nbsp;2026</strong> na&nbsp;adresu
+          uvedenou ve&nbsp;formuláři. Pokud se výherce neozve do&nbsp;14&nbsp;dnů od&nbsp;odeslání
+          zprávy, výhra propadá a&nbsp;pořadatel může losovat znovu. Způsob předání výhry
+          domluvíme individuálně; výhru nelze vyměnit za&nbsp;peníze a&nbsp;není na&nbsp;ni právní nárok.
+        </p>
+
+        <h3>Ostatní</h3>
+        <p>
+          Nejde o&nbsp;spotřebitelskou loterii ani hazardní hru podle zákona č.&nbsp;186/2016&nbsp;Sb.
+          Pořadatel si vyhrazuje právo soutěž zkrátit, přerušit nebo zrušit či změnit její pravidla;
+          změnu zveřejní na&nbsp;této stránce. Pořadatel může ze&nbsp;soutěže vyřadit odpovědi,
+          které vykazují znaky zneužití (automatizované odesílání, hromadné zakládání e‑mailů apod.).
+        </p>
+        <p>Pravidla jsou platná od&nbsp;<strong>[DOPLNIT: datum vydání novin]</strong>.</p>
+      </div>
+    </details>
+
+    <details id="gdpr">
+      <summary>
+        <span>Zpracování osobních údajů (GDPR)</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <div class="doc-body">
+        <h3>Kdo údaje zpracovává</h3>
+        <p>
+          Správcem osobních údajů je <strong>[DOPLNIT: název správce, IČO, sídlo]</strong>.
+          Ve&nbsp;všem, co se týká vašich údajů, se na&nbsp;nás obraťte na&nbsp;
+          <a href="mailto:info@ricanysrdcem.cz">info@ricanysrdcem.cz</a>.
+        </p>
+
+        <h3>Co o&nbsp;vás víme</h3>
+        <p>Jen to, co sami vyplníte, a&nbsp;nezbytné technické minimum:</p>
+        <ul>
+          <li><strong>E‑mailová adresa</strong> — abychom vás mohli vyrozumět, pokud vyhrajete.</li>
+          <li><strong>Znění tajenky</strong> a&nbsp;čas odeslání — abychom mohli vyhodnotit soutěž.</li>
+          <li><strong>Nevratný otisk IP adresy</strong> (hash) — jen jako ochrana proti hromadnému
+            automatickému odesílání. Samotnou IP adresu neukládáme a&nbsp;z&nbsp;otisku ji nelze zpětně získat.</li>
+        </ul>
+        <p>Jméno, adresu ani telefon nechceme. Údaje z&nbsp;formuláře nikam neprodáváme ani nepředáváme třetím stranám pro jejich vlastní účely.</p>
+
+        <h3>Proč a&nbsp;na&nbsp;základě čeho</h3>
+        <p>
+          Údaje zpracováváme <strong>pro účast v&nbsp;soutěži a&nbsp;její vyhodnocení</strong>.
+          Právním základem je plnění smlouvy (účast v&nbsp;soutěži podle pravidel) podle
+          čl.&nbsp;6 odst.&nbsp;1 písm.&nbsp;b) GDPR, u&nbsp;ochrany proti zneužití formuláře náš
+          oprávněný zájem podle čl.&nbsp;6 odst.&nbsp;1 písm.&nbsp;f) GDPR.
+        </p>
+
+        <h3>Jak dlouho</h3>
+        <p>
+          Údaje smažeme <strong>nejpozději do&nbsp;30&nbsp;dnů po&nbsp;předání výher</strong>,
+          v&nbsp;každém případě do&nbsp;<strong>31.&nbsp;prosince&nbsp;2026</strong>. Poté
+          nezůstávají v&nbsp;žádné podobě, ze&nbsp;které by šlo dohledat konkrétního člověka.
+        </p>
+
+        <h3>Kdo se k&nbsp;údajům dostane</h3>
+        <p>
+          Vyplněné odpovědi jsou uložené v&nbsp;zabezpečené databázi u&nbsp;společnosti
+          <strong>Supabase</strong> (servery v&nbsp;EU, Paříž) a&nbsp;webovou stránku provozujeme
+          u&nbsp;společnosti <strong>Vercel</strong>. Obě společnosti pro nás vystupují jako
+          zpracovatelé. Přístup k&nbsp;odpovědím mají jen pověření zástupci pořadatele.
+        </p>
+        <p>
+          Návštěvnost webu měříme přes <strong>Plausible Analytics</strong> — bez cookies
+          a&nbsp;bez ukládání čehokoli do&nbsp;vašeho prohlížeče; tato měření nejsou spojena
+          s&nbsp;vaší soutěžní odpovědí.
+        </p>
+
+        <h3>Vaše práva</h3>
+        <p>
+          Máte právo na&nbsp;přístup ke&nbsp;svým údajům, na&nbsp;jejich opravu nebo výmaz,
+          na&nbsp;omezení zpracování, na&nbsp;přenositelnost a&nbsp;právo vznést námitku.
+          Stačí napsat na&nbsp;<a href="mailto:info@ricanysrdcem.cz">info@ricanysrdcem.cz</a>
+          — ozveme se do&nbsp;30&nbsp;dnů. Výmaz před koncem soutěže znamená ukončení účasti
+          v&nbsp;ní. Pokud si budete myslet, že s&nbsp;údaji nakládáme špatně, můžete si stěžovat
+          u&nbsp;<a href="https://www.uoou.cz" target="_blank" rel="noopener noreferrer">Úřadu pro ochranu osobních údajů</a>.
+        </p>
+
+        <h3>Žádné automatické rozhodování</h3>
+        <p>Nic o&nbsp;vás nevyhodnocujeme automaticky ani neprofilujeme. Výherce určí náhodné losování.</p>
+      </div>
+    </details>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Společná kandidátka TOP&nbsp;09, KDU·ČSL a&nbsp;nezávislých kandidátů</span>
+    <span class="disclaimer">Toto je politická reklama</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var form = document.getElementById('contest-form');
+    var msg = document.getElementById('msg');
+    var btn = document.getElementById('submit');
+    var done = document.getElementById('done');
+    var loadedAt = Date.now();
+
+    function track(name, props) {
+      if (typeof window.plausible === 'function') {
+        window.plausible(name, props ? { props: props } : undefined);
+      }
+    }
+
+    // Odkazy v souhlasu rozbalí příslušnou sekci a doscrollují k ní.
+    document.querySelectorAll('[data-open]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var el = document.getElementById(a.dataset.open);
+        if (!el) return;
+        el.open = true;
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    function show(text, kind) {
+      msg.textContent = text;
+      msg.className = 'msg ' + (kind || '');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = form.email.value.trim();
+      var answer = form.answer.value.trim();
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        show('Zkontrolujte prosím e‑mailovou adresu.', 'err');
+        form.email.focus();
+        return;
+      }
+      if (answer.length < 2) {
+        show('Vyplňte prosím znění tajenky.', 'err');
+        form.answer.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      show('Odesíláme…');
+
+      fetch('/api/soutez', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          answer: answer,
+          web: form.web.value,
+          elapsed: Date.now() - loadedAt
+        })
+      })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (res.ok) {
+            form.hidden = true;
+            done.hidden = false;
+            track('Soutěž: odesláno');
+            return;
+          }
+          btn.disabled = false;
+          show(res.d.error || 'Odeslání se nepovedlo. Zkuste to prosím za chvíli znovu.', 'err');
+          track('Soutěž: chyba', { duvod: res.d.code || 'unknown' });
+        })
+        .catch(function () {
+          btn.disabled = false;
+          show('Odeslání se nepovedlo — zkontrolujte prosím připojení a zkuste to znovu. ' +
+               'Pokud to nepůjde, napište nám na info@ricanysrdcem.cz.', 'err');
+        });
+    });
+  })();
+</script>
+
+</body>
+</html>
