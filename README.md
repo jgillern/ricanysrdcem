@@ -469,13 +469,16 @@ Klíčová otázka byla, **kam ukládat údaje, aby to bylo bezpečné**. Zvolen
 
 ### Co doplnit v textu před tiskem novin
 
-V `soutez/index.html` jsou tři místa označená `[DOPLNIT: …]` — stránka se bez nich nesmí
-pustit do světa:
+V `soutez/index.html` zbývají dvě místa označená `[DOPLNIT: …]` — **popis výhry**
+a **datum platnosti pravidel** (= den vydání volebních novin).
 
-- **pořadatel soutěže** (název, IČO, sídlo) v pravidlech,
-- **správce osobních údajů** (název, IČO, sídlo) v GDPR sekci — kandidátka „Říčany srdcem"
-  není právnická osoba, správcem musí být konkrétní strana nebo spolek,
-- **popis výhry** a **datum platnosti pravidel**.
+Pořadatel i správce osobních údajů jsou vyplnění jako **TOP 09, IČO 71339728,
+Opletalova 1603/57, 110 00 Praha 1** — tedy shodně se subjektem, který je v našich
+[TTPA prohlášeních](#prohlášení-o-transparentnosti-ttpa--nařízení-eu-2024900) uvedený
+jako zadavatel kampaně. Kandidátka „Říčany srdcem" sama není právnická osoba, takže
+pořadatelem musí být buď strana, nebo konkrétní fyzická osoba (to je právně možné —
+veřejný příslib podle § 2884 obč. zák. může učinit kdokoli — ale ten člověk se pak stává
+správcem osobních údajů se vším, co k tomu patří).
 
 Dále je potřeba **zkontrolovat termíny** (uzávěrka 30. 9. 2026, losování 2. 10. 2026,
 vyrozumění výherců do 5. 10. 2026, 3 výherci) — jsou to návrhy, musí sedět s tím, co bude
