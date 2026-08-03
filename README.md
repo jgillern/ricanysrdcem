@@ -473,12 +473,21 @@ V `soutez/index.html` zbývají dvě místa označená `[DOPLNIT: …]` — **po
 a **datum platnosti pravidel** (= den vydání volebních novin).
 
 Pořadatel i správce osobních údajů jsou vyplnění jako **TOP 09, IČO 71339728,
-Opletalova 1603/57, 110 00 Praha 1** — tedy shodně se subjektem, který je v našich
-[TTPA prohlášeních](#prohlášení-o-transparentnosti-ttpa--nařízení-eu-2024900) uvedený
-jako zadavatel kampaně. Kandidátka „Říčany srdcem" sama není právnická osoba, takže
-pořadatelem musí být buď strana, nebo konkrétní fyzická osoba (to je právně možné —
-veřejný příslib podle § 2884 obč. zák. může učinit kdokoli — ale ten člověk se pak stává
-správcem osobních údajů se vším, co k tomu patří).
+Opletalova 1603/57, 110 00 Praha 1**.
+
+Proč zrovna strana: kandidátka „Říčany srdcem" není právnická osoba, takže pořadatelem
+musí být buď strana, nebo konkrétní fyzická osoba. Místní organizace zpravidla nemá vlastní
+právní osobnost a jedná v rámci strany — pokud tedy o soutěži rozhoduje lokální tým jako
+orgán TOP 09, je správcem podle faktického testu (čl. 4 odst. 7 GDPR) právě TOP 09.
+
+Fyzická osoba je taky možná (veřejný příslib podle § 2884 obč. zák. může učinit kdokoli),
+dávalo by to smysl u člověka, který soutěž fakticky vede a data drží sám — ale ručí pak
+osobně za lhůty, výmazy i případnou pokutu.
+
+> Pozor na dvě záměny: **s TTPA to nesouvisí** — prohlášení o transparentnosti je podklad
+> pro šiřitele reklamy o tom, kdo si u něj objednal sdělení; kdo pořádá soutěž a kdo je
+> správcem údajů, jsou samostatné otázky s vlastními testy. A ať je uvedený kdokoli, musí
+> o soutěži **vědět** a být schopen odbavit žádost o výmaz nebo stížnost, která mu přistane.
 
 Dále je potřeba **zkontrolovat termíny** (uzávěrka 30. 9. 2026, losování 2. 10. 2026,
 vyrozumění výherců do 5. 10. 2026, 3 výherci) — jsou to návrhy, musí sedět s tím, co bude
