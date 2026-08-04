@@ -67,7 +67,7 @@ window.RS_DATA = {
       name: 'Sylvie Kubálková',
       role: 'učitelka, majitelka kočičího hotelu',
       photo: '/preview/photos/sylvie-kubalkova.jpg',
-      bio: 'Jsem učitelka a zároveň podnikám jako OSVČ, kde se věnuji péči o domácí mazlíčky. Práce se zvířaty je pro mě nejen povoláním, ale i dlouholetou zálibou a posláním.\n\nV Říčanech dlouhodobě pomáhám opuštěným a zatoulaným zvířatům a ráda bych podpořila vznik funkčního systému pomoci, který bude spolupracovat s městem, dobrovolníky i veřejností.\n\nŘíčany jsou mým domovem a záleží mi na tom, aby byly příjemným místem pro všechny — nejen pro nás, ale i pro zvířata, která jsou nedílnou součástí života ve městě.'
+      bio: 'Jsem učitelka a zároveň podnikám jako OSVČ, kde se věnuji péči o domácí mazlíčky. Práce se zvířaty je pro mě nejen povoláním, ale i dlouholetou zálibou a posláním. V Říčanech dlouhodobě pomáhám opuštěným a zatoulaným zvířatům a ráda bych podpořila vznik funkčního systému pomoci, který bude spolupracovat s městem, dobrovolníky i veřejností. Říčany jsou mým domovem a záleží mi na tom, aby byly příjemným místem pro všechny — nejen pro nás, ale i pro zvířata, která jsou nedílnou součástí života ve městě.'
     },
     {
       id: 'peter-vercimak',    n:  9,
@@ -112,7 +112,7 @@ window.RS_DATA = {
           heading: 'Průběžný dialog s občany a podnikateli',
           paragraphs: [
             'Otevřeme jednání výborů zastupitelstva veřejnosti, a to jak v prezenční, tak i online formě. Samozřejmostí bude vždy předem zveřejněná pozvánka a kompletní podklady pro jednání. Nově navíc zajistíme, že kompletní zápis bude dostupný v přehledném online prostředí. Tímto krokem více vtáhneme občany do rozhodování a zajistíme, že žádný názor nebude z diskuzí na výborech vyloučen. Diskuze o klíčových tématech města nemají probíhat za zavřenými dveřmi.',
-            'Spustíme nové online diskuzní fórum s možností vytváření tematických komunit, do kterých se zástupci města aktivně zapojí. Osobní kontakt podpoříme pravidelnými setkáními rady města s občany, podnikateli i spolky.'
+            'Spustíme nové **online diskuzní fórum** s možností vytváření tematických komunit, do kterých se zástupci města aktivně zapojí. Osobní kontakt podpoříme pravidelnými setkáními rady města s občany, podnikateli i spolky.'
           ]
         },
         {
@@ -125,14 +125,14 @@ window.RS_DATA = {
         {
           heading: 'Tvoříme město s vámi',
           paragraphs: [
-            'Před většími úpravami veřejného prostoru vás **zapojíme hned na samém začátku**. Výstupy z dotazníků, pocitových map a veřejných workshopů se stanou závaznou součástí zadání pro architekty nebo projektanty. Tím zajistíme, že úpravy veřejného prostoru budou odpovídat potřebám lidí, kteří v dané lokalitě žijí.',
+            'Před většími úpravami veřejného prostoru vás zapojíme hned na samém začátku. Výstupy z dotazníků, pocitových map a veřejných workshopů se stanou závaznou součástí zadání pro architekty nebo projektanty. Tím zajistíme, že úpravy veřejného prostoru budou odpovídat potřebám lidí, kteří v dané lokalitě žijí.',
             'Participativní rozpočet posuneme na formát **„Překvapte Říčany 2.0“**. Město se pro navrhovatele stane partnerem s cílem maximálně jim pomoci jejich projekt vylepšit. Uspořádáme sérii školení a kolaborativních workshopů, kde úředníci a odborníci města pomohou v roli mentorů nápady vylepšit a dotáhnout do konce. K jednotlivým návrhům navíc přidáme možnost online diskuze ještě před zahájením hlasování, abyste se mohli doptávat navrhovatelů a společně projekty posouvat dál.'
           ]
         },
         {
           heading: 'Úřad pro lidi, ne naopak',
           paragraphs: [
-            'Změníme přístup úřadu tak, aby **občan byl klientem**, nikoliv žadatelem. Omezíme zbytečné přebíhání mezi odbory a tam, kde to zákon umožňuje, si úřad předá dokumenty sám. Úřední hodiny upravíme podle reálných potřeb obyvatel — včetně **prodloužené doby do 20:00** jeden den v týdnu a pilotního sobotního provozu. Chceme budovat úřad, který je přívětivý, naslouchá vám a vychází vám vstříc.'
+            'Změníme přístup úřadu tak, aby občan byl klientem, nikoliv žadatelem. Omezíme zbytečné přebíhání mezi odbory a tam, kde to zákon umožňuje, si úřad předá dokumenty sám. Úřední hodiny upravíme podle reálných potřeb obyvatel — včetně **prodloužené doby do 20:00** jeden den v týdnu a pilotního sobotního provozu. Chceme budovat úřad, který je přívětivý, naslouchá vám a vychází vám vstříc.'
           ]
         }
       ]
@@ -158,14 +158,14 @@ window.RS_DATA = {
           heading: 'Transparentní zastupitelstvo',
           paragraphs: [
             'Naším klíčovým závazkem je **zveřejňování veškerých podkladů** pro jednání zastupitelstva a výborů minimálně s týdenním předstihem. Získáte tak reálný čas se s materiály v klidu seznámit, připravit si k nim připomínky a smysluplně tak ovlivnit výsledek jednání. Výrazně zrychlíme také zveřejňování zápisů a usnesení, které budou dostupné v přehledném webovém prostředí nejpozději do sedmi dnů.',
-            'Toto nové webové prostředí nabídne rychlé fulltextové vyhledávání ve všech zápisech a usneseních napříč volebními obdobími a u každého usnesení jasně uvidíte, **jak hlasovali jednotliví zastupitelé i celé zastupitelské kluby**. Zápis bude navíc vždy propojen přímo s videozáznamem. Jako samozřejmost vnímáme, že veškerá data budou poskytována i v otevřených formátech, aby s nimi mohly pracovat analytické nástroje a aplikace (např. v souladu s metodikou „Hlídač státu“).'
+            'Toto nové webové prostředí nabídne rychlé fulltextové vyhledávání ve všech zápisech a usneseních napříč volebními obdobími a u každého usnesení jasně uvidíte, jak hlasovali jednotliví zastupitelé i celé zastupitelské kluby. Zápis bude navíc vždy propojen přímo s videozáznamem. Jako samozřejmost vnímáme, že veškerá data budou poskytována i v otevřených formátech, aby s nimi mohly pracovat analytické nástroje a aplikace (např. v souladu s metodikou „Hlídač státu“).'
           ]
         },
         {
           heading: 'Otevřená data',
           paragraphs: [
             'Data, která město za naše daně sbírá, jsou cenným majetkem nás všech. Současné formální zveřejňování připomíná jen pasivní kopii úřední desky, což nemá pro obyvatele ani vývojáře téměř žádnou reálnou hodnotu. Zavedeme proto skutečně užitečný datový portál, přičemž vzorem nám budou ta nejlepší česká města jako Písek nebo Litoměřice. Pro zajištění stoprocentní kontroly nad hospodařením zprovozníme **plně interaktivní klikací rozpočet**. V něm se každý z vás jednoduše prokliká z celkové částky až na úroveň jakékoliv konkrétní faktury.',
-            'Zároveň u všech dodavatelů zajistíme **datovou suverenitu** — získaná data musí patřit výhradně městu. Skutečně otevřená data obrovsky podpoří místní IT komunitu a inovátory. Aktivně je proto nabídneme studentům a firmám a uspořádáme soutěž **Datová výzva Říčany**. Zde budeme společně hledat a vytvářet chytré aplikace, které nám pomohou řešit reálné problémy v našich ulicích.'
+            'Zároveň u všech dodavatelů zajistíme datovou suverenitu — získaná data musí patřit výhradně městu. Skutečně otevřená data obrovsky podpoří místní IT komunitu a inovátory. Aktivně je proto nabídneme studentům a firmám a uspořádáme soutěž **Datová výzva Říčany**. Zde budeme společně hledat a vytvářet chytré aplikace, které nám pomohou řešit reálné problémy v našich ulicích.'
           ]
         }
       ]
@@ -185,14 +185,14 @@ window.RS_DATA = {
           heading: 'Strategie, která má jasný standard',
           paragraphs: [
             'Řešení přitom existuje a my nemusíme vymýšlet nic nového. Vytvoříme **Plán udržitelné městské mobility**, což je osvědčený evropský standard pro moderní města. Tento strategický dokument jasně a odborně určí, jak se bude doprava v Říčanech dlouhodobě vyvíjet.',
-            'Jeho největší silou je, že neřeší pouze auta, ale **zahrnuje naprosto všechny módy dopravy** a přináší spravedlivý pohled na celý městský prostor: pomůže chodcům s bezpečnými přechody, cyklistům se systematickým propojováním stezek a řidičům s plynulejším průjezdem. Celý plán přitom nestojí na pocitech politiků, ale je založen na dopravním modelu vytvořeném na základě komplexního měření dopravních toků a na spolupráci s veřejností.'
+            'Jeho největší silou je, že neřeší pouze auta, ale zahrnuje naprosto všechny módy dopravy a přináší spravedlivý pohled na celý městský prostor: pomůže chodcům s bezpečnými přechody, cyklistům se systematickým propojováním stezek a řidičům s plynulejším průjezdem. Celý plán přitom nestojí na pocitech politiků, ale je založen na dopravním modelu vytvořeném na základě komplexního měření dopravních toků a na spolupráci s veřejností.'
           ]
         },
         {
           heading: 'Od přesných dat k participaci',
           paragraphs: [
             'Příprava plánu začne důkladným **měřením dopravních toků** po celém městě. Z těchto reálných informací následně vytvoříme přesný počítačový dopravní model Říčan, ve kterém si každou zamýšlenou změnu nejprve nanečisto nasimulujeme.',
-            'Zároveň do celého procesu **aktivně zapojíme veřejnost formou participace**. Kvalitní plán nemůže vzniknout jen od stolu za zavřenými dveřmi. Chceme od vás jasně slyšet, kde a jak vás doprava pálí nejvíce, abychom modelová řešení přizpůsobili skutečnému životu v ulicích.'
+            'Zároveň do celého procesu aktivně zapojíme veřejnost formou participace. Kvalitní plán nemůže vzniknout jen od stolu za zavřenými dveřmi. Chceme od vás jasně slyšet, kde a jak vás doprava pálí nejvíce, abychom modelová řešení přizpůsobili skutečnému životu v ulicích.'
           ]
         },
         {
@@ -219,13 +219,13 @@ window.RS_DATA = {
           heading: 'Chybějící propojení',
           paragraphs: [
             'Centrum Říčan dnes nese dopravní zátěž, která do něj dlouhodobě nepatří. Masarykovo náměstí a Jizerská ulice slouží jako hlavní propojení mezi Říčanskou a Širokou, a proto se tudy soustředí velká část průjezdné dopravy.',
-            'O propojení mimo centrum se mluví už desítky let. Původní představa jižního obchvatu počítala zejména se Solnou stezkou a napojením na Pražský okruh. Solná stezka ale dlouhodobě nemá podporu okolních obcí a její napojení na Pražský okruh už není reálné. Pro město proto musí být absolutní prioritou prověřit možnost jiné alternativní spojnice. Jako nejjednodušší a nejefektivnější řešení se nabízí lokální varianta jižního obchvatu, která by Říčanskou a Širokou propojila mimo hranice města.'
+            'O propojení mimo centrum se mluví už desítky let. Původní představa jižního obchvatu počítala zejména se Solnou stezkou a napojením na Pražský okruh. Solná stezka ale dlouhodobě nemá podporu okolních obcí a její napojení na Pražský okruh už není reálné. Pro město proto musí být absolutní prioritou prověřit možnost jiné alternativní spojnice. Jako nejjednodušší a nejefektivnější řešení se nabízí **lokální varianta jižního obchvatu**, která by Říčanskou a Širokou propojila mimo hranice města.'
           ]
         },
         {
           heading: 'Jižní obchvat musí být prioritou',
           paragraphs: [
-            'Jižní obchvat Říčan vnímáme jako naprostou prioritu pro dopravní úlevu celého města. Nebudeme vám slibovat vzdušné zámky ani to, že se zítra začne stavět, rozhodně ale nebudeme ztrácet čas. V nejkratším možném termínu zadáme zpracování odborné studie, která potvrdí účelnost stavby a zároveň prověří možné varianty trasování.',
+            'Jižní obchvat Říčan vnímáme jako naprostou prioritu pro dopravní úlevu celého města. Nebudeme vám slibovat vzdušné zámky ani to, že se zítra začne stavět, rozhodně ale nebudeme ztrácet čas. V nejkratším možném termínu zadáme zpracování **odborné studie**, která potvrdí účelnost stavby a zároveň prověří možné varianty trasování.',
             'Jakmile studie potvrdí tu nejlepší možnou variantu, urychlíme všechny navazující přípravné procesy a neprodleně zahájíme intenzivní jednání se Středočeským krajem o financování samotné výstavby.'
           ]
         },
@@ -233,7 +233,7 @@ window.RS_DATA = {
           heading: 'Oživení Masarykova náměstí',
           paragraphs: [
             'Vznik jižního obchvatu konečně umožní upravit provoz na náměstí tak, aby místo tranzitu sloužilo primárně místním obyvatelům. Možných cest je celá řada a konečné rozhodnutí musí vzejít z kombinace odborných studií, veřejných diskuzí a architektonické soutěže.',
-            'Jednou z variant by mohla být například takzvaná sdílená zóna — model, ve kterém jeden zklidněný prostor společně sdílí chodci, cyklisté, auta i autobusy a jsou si v něm rovni. V České republice se jedná o novinku, ale v řadě západoevropských zemí se tento model velmi osvědčil a uplatňuje se v centrech měst nejčastěji.'
+            'Jednou z variant by mohla být například takzvaná **sdílená zóna** — model, ve kterém jeden zklidněný prostor společně sdílí chodci, cyklisté, auta i autobusy a jsou si v něm rovni. V České republice se jedná o novinku, ale v řadě západoevropských zemí se tento model velmi osvědčil a uplatňuje se v centrech měst nejčastěji.'
           ]
         }
       ]
@@ -252,14 +252,14 @@ window.RS_DATA = {
         {
           heading: 'Bezpečný pohyb a doprava',
           paragraphs: [
-            'Kvalitní a bezpečné chodníky jsou pro nás absolutním základem. Zavedeme systematický program oprav prioritních tras, snížíme obrubníky a přísně zregulujeme dočasné překážky, zejména nevhodně umístěné reklamní poutače a stavební zábory, které zbytečně komplikují průchod zranitelným chodcům.',
-            'Zásadní novinkou bude spuštění **bezbariérové varianty oblíbeného Senior Taxi**. Zajistíme specializovaný vůz s plošinou a bezpečným ukotvením vozíku. Samozřejmostí bude speciálně proškolený řidič pro citlivou asistenci. Zároveň důkladně vyhodnotíme reálnou poptávku a na základě dat **rozšíříme celkovou kapacitu i počet vozidel** tak, abychom už nikoho nemuseli odmítat a doprava po Říčanech byla dostupná opravdu všem.'
+            'Kvalitní a bezpečné chodníky jsou pro nás absolutním základem. Zavedeme systematický **program oprav prioritních tras**, snížíme obrubníky a přísně zregulujeme dočasné překážky, zejména nevhodně umístěné reklamní poutače a stavební zábory, které zbytečně komplikují průchod zranitelným chodcům.',
+            'Zásadní novinkou bude spuštění **bezbariérové varianty oblíbeného Senior Taxi**. Zajistíme specializovaný vůz s plošinou a bezpečným ukotvením vozíku. Samozřejmostí bude speciálně proškolený řidič pro citlivou asistenci. Zároveň důkladně vyhodnotíme reálnou poptávku a na základě dat rozšíříme celkovou kapacitu i počet vozidel tak, abychom už nikoho nemuseli odmítat a doprava po Říčanech byla dostupná opravdu všem.'
           ]
         },
         {
           heading: 'Přístupné budovy a veřejný prostor',
           paragraphs: [
-            'Provedeme důkladný architektonický audit všech budov v majetku města a vytvoříme plán realizace nezbytných opatření, jako jsou rampy a plošiny. Samotná radnice je přitom jen tím nejočividnějším příkladem — je naprosto nepřijatelné, že lidé s handicapem se dnes kvůli bariérám nemohou osobně zúčastnit klíčových jednání zastupitelstva přímo v její budově. Okamžitě proto zajistíme instalaci nájezdových ramp. V městských budovách také plošně zlepšíme orientační systémy a přidáme kontrastní značení a akustické prvky pro slabozraké. U důležitých veřejných debat zajistíme lepší ozvučení, kvalitní titulky či možnost tlumočení do znakového jazyka.',
+            'Provedeme důkladný **architektonický audit** všech budov v majetku města a vytvoříme plán realizace nezbytných opatření, jako jsou rampy a plošiny. Samotná radnice je přitom jen tím nejočividnějším příkladem — je naprosto nepřijatelné, že lidé s handicapem se dnes kvůli bariérám nemohou osobně zúčastnit klíčových jednání zastupitelstva přímo v její budově. Okamžitě proto zajistíme instalaci nájezdových ramp. V městských budovách také plošně zlepšíme orientační systémy a přidáme kontrastní značení a akustické prvky pro slabozraké. U důležitých veřejných debat zajistíme lepší ozvučení, kvalitní titulky či možnost tlumočení do znakového jazyka.',
             'Nezapomínáme ani na trávení volného času. Parky a veřejná prostranství postupně vybavíme bezbariérovými toaletami a vhodnými lavičkami. Na dětská hřiště systematicky doplníme speciální herní prvky pro hendikepované děti, aby si mohly bezpečně a bez omezení hrát společně se svými vrstevníky.'
           ]
         },
@@ -272,7 +272,7 @@ window.RS_DATA = {
         {
           heading: 'Nasloucháme a jdeme příkladem',
           paragraphs: [
-            'O potřebách lidí se zdravotním omezením už zkrátka nechceme rozhodovat bez nich. Zřídíme proto stálý poradní orgán složený přímo z občanů s handicapem. Město samotné navíc půjde příkladem a začne aktivně podporovat zaměstnávání lidí se zdravotním postižením i flexibilní úvazky pro pečující osoby. U všech městských zakázek budeme přísnou bezbariérovost vyžadovat už v samotném zadání, nikoliv až jako drahou opravu hotového projektu.'
+            'O potřebách lidí se zdravotním omezením už zkrátka nechceme rozhodovat bez nich. Zřídíme proto **stálý poradní orgán** složený přímo z občanů s handicapem. Město samotné navíc půjde příkladem a začne aktivně podporovat zaměstnávání lidí se zdravotním postižením i flexibilní úvazky pro pečující osoby. U všech městských zakázek budeme přísnou bezbariérovost vyžadovat už v samotném zadání, nikoliv až jako drahou opravu hotového projektu.'
           ]
         }
       ]
@@ -298,14 +298,14 @@ window.RS_DATA = {
         {
           heading: 'Odlehčení a záchranná síť',
           paragraphs: [
-            'Co se stane, když pečující sám onemocní nebo zkrátka vyhoří? Zavedeme **krizový plán pro výpadek pečující osoby**, který rodinám garantuje rychlou terénní pomoc nebo okamžité dočasné navýšení pečovatelských hodin. Rozšíříme také kapacity odlehčovacích služeb v různých formách — od pomoci na pár hodin týdně až po krátkodobé pobyty. Podpoříme i komunitní formy pomoci, jako je **homesharing**, kdy město pomůže s koordinací dobrovolníků či hostitelských rodin, kteří si dítě či mladého dospělého s postižením pravidelně vezmou na starosti. Pečující tak získají potřebný prostor k odpočinku a dítě další bezpečný vztah a zkušenost.',
+            'Co se stane, když pečující sám onemocní nebo zkrátka vyhoří? Zavedeme **krizový plán pro výpadek pečující osoby**, který rodinám garantuje rychlou terénní pomoc nebo okamžité dočasné navýšení pečovatelských hodin. Rozšíříme také kapacity odlehčovacích služeb v různých formách — od pomoci na pár hodin týdně až po krátkodobé pobyty. Podpoříme i komunitní formy pomoci, jako je homesharing, kdy město pomůže s koordinací dobrovolníků či hostitelských rodin, kteří si dítě či mladého dospělého s postižením pravidelně vezmou na starosti. Pečující tak získají potřebný prostor k odpočinku a dítě další bezpečný vztah a zkušenost.',
             'Zároveň posílíme cílenou podporu pro samoživitele a rodiny ohrožené chudobou či ztrátou bydlení. Úřad má být místem, kde lidé včas získají bezplatné krizové poradenství a rychlou materiální či finanční pomoc. Byrokratické překážky v takových chvílích nesmí stát v cestě účinné podpoře; budeme proto aktivně vyhledávat ty, kteří se mohou ocitnout v ohrožení.'
           ]
         },
         {
           heading: 'Kapacity a důstojný život',
           paragraphs: [
-            'Vybudujeme nová místa v denních stacionářích a podpoříme vznik **menších komunitních a chráněných bytů**, které lidem s handicapem nabídnou samostatnost i pomoc na dosah ruky. Radnice nesmí rozhodovat od stolu, a proto **posílíme spolupráci s neziskovými organizacemi a poskytovateli péče**, které rovnocenně zapojíme přímo do tvorby plánů rozvoje sociálních služeb ve městě.',
+            'Vybudujeme nová místa v denních stacionářích a podpoříme vznik **menších komunitních a chráněných bytů**, které lidem s handicapem nabídnou samostatnost i pomoc na dosah ruky. Radnice nesmí rozhodovat od stolu, a proto posílíme spolupráci s neziskovými organizacemi a poskytovateli péče, které rovnocenně zapojíme přímo do tvorby plánů rozvoje sociálních služeb ve městě.',
             'Zcela zásadním, i když velmi citlivým tématem, je pro nás zajištění důstojného dožití doma, pokud si to rodina přeje. Vytvoříme proto **grantový program na podporu mobilní hospicové a paliativní péče**, přičemž se budeme inspirovat skvěle fungujícím modelem v Praze 10.'
           ]
         }
@@ -325,27 +325,27 @@ window.RS_DATA = {
         {
           heading: 'Chladnější ulice a stín ze stromů',
           paragraphs: [
-            'Nejpřirozenějším a nejlepším způsobem ochlazování města jsou vzrostlé stromy. Nebudeme se proto chlubit jen počtem čerstvě vysazených sazenic, ale tím, kolik stromů skutečně přežije. Každý nový strom dostane kvalitní výsadbovou jámu, prostor pro kořeny a zajištěnou zálivku. Vzrostlé stromy pak budeme **chránit jako klíčovou městskou infrastrukturu**, stejně důležitou, jako jsou chodníky nebo kanalizace.',
-            'Zpracujeme praktickou mapu horka, stínu a vody. Díky ní vytvoříme síť chladnějších pěších tras, aby se senioři či rodiče s dětmi dostali bezpečně ve stínu na nádraží, do školy nebo k lékaři. Tam, kde stromy teprve porostou, využijeme dočasné stínící prvky, pergoly a **popínavou zeleň**. Zavedeme také nekompromisní pravidlo: **každá rekonstrukce = stín, voda a propustnost**. Při opravách omezíme nepropustné asfaltové povrchy a začneme více využívat **průsakovou dlažbu**, která udrží dešťovou vodu v půdě.'
+            'Nejpřirozenějším a nejlepším způsobem ochlazování města jsou vzrostlé stromy. Nebudeme se proto chlubit jen počtem čerstvě vysazených sazenic, ale tím, kolik stromů skutečně přežije. Každý nový strom dostane kvalitní výsadbovou jámu, prostor pro kořeny a zajištěnou zálivku. Vzrostlé stromy pak budeme chránit jako klíčovou městskou infrastrukturu, stejně důležitou, jako jsou chodníky nebo kanalizace.',
+            'Zpracujeme praktickou mapu horka, stínu a vody. Díky ní vytvoříme síť chladnějších pěších tras, aby se senioři či rodiče s dětmi dostali bezpečně ve stínu na nádraží, do školy nebo k lékaři. Tam, kde stromy teprve porostou, využijeme dočasné stínící prvky, pergoly a popínavou zeleň. Zavedeme také nekompromisní pravidlo: **každá rekonstrukce = stín, voda a propustnost**. Při opravách omezíme nepropustné asfaltové povrchy a začneme více využívat průsakovou dlažbu, která udrží dešťovou vodu v půdě.'
           ]
         },
         {
           heading: 'Osvěžující voda a moderní údržba',
           paragraphs: [
-            'Kromě stínu je pro boj s přehřátým městem naprosto zásadní voda. Rozjedeme proto program budování osvěžujících prvků. Systematicky budeme doplňovat **multifunkční pítka** na všech hlavních pěších trasách, u dětských hřišť, sportovišť a zastávek. Ta nabídnou trysku pro pití, kohoutek pro naplnění lahve i misku u země pro **osvěžení psů a dalších zvířat**. Přímo do největších tepelných ostrovů pak **nainstalujeme osvěžující mlžítka**, která dokáží v parných dnech okamžitě a znatelně snížit pocitovou teplotu v ulicích.',
-            'Zmodernizujeme také celkovou péči o zeleň. Reprezentativní plochy budeme sekat tak, aby zůstaly použitelné, ale vybraná místa **proměníme v květnaté louky a vyšší trávníky**, které chladí okolí. Umístíme u nich jednoduché informační cedule, aby obyvatelé věděli, že jde o vědomou péči v době sucha.'
+            'Kromě stínu je pro boj s přehřátým městem naprosto zásadní voda. Rozjedeme proto program budování osvěžujících prvků. Systematicky budeme doplňovat **multifunkční pítka** na všech hlavních pěších trasách, u dětských hřišť, sportovišť a zastávek. Ta nabídnou trysku pro pití, kohoutek pro naplnění lahve i misku u země pro osvěžení psů a dalších zvířat. Přímo do největších tepelných ostrovů pak nainstalujeme osvěžující mlžítka, která dokáží v parných dnech okamžitě a znatelně snížit pocitovou teplotu v ulicích.',
+            'Zmodernizujeme také celkovou péči o zeleň. Reprezentativní plochy budeme sekat tak, aby zůstaly použitelné, ale vybraná místa proměníme v květnaté louky a vyšší trávníky, které chladí okolí. Umístíme u nich jednoduché informační cedule, aby obyvatelé věděli, že jde o vědomou péči v době sucha.'
           ]
         },
         {
           heading: 'Spolupráce s občany a podpora SVJ',
           paragraphs: [
-            'Radnice se stane partnerem pro ty, kteří chtějí zeleň rozvíjet sami. Spustíme jasný **program adopce předzahrádek** a veřejné zeleně. Dáme mu rámec formou jednoduché smlouvy, přičemž zeleň zůstane i nadále plně veřejně přístupná a radnice vám na oplátku **poskytne bezplatnou odbornou pomoc** s návrhem osázení. Nabídneme také dotační program a odborné poradenství pro SVJ a správce bytových domů. Pomůžeme vám s úpravou přehřátých dvorů, oživením vnitrobloků a budováním **komunitních zahrad**.'
+            'Radnice se stane partnerem pro ty, kteří chtějí zeleň rozvíjet sami. Spustíme jasný **program adopce předzahrádek** a veřejné zeleně. Dáme mu rámec formou jednoduché smlouvy, přičemž zeleň zůstane i nadále plně veřejně přístupná a radnice vám na oplátku poskytne bezplatnou odbornou pomoc s návrhem osázení. Nabídneme také dotační program a odborné poradenství pro SVJ a správce bytových domů. Pomůžeme vám s úpravou přehřátých dvorů, oživením vnitrobloků a budováním komunitních zahrad.'
           ]
         },
         {
           heading: 'Městský Re-use point pro dobré účely',
           paragraphs: [
-            'Založíme reuse centrum, kde funkční věci dostanou druhý život. Lidé sem budou moci přinést vybavení, které už nepotřebují, a ostatní si ho odnesou za symbolickou cenu. Ve spolupráci se sociálními službami zajistíme, aby se potřebné věci dostaly také k lidem a rodinám v obtížné situaci. Případný přebytek z provozu centra vrátíme zpět do jeho rozvoje a do projektů, které s jeho smyslem přímo souvisejí: snižování odpadu, dostupné vybavení pro domácnosti v obtížné situaci a péče o veřejný prostor.'
+            'Založíme **reuse centrum**, kde funkční věci dostanou druhý život. Lidé sem budou moci přinést vybavení, které už nepotřebují, a ostatní si ho odnesou za symbolickou cenu. Ve spolupráci se sociálními službami zajistíme, aby se potřebné věci dostaly také k lidem a rodinám v obtížné situaci. Případný přebytek z provozu centra vrátíme zpět do jeho rozvoje a do projektů, které s jeho smyslem přímo souvisejí: snižování odpadu, dostupné vybavení pro domácnosti v obtížné situaci a péče o veřejný prostor.'
           ]
         }
       ]
@@ -365,8 +365,8 @@ window.RS_DATA = {
           heading: 'Místa pro setkávání a každodenní život',
           paragraphs: [
             'Chceme, aby veřejný prostor nebyl jen průchozím územím, ale přirozeným místem pro život města. Zaměříme se na náměstí, parky, menší plácky i veřejná prostranství v jednotlivých částech Říčan, která mohou lépe sloužit sousedskému setkávání, odpočinku a komunitním aktivitám. Budeme podporovat konání trhů, koncertů, slavností, sousedských akcí a dalších příležitostí, při kterých město skutečně žije.',
-            'Dětská hřiště nemají být všechna stejná. Chceme větší pestrost herních prvků i celých hřišť, aby nabízela různé možnosti pohybu, tvořivosti a hry pro děti různého věku. Vedle klasických hřišť budeme rozvíjet také přírodní hřiště, která pracují s terénem, dřevem, pískem, kameny a dalšími přírodními prvky.',
-            'Stejně důležitá jsou klidná místa pro ty, kteří nevyhledávají ruch a aktivitu. Budeme vytvářet dobře dostupné odpočinkové zóny s pohodlnými lavičkami, bezpečným povrchem, stínem a dostatkem klidu. Veřejný prostor má myslet na děti, rodiče, mladé lidi i seniory, ne jen na jednu skupinu obyvatel.'
+            'Dětská hřiště nemají být všechna stejná. Chceme větší pestrost herních prvků i celých hřišť, aby nabízela různé možnosti pohybu, tvořivosti a hry pro děti různého věku. Vedle klasických hřišť budeme rozvíjet také **přírodní hřiště**, která pracují s terénem, dřevem, pískem, kameny a dalšími přírodními prvky.',
+            'Stejně důležitá jsou klidná místa pro ty, kteří nevyhledávají ruch a aktivitu. Budeme vytvářet dobře dostupné **odpočinkové zóny** s pohodlnými lavičkami, bezpečným povrchem, stínem a dostatkem klidu. Veřejný prostor má myslet na děti, rodiče, mladé lidi i seniory, ne jen na jednu skupinu obyvatel.'
           ]
         },
         {
@@ -381,14 +381,14 @@ window.RS_DATA = {
           heading: 'Přesun sběrného dvora a centrální park',
           paragraphs: [
             'Za jednu z největších příležitostí pro budoucnost Říčan považujeme území dnešního sběrného dvora v centru města. Okolí Mlýnského rybníka už dnes patří k příjemným místům ve městě. Naším cílem je, aby se tento prostor mohl v budoucnu přirozeně rozšířit právě o místo, které dnes zabírá sběrný dvůr.',
-            'Víme, že přesun sběrného dvora mimo centrum není jednoduchý úkol a nepůjde o rychlé řešení. O to důležitější je začít ho připravovat včas. Budeme hledat vhodnější lokalitu, prověřovat technické, dopravní i majetkové možnosti a připravovat dlouhodobý plán, který umožní, aby toto cenné území jednou sloužilo lidem, odpočinku a veřejnému životu, nikoliv provozu, který do centra města dlouhodobě nepatří.'
+            'Víme, že **přesun sběrného dvora mimo centrum** není jednoduchý úkol a nepůjde o rychlé řešení. O to důležitější je začít ho připravovat včas. Budeme hledat vhodnější lokalitu, prověřovat technické, dopravní i majetkové možnosti a připravovat dlouhodobý plán, který umožní, aby toto cenné území jednou sloužilo lidem, odpočinku a veřejnému životu, nikoliv provozu, který do centra města dlouhodobě nepatří.'
           ]
         },
         {
           heading: 'Kultivovaný veřejný prostor',
           paragraphs: [
             'Kvalitu města neurčují jen velké investice, ale i každodenní detaily. Zaměříme se na lepší mobiliář tam, kde dnes chybí — lavičky, odpadkové koše, stojany na kola, veřejné toalety, bezpečné osvětlení i více košů na psí exkrementy. Součástí musí být také pravidelná údržba, čistota a pořádek, protože veřejný prostor má být nejen dobře navržený, ale také dlouhodobě spravovaný.',
-            'Do kultivovaného veřejného prostoru patří i jasná pravidla pro nové prvky a služby. Výdejní boxy jsou praktickou službou, kterou lidé využívají, ale musí být umisťovány citlivě. Nechceme vizuální smog, překážky na chodnících ani nebezpečná zákoutí. Na městských pozemcích nastavíme jasná pravidla a u soukromých pozemků budeme aktivně jednat s vlastníky a provozovateli. Naším cílem není služby zakazovat, ale kultivovat je tak, aby sloužily lidem a zároveň nezhoršovaly vzhled, bezpečnost a prostupnost města.'
+            'Do kultivovaného veřejného prostoru patří i **jasná pravidla pro nové prvky a služby**. Výdejní boxy jsou praktickou službou, kterou lidé využívají, ale musí být umisťovány citlivě. Nechceme vizuální smog, překážky na chodnících ani nebezpečná zákoutí. Na městských pozemcích nastavíme jasná pravidla a u soukromých pozemků budeme aktivně jednat s vlastníky a provozovateli. Naším cílem není služby zakazovat, ale kultivovat je tak, aby sloužily lidem a zároveň nezhoršovaly vzhled, bezpečnost a prostupnost města.'
           ]
         }
       ]
@@ -401,7 +401,7 @@ window.RS_DATA = {
         {
           heading: null,
           paragraphs: [
-            'Říčany investovaly do školních kapacit. Teď musí stejně **vážně řešit kvalitu** toho, co děti a rodiče zažívají každý den: vedení škol, klima ve třídách, podporu učitelů, pomoc dětem, komunikaci s rodiči, stav budov, návaznost školek na první třídy i školní stravování. Město nebude školám určovat metody výuky. Jako zřizovatel ale **musí zajistit podmínky, bez kterých dobrá škola dlouhodobě nefunguje**.'
+            'Říčany investovaly do školních kapacit. Teď musí stejně vážně řešit kvalitu toho, co děti a rodiče zažívají každý den: vedení škol, klima ve třídách, podporu učitelů, pomoc dětem, komunikaci s rodiči, stav budov, návaznost školek na první třídy i školní stravování. Město nebude školám určovat metody výuky. Jako zřizovatel ale musí zajistit podmínky, bez kterých dobrá škola dlouhodobě nefunguje.'
           ]
         },
         {
@@ -414,7 +414,7 @@ window.RS_DATA = {
         {
           heading: 'Data a zpětná vazba',
           paragraphs: [
-            'Vytvoříme datový panel školství. Budeme sledovat absenci, výsledky, klima, personální stabilitu, kapacity, materiální potřeby a oblasti, kde školy potřebují podporu. **Data nebudou sloužit k žebříčkům škol, ale k lepším rozhodnutím města.** Do hodnocení zapojíme také rodiče a přiměřeně věku žáky. Každý rok získáme zpětnou vazbu podle stejných pravidel pro všechny školy. Když se ukáže problém, musí následovat pomoc: metodická podpora, práce s klimatem, úprava podmínek, posílení služeb nebo jasný plán nápravy. Stejně budeme pracovat i se zprávami České školní inspekce.'
+            'Vytvoříme **datový panel školství**. Budeme sledovat absenci, výsledky, klima, personální stabilitu, kapacity, materiální potřeby a oblasti, kde školy potřebují podporu. Data nebudou sloužit k žebříčkům škol, ale k lepším rozhodnutím města. Do hodnocení zapojíme také rodiče a přiměřeně věku žáky. Každý rok získáme zpětnou vazbu podle stejných pravidel pro všechny školy. Když se ukáže problém, musí následovat pomoc: metodická podpora, práce s klimatem, úprava podmínek, posílení služeb nebo jasný plán nápravy. Stejně budeme pracovat i se zprávami České školní inspekce.'
           ]
         },
         {
@@ -426,7 +426,7 @@ window.RS_DATA = {
         {
           heading: 'Ředitelé a budovy',
           paragraphs: [
-            'Ředitelé mají vést školy, ne se ztrácet v provozní agendě. Posílíme proto společný městský servis v oblastech, které lze řešit centrálně: IT, projekty, zakázky, správa majetku, energetika, právní a provozní podpora. Větší část pozornosti i peněz musí mířit do starších školních budov. Kvalitu školy dítě pozná i podle učebny, lavice, světla, šaten, toalet, teploty ve třídě nebo místa, kde může o přestávce normálně být. Materiální komfort nemá být luxus, ale běžný standard.',
+            'Ředitelé mají vést školy, ne se ztrácet v provozní agendě. Posílíme proto **společný městský servis** v oblastech, které lze řešit centrálně: IT, projekty, zakázky, správa majetku, energetika, právní a provozní podpora. Větší část pozornosti i peněz musí mířit do starších školních budov. Kvalitu školy dítě pozná i podle učebny, lavice, světla, šaten, toalet, teploty ve třídě nebo místa, kde může o přestávce normálně být. Materiální komfort nemá být luxus, ale běžný standard.',
             'Propojíme ředitele mateřských a základních škol v pravidelné pracovní skupině. Budou společně řešit návaznost předškolní přípravy, adaptaci v první třídě, podporu dětí s odkladem a sdílení toho, co v praxi funguje.'
           ]
         }
@@ -453,7 +453,7 @@ window.RS_DATA = {
         {
           heading: 'Kampaň Podporuj svého souseda a město jako partner',
           paragraphs: [
-            'Město má být prvním propagátorem lidí, kteří tu poctivě pracují, zaměstnávají, platí daně a dávají ulicím život. Spustíme proto novou komunikační kampaň **„Podporuj svého souseda“**. Její myšlenkou je ukázat obyvatelům přínos nakupování u místních firem a propojit podnikatele s děním v sousedství. Nejde přitom jen o líbivý reklamní slogan. Vytvoříme přehlednou **online mapu místních obchodů**, služeb, řemeslníků a provozoven, budeme je pravidelně představovat v městských kanálech a přímo je propojíme s městskými akcemi.',
+            'Město má být prvním propagátorem lidí, kteří tu poctivě pracují, zaměstnávají, platí daně a dávají ulicím život. Spustíme proto novou komunikační kampaň **„Podporuj svého souseda“**. Její myšlenkou je ukázat obyvatelům přínos nakupování u místních firem a propojit podnikatele s děním v sousedství. Nejde přitom jen o líbivý reklamní slogan. Vytvoříme přehlednou online mapu místních obchodů, služeb, řemeslníků a provozoven, budeme je pravidelně představovat v městských kanálech a přímo je propojíme s městskými akcemi.',
             'Samotné město se také stane pro inovativní firmy partnerem. Budeme vypisovat **malé městské výzvy** pro řešení našich lokálních problémů — ať už v dopravě, energetice nebo digitalizaci. Místní startupy, odborníci a studenti nám pomohou situaci řešit a my pro ně budeme prvním testovacím místem a cennou referencí.'
           ]
         },
@@ -461,7 +461,7 @@ window.RS_DATA = {
           heading: 'Prostory, setkávání a propojování se školami',
           paragraphs: [
             'Na webu vytvoříme transparentní **rozcestník prostor pro podnikání**, kde se přehledně potká nabídka městských i soukromých nebytových prostor, volných provozoven či coworkingových míst.',
-            'Zavedeme také **tematická pracovní setkání**, kde u jednoho stolu s městem usednou nejen velké firmy, ale i malé provozovny, restauratéři a OSVČ, abychom prakticky řešili konkrétní témata jako zásobování či parkování. Místní podnikatele navíc **propojíme se školami**. Děti a studenti by měli formou exkurzí a stáží poznat technologie, řemesla a profese, které v Říčanech skutečně existují.'
+            'Zavedeme také tematická pracovní setkání, kde u jednoho stolu s městem usednou nejen velké firmy, ale i malé provozovny, restauratéři a OSVČ, abychom prakticky řešili konkrétní témata jako zásobování či parkování. Místní podnikatele navíc propojíme se školami. Děti a studenti by měli formou exkurzí a stáží poznat technologie, řemesla a profese, které v Říčanech skutečně existují.'
           ]
         },
         {
