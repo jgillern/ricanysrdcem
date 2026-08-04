@@ -21,10 +21,11 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 8. [Import medailonků z Confluence](#import-medailonků-z-confluence)
 9. [Import textů z Wordu](#import-textů-z-wordu)
 10. [Prohlášení o transparentnosti (TTPA)](#prohlášení-o-transparentnosti-ttpa--nařízení-eu-2024900)
-11. [Analytics (Plausible)](#analytics-plausible)
-12. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
-13. [Plány do budoucna](#plány-do-budoucna)
-14. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
+11. [Soutěž ke křížovce (`/soutez`)](#soutěž-ke-křížovce-soutez)
+12. [Analytics (Plausible)](#analytics-plausible)
+13. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
+14. [Plány do budoucna](#plány-do-budoucna)
+15. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
 
 ---
 
@@ -35,6 +36,7 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 | `ricanysrdcem.cz/` | **Teaser** — pulzující srdce, datum voleb, countdown | veřejné |
 | `ricanysrdcem.cz/preview` | **Plnohodnotný náhled** finálního webu (Hero, Priority, Tým, Footer) | heslo `Volby2026!` (jen heslo, jméno se ignoruje) |
 | `ricanysrdcem.cz/preview/login` | login form pro `/preview` | volné GET, POST validuje heslo |
+| `ricanysrdcem.cz/soutez` | **Soutěž ke křížovce** z volebních novin — pravidla, GDPR, formulář | veřejné (zatím `noindex`) |
 
 Obsah na `/preview` je reálný a finální — priority, seznam kandidátů, fotky i medailonky top10. Co zbývá dodělat, je v [Plánech do budoucna](#plány-do-budoucna) (hlavně reálné odkazy na FB/IG a SEO před spuštěním).
 
@@ -51,6 +53,12 @@ Obsah na `/preview` je reálný a finální — priority, seznam kandidátů, fo
 ├── ttpa/                      # prohlášení o transparentnosti (nařízení EU 2024/900)
 │   ├── rengl.pdf              # → ricanysrdcem.cz/ttpa/rengl.pdf
 │   └── maks.pdf               # → ricanysrdcem.cz/ttpa/maks.pdf
+├── soutez/
+│   └── index.html             # soutěžní stránka ke křížovce → ricanysrdcem.cz/soutez
+├── api/
+│   └── soutez.js              # Vercel Edge Function — příjem odpovědí, zápis do Supabase
+├── supabase/
+│   └── migrations/0001_contest_entries.sql   # schéma tabulky odpovědí + RLS
 ├── brand/                     # logo v křivkách (SVG/PDF/PNG) + manuál, viz brand/README.md
 ├── tools/                     # pomocné skripty (nejsou součástí webu)
 │   ├── process-photos.py      # ořez fotek kandidátů 8+ na 4:5 → preview/photos/
@@ -411,6 +419,116 @@ Stačí dropnout další PDF do `ttpa/` — bude hned dostupné na `www.ricanysr
 
 ---
 
+## Soutěž ke křížovce (`/soutez`)
+
+Ve volebních novinách je křížovka se soutěží. Odpovědi se sbírají na samostatné stránce
+**`ricanysrdcem.cz/soutez`** — na ní jsou pravidla soutěže, informace o zpracování osobních
+údajů a formulář (e‑mail + tajenka).
+
+### Jak to je poskládané
+
+| Vrstva | Soubor | Co dělá |
+|---|---|---|
+| Stránka | `soutez/index.html` | Samostatná statická stránka (bez Reactu), design tokeny shodné s `preview/index.html`. Pravidla a GDPR jsou ve složených `<details>` pod formulářem, aby nepřebily obsah. |
+| API | `api/soutez.js` | Vercel **Edge Function** — validace, antispam, zápis do databáze servisním klíčem |
+| Databáze | `supabase/migrations/0001_contest_entries.sql` | Tabulka `contest_entries` v Supabase (region **eu-west-3, Paříž**) |
+
+Odesláním formuláře člověk potvrzuje seznámení s pravidly a se zpracováním údajů —
+odkazy v té větě rozbalí příslušnou sekci přímo na stránce (žádné proklikávání jinam).
+Souhlas se ukládá jako verze textu (`consent_version`), aby šlo doložit, s čím přesně kdo souhlasil.
+
+### Zabezpečení dat — proč zrovna takhle
+
+Klíčová otázka byla, **kam ukládat údaje, aby to bylo bezpečné**. Zvolený model:
+
+1. **V prohlížeči nejsou žádné přístupy k databázi.** Formulář posílá JSON na `/api/soutez`;
+   teprve serverová funkce zapisuje do Supabase **servisním klíčem**, který žije jen v env varu
+   na Vercelu. (Alternativa „anon key + RLS přímo z prohlížeče" by znamenala veřejně známý
+   endpoint databáze v HTML — proto ne.)
+2. **Tabulka je z veřejného API nedosažitelná.** Má zapnuté RLS a **schválně žádnou policy**,
+   navíc odebrané granty rolím `anon` a `authenticated`. Číst i zapisovat může jen `service_role`.
+   I kdyby klíč z Vercelu unikl, jde o klíč, který nikde jinde nefiguruje a lze ho jedním
+   kliknutím rotovat.
+3. **Sbíráme minimum údajů** — e‑mail, tajenka, čas. Žádné jméno, adresa, telefon.
+4. **IP adresa se neukládá.** Kvůli brzdě proti hromadnému odesílání se ukládá jen její
+   **nevratný HMAC otisk** (sůl v env varu `CONTEST_IP_SALT`), ze kterého IP nelze získat zpět.
+5. **Antispam bez CAPTCHA a bez cookies:** honeypot pole, minimální doba vyplnění (1,5 s),
+   kontrola `Origin` (endpoint nejde volat z cizího webu) a limit 10 odpovědí z jedné sítě za den.
+6. **Jeden e‑mail = jedna účast** (unikátní index + upsert). Opakované odeslání přepíše
+   předchozí odpověď — nevzniká tak duplicitní databáze e‑mailů a nejde ani zjistit,
+   jestli už daný e‑mail soutěžil.
+7. **Data jsou v EU** (Supabase Paříž, Vercel edge), šifrovaná at rest i po cestě.
+8. **Retence:** smazat do 30 dnů po předání výher, nejpozději do 31. 12. 2026 —
+   `truncate table public.contest_entries;` (příkaz je i v komentáři migrace).
+
+> **Co v repu nikdy nesmí být:** `SUPABASE_SERVICE_ROLE_KEY`. Patří výhradně do env varů
+> na Vercelu. Kdyby se omylem dostal do commitu, je potřeba ho v Supabase hned rotovat
+> (Project Settings → API → Reset service role key).
+
+### Zprovoznění (jednorázově, ruční kroky)
+
+1. **Probudit Supabase projekt** — projekt `jgillern's Project` (ref `dqoujkghabiwflrpciov`,
+   eu-west-3) je momentálně **pozastavený**; v Supabase dashboardu dát *Restore*.
+   (Nebo založit nový projekt v EU regionu, ať soutěž nesdílí databázi s čímkoli jiným.)
+2. **Vytvořit tabulku** — Supabase Studio → SQL Editor → vložit a spustit celý obsah
+   `supabase/migrations/0001_contest_entries.sql`.
+3. **Nastavit env vary na Vercelu** (Project → Settings → Environment Variables,
+   pro Production i Preview):
+   | Env var | Hodnota |
+   |---|---|
+   | `SUPABASE_URL` | `https://<ref>.supabase.co` |
+   | `SUPABASE_SERVICE_ROLE_KEY` | servisní klíč z Project Settings → API |
+   | `CONTEST_IP_SALT` | libovolný náhodný řetězec (např. `openssl rand -hex 32`) |
+   | `CONTEST_DEADLINE` | volitelné, ISO datum uzávěrky (default `2026-09-30T23:59:59+02:00`) |
+4. **Redeploy** (env vary se propíšou až novým deploymentem).
+5. **Otestovat** na produkci: odeslat testovací odpověď a ověřit ji v Supabase
+   (`select * from public.contest_entries;`), pak ji smazat.
+
+### Co doplnit v textu před tiskem novin
+
+V `soutez/index.html` zbývají dvě místa označená `[DOPLNIT: …]` — **popis výhry**
+a **datum platnosti pravidel** (= den vydání volebních novin).
+
+**A jedna věc k potvrzení: kdo je pořadatel a správce.** V textu je předvyplněná TOP 09,
+ale to je jen default — rozhodnout to musí skutkový stav, ne preference. Kontrolní otázka:
+*kdo bude mít přístup do databáze odpovědí, kdo bude losovat výherce a kdo data po soutěži
+smaže?* Pokud to dělá lokální tým TOP 09 z rozpočtu strany, sedí TOP 09. Pokud si to celé
+odbaví jeden konkrétní člověk, patří tam on. Pokud o tom rozhodují TOP 09 i KDU-ČSL
+společně, jde o společné správce a je k tomu potřeba dohoda mezi stranami.
+
+Pořadatel i správce osobních údajů jsou vyplnění jako **TOP 09, IČO 71339728,
+Opletalova 1603/57, 110 00 Praha 1**.
+
+Proč zrovna strana: kandidátka „Říčany srdcem" není právnická osoba, takže pořadatelem
+musí být buď strana, nebo konkrétní fyzická osoba. Místní organizace zpravidla nemá vlastní
+právní osobnost a jedná v rámci strany — pokud tedy o soutěži rozhoduje lokální tým jako
+orgán TOP 09, je správcem podle faktického testu (čl. 4 odst. 7 GDPR) právě TOP 09.
+
+Fyzická osoba je taky možná (veřejný příslib podle § 2884 obč. zák. může učinit kdokoli),
+dávalo by to smysl u člověka, který soutěž fakticky vede a data drží sám — ale ručí pak
+osobně za lhůty, výmazy i případnou pokutu.
+
+> Pozor na dvě záměny: **s TTPA to nesouvisí** — prohlášení o transparentnosti je podklad
+> pro šiřitele reklamy o tom, kdo si u něj objednal sdělení; kdo pořádá soutěž a kdo je
+> správcem údajů, jsou samostatné otázky s vlastními testy. A ať je uvedený kdokoli, musí
+> o soutěži **vědět** a být schopen odbavit žádost o výmaz nebo stížnost, která mu přistane.
+
+Dále je potřeba **zkontrolovat termíny** (uzávěrka 30. 9. 2026, losování 2. 10. 2026,
+vyrozumění výherců do 5. 10. 2026, 3 výherci) — jsou to návrhy, musí sedět s tím, co bude
+vytištěné v novinách, a `CONTEST_DEADLINE` musí odpovídat uzávěrce v pravidlech.
+Stránka má zatím `<meta name="robots" content="noindex, nofollow">` — před spuštěním
+soutěže ho odstranit, ať stránku najdou i lidé, kteří adresu opíšou nepřesně.
+
+### Vyhodnocení soutěže
+
+Odpovědi se ukládají dvakrát: `answer` (přesně jak to člověk napsal) a `answer_norm`
+(velkými písmeny, bez diakritiky a interpunkce) — díky tomu se dá vyhodnotit jedním dotazem
+bez ohledu na to, jestli někdo napsal tajenku s háčky nebo bez. Hotové dotazy pro počty,
+filtr správných odpovědí, náhodné losování a GDPR výmaz jsou v komentáři na konci
+`supabase/migrations/0001_contest_entries.sql`.
+
+---
+
 ## Analytics (Plausible)
 
 Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)** — **cookieless**, bez ukládání čehokoli do prohlížeče, takže **není potřeba cookie lišta ani souhlas** (ČR má od 1. 1. 2022 opt-in režim, § 89 zák. č. 127/2005 Sb.). Data jsou v EU, unikáty se počítají přes denně rotující anonymní hash.
@@ -429,6 +547,8 @@ Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)**
 | `Hero CTA: Priority` / `Hero CTA: Tým` | klik na tlačítka v Hero | |
 | `Social: Facebook` / `Social: Instagram` | klik na ikony v navigaci | funguje i po doplnění reálných URL |
 | `Kontakt e-mail` | klik na kontaktní e-mail | |
+| `Soutěž: odesláno` | úspěšné odeslání tajenky na `/soutez` | |
+| `Soutěž: chyba` | odeslání skončilo chybou | důvod je v props (`duvod`) |
 
 ### Co je potřeba udělat v účtu Plausible (jednorázově, ruční)
 
@@ -450,6 +570,8 @@ Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)**
    - `Social: Facebook`
    - `Social: Instagram`
    - `Kontakt e-mail`
+   - `Soutěž: odesláno`
+   - `Soutěž: chyba`
 
 > ⚠️ Názvy priorit v událostech = titulky z `data.js`. **Když prioritu přejmenuješ** (např. při importu z Confluence), uprav i název odpovídajícího goalu v Plausible (nebo přidej nový). Aktuální titulky ověříš příkazem z [kontroly po importu](#kontrola-po-importu).
 
@@ -552,6 +674,7 @@ Až dorazí čas přepnout `ricanysrdcem.cz` z teaseru na finální stránku (cc
 - [ ] **Smazat `middleware.js`** (nebo upravit matcher na nějakou staging cestu, kdyby chtěl klient nadále mít heslem chráněnou „pracovní" verzi)
 - [ ] **Smazat env var `PREVIEW_PASSWORD`** ve Vercelu (a `PREVIEW_SECRET`, pokud byla)
 - [ ] Smazat `package.json` (pokud nebudou potřeba další build dependencies)
+- [ ] **`soutez/` a `api/` se cutover netýká** — leží mimo `preview/`, URL `/soutez` i `/api/soutez` zůstávají stejné. Jen ověřit, že po přepnutí funguje odkaz „Zpět na web" a odstranit `noindex` v `soutez/index.html`.
 - [ ] Push do `main` (nebo merge `claude/...` → `main`) a redeploy
 - [ ] Otestovat `ricanysrdcem.cz` v inkognito okně (žádné cache, žádné cookie)
   - [ ] **Analytics:** v *DevTools → Network* ověřit request na `plausible.io/api/event` (status 202) a v Plausible *Realtime* živého návštěvníka; kliknout na prioritu a ověřit, že dorazí event `Priorita: …`.
