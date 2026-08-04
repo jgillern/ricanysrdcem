@@ -10,7 +10,7 @@ window.RS_DATA = {
     job: 'ředitelka MAS Říčansko, galeristka',
     photo: '/preview/photos/leader-team.webp',
     photoHero: '/preview/photos/leader-hero.webp',
-    bio: '',
+    bio: 'Říčany znám nejen jako místo, kde žiji s rodinou, ale i jako město, pro které dlouhodobě pracuji. Proto mi záleží na tom, jaké prostředí společně vytváříme pro současné i budoucí generace.\n\nVystudovala jsem Management a řízení lidských zdrojů na Univerzitě Jana Amose Komenského v Praze. Jako ředitelka Místní akční skupiny už řadu let propojuji obce, podnikatele, spolky i aktivní občany a pomáhám připravovat a realizovat projekty, které zlepšují život v našem regionu. Dlouhodobě se věnuji také kultuře a veřejnému prostoru. Stojím za projektem VIDÍM SOCHY, který každoročně přináší současné umění do ulic Říčan a proměňuje město v otevřenou galerii. Podílela jsem se také na výstavním programu Galerie ME GA a věřím, že kvalitní veřejný prostor a kultura posilují vztah lidí k místu, kde žijí.\n\nKandiduji v čele kandidátky, protože chci do vedení města přinést novou energii, otevřenou komunikaci a spolupráci založenou na respektu. Mým cílem je město, které naslouchá lidem, podporuje aktivní komunitní život a rozvíjí se s dlouhodobou vizí.',
     intro: 'Říčany jsou pro mě domov. Místo, kde znám souseda, kam vodím děti do školy a kde si chci v sobotu sednout s kamarády na náměstí. Mám tohle město ráda a věřím v jeho lidi i v jeho potenciál. Přeju si živé náměstí pro setkávání, víc zeleně a stínu v ulicích a radnici, která s vámi mluví na rovinu a zapojuje vás do rozhodování. Proto jsme se sešli jako lidé, kteří město znají a mají ho rádi, a jsme připraveni pro něj pracovat. Otevřeně, slušně, a hlavně srdcem.'
   },
 
@@ -20,7 +20,7 @@ window.RS_DATA = {
       name: 'Jan Gillern',
       role: 'produktový manažer, člen výboru pro dopravu',
       photo: '/preview/photos/jan-gillern.webp',
-      bio: 'Vystudoval jsem politologii na Karlově univerzitě a během studia jsem působil jako analytik think-tanku Evropské hodnoty, kde jsem se mimo jiné zaměřoval na boj s proruskou propagandou v Česku. Aktuálně pracuji na pozici produktového manažera a jsem zodpovědný za rozvoj digitálních produktů naší společnosti. Poslední čtyři roky zároveň působím v říčanském výboru pro dopravu. V Říčanech jsem prožil téměř celý svůj dosavadní život a na našem městě mi velmi záleží. Proto jsem se rozhodl kandidovat s chutí pro Říčany pracovat. Mezi mé hlavní priority patří koncepční rozvoj dopravy, urychlení přípravy jižního obchvatu a větší využití nových technologií pro efektivnější řízení města.'
+      bio: 'V Říčanech jsem prožil téměř celý život, a proto mi na budoucnosti našeho města velmi záleží. Vystudoval jsem politologii na Karlově univerzitě a během studia působil jako analytik neziskové organizace, kde jsem se věnoval proruské propagandě v Česku. Dnes pracuji jako produktový manažer a mám na starosti rozvoj digitálních produktů. Poslední čtyři roky působím v říčanském výboru pro dopravu. Kandiduji, protože chci své zkušenosti využít pro Říčany a prosazovat rozhodování založené na datech a dlouhodobé koncepci. Mezi mé hlavní priority patří koncepční rozvoj dopravy, urychlení přípravy jižního obchvatu a využití moderních technologií pro efektivnější řízení města.'
     },
     {
       id: 'irena-moudra',   n: 3,
@@ -34,28 +34,28 @@ window.RS_DATA = {
       name: 'Ondřej Tomáš',
       role: 'student politologie',
       photo: '/preview/photos/ondrej-tomas.webp',
-      bio: 'Jmenuji se Ondřej Tomáš, je mi 21 let a v Říčanech žiji už více než 15 let. Studuji politologii a veřejnou politiku na Fakultě sociálních věd Univerzity Karlovy a jsem členem mládežnické organizace TOP tým. Chci přispět k tomu, aby Říčany zůstaly skvělým místem pro život i pro mladou generaci.'
+      bio: 'Studuji politologii a veřejnou politiku na Fakultě sociálních věd Univerzity Karlovy. V Říčanech žiji už více než 15 let. Jako člen mládežnické organizace TOP tým chci do vedení města přinést pohled mladé generace. Prosazuji otevřenou a transparentní radnici, která více komunikuje s občany, a moderní digitální služby usnadňující každodenní kontakt s městem. Věřím, že radnice má svá rozhodnutí srozumitelně vysvětlovat, aktivně naslouchat podnětům obyvatel a vytvářet prostor pro otevřenou diskusi. Pohled mladé generace podle mě může do říčanské politiky přinést novou energii a pomoci hledat dobrá řešení pro všechny generace.'
     },
     {
       id: 'jaromir-zilka',     n: 5,
       name: 'Jaromír Žilka',
       role: 'projektant, člen komise pro životní prostředí',
       photo: '/preview/photos/jaromir-zilka.webp',
-      bio: ''
+      bio: 'Profesí jsem stavební inženýr a projektant. V Říčanech jsem vystudoval gymnázium a od roku 1988 zde žiji s manželkou. Máme tři dospělé dcery. Působím také jako člen městské komise pro životní prostředí. Pro další rozvoj Říčan nabízím svou odbornost a zkušenosti, které bych rád uplatnil při posuzování stavebních záměrů soukromých investorů i města a při tvorbě a změnách územního plánu. Městské investice by se podle mě měly posuzovat také podle toho, jak ovlivní podobu Říčan a kvalitu života v dalších desetiletích. Mojí prioritou je rovněž ochrana životního prostředí a městské zeleně. Chci přispět k tomu, aby se naše město rozvíjelo promyšleně a s respektem k potřebám obyvatel.'
     },
     {
       id: 'radana-simcikova',     n: 6,
       name: 'Radana Šimčíková',
       role: 'ředitelka školy, vedoucí divadelního spolku Tyl',
       photo: '/preview/photos/radana-simcikova.webp',
-      bio: ''
+      bio: 'V Říčanech žiji s krátkou přestávkou v dospívání celý život. Žili zde už moji prarodiče i praprarodiče, a proto je pro mě naše město skutečným domovem. Vystudovala jsem Pedagogickou fakultu Univerzity Karlovy v Praze a celý profesní život se věnuji vzdělávání dětí. V současné době působím jako ředitelka Základní školy a Mateřské školy Tehov. Ve volném čase vedu amatérský Divadelní spolek Tyl, zajímám se o historii našeho kraje a ráda trávím čas v přírodě. Záleží mi na tom, aby Říčany byly městem, kde se dobře žije všem generacím, kde se neztrácí lidskost, vzájemný respekt a vztah k místu, které společně sdílíme.'
     },
     {
       id: 'pavel-sramota',   n: 7,
       name: 'Pavel Šramota',
       role: 'brand manažer',
       photo: '/preview/photos/pavel-sramota.webp',
-      bio: 'Říčany jsou moje srdeční záležitost. Šest let žiji v našem městě a šestnáct let v něm také pracuji. Záleží mi na tom, jak se bude dál rozvíjet, a proto kandiduji s cílem podporovat spolupráci, rozumná řešení a otevřený dialog. Společně hledat cestu vpřed.'
+      bio: 'Říčany jsou moje srdeční záležitost. Šest let žiji v našem městě a šestnáct let v něm také pracuji. Profesně působím jako brand manažer a ze své práce vím, jak důležité je naslouchat různým názorům, srozumitelně komunikovat a hledat společnou cestu. Záleží mi na tom, jak se budou Říčany dál rozvíjet, a proto kandiduji s cílem podporovat spolupráci, praktická řešení a otevřený dialog. Chci, aby se důležitá rozhodnutí připravovala v diskusi s lidmi, kterých se týkají, a aby radnice dokázala své kroky jasně vysvětlit. Věřím, že právě ochota naslouchat, respektovat různé pohledy a hledat shodu je základem dobré správy města. Společně můžeme hledat cestu vpřed.'
     }
   ],
 
@@ -67,21 +67,21 @@ window.RS_DATA = {
       name: 'Sylvie Kubálková',
       role: 'učitelka, majitelka kočičího hotelu',
       photo: '/preview/photos/sylvie-kubalkova.jpg',
-      bio: ''
+      bio: 'Jsem učitelka a zároveň podnikám jako OSVČ, kde se věnuji péči o domácí mazlíčky. Práce se zvířaty je pro mě nejen povoláním, ale i dlouholetou zálibou a posláním.\n\nV Říčanech dlouhodobě pomáhám opuštěným a zatoulaným zvířatům a ráda bych podpořila vznik funkčního systému pomoci, který bude spolupracovat s městem, dobrovolníky i veřejností.\n\nŘíčany jsou mým domovem a záleží mi na tom, aby byly příjemným místem pro všechny — nejen pro nás, ale i pro zvířata, která jsou nedílnou součástí života ve městě.'
     },
     {
       id: 'peter-vercimak',    n:  9,
       name: 'Peter Verčimák',
       role: 'projektový manažer',
       photo: '/preview/photos/peter-vercimak.jpg',
-      bio: 'V Říčanech žiji s rodinou už 25 let a za tu dobu se pro mě staly skutečným domovem. S manželkou jsme zde vychovali dva syny a dobře víme, co je pro kvalitní život ve městě důležité. Říčany jsme si vybrali jako místo, kde chceme založit rodinu, a toto město a lokalitu jsme si natolik oblíbili, že ani po pětadvaceti letech bychom určitě neměnili. Profesně pracuji jako projektový manažer v oblasti rozsáhlých infrastrukturních projektů pro akademickou a vědeckou sféru. Mám dlouholeté zkušenosti s přípravou a řízením projektů financovaných z evropských fondů, s veřejnými zakázkami i dohledem nad efektivním využíváním veřejných prostředků. Věřím, že tyto zkušenosti s přípravou investičních projektů, evropským financováním a kontrolou veřejných zakázek mohou být přínosem i při rozhodování o budoucím rozvoji našeho města.'
+      bio: 'V Říčanech žiji s rodinou už 25 let a za tu dobu se pro mě staly skutečným domovem. S manželkou jsme zde vychovali dva syny a dobře víme, co je pro kvalitní život ve městě důležité. Říčany jsme si vybrali jako místo, kde chceme založit rodinu, a toto město a lokalitu jsme si natolik oblíbili, že ani po pětadvaceti letech bychom neměnili. Profesně pracuji jako projektový manažer v oblasti rozsáhlých infrastrukturních projektů pro akademickou a vědeckou sféru. Mám dlouholeté zkušenosti s přípravou a řízením projektů financovaných z evropských fondů, s veřejnými zakázkami i dohledem nad efektivním využíváním veřejných prostředků. Věřím, že tyto zkušenosti mohou být přínosem i při rozhodování o rozvoji našeho města.'
     },
     {
       id: 'dominik-bren',      n: 10,
       name: 'Dominik Břeň',
       role: 'psycholog',
       photo: '/preview/photos/dominik-bren.jpg',
-      bio: ''
+      bio: 'V Říčanech žiji již přes 30 let a více než polovinu tohoto času se věnuji práci s dětmi a dospívajícími. Za tu dobu jsem si vyzkoušel roli vychovatele, učitele i sociálního pracovníka, a následně našel místo, které mi sedí nejlépe, a to jako psycholog a psychoterapeut. Ať už to bylo v jakékoliv roli, vždy jsem vnímal, že je důležité ke každému přistupovat individuálně, a tento princip se snažím ve své práci trvale zachovat a řídit se jím. Kandiduji proto, že mi záleží na tom, aby se právě na tato témata — podporu dětí, rozvoj mládeže a celkovou péči o duševní zdraví — dával v Říčanech tolik potřebný důraz.'
     },
     { id: 'pavla-ruzickova',   n: 11, name: 'Pavla Růžičková',   role: 'nepedagogická pracovnice ve školství' },
     { id: 'martina-machova',   n: 12, name: 'Martina Machová',   role: 'personální ředitelka' },

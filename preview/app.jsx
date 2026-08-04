@@ -233,7 +233,7 @@ function MemberModal({ member, onClose }) {
   const bio = (member.bio || '').trim();
   // Medailonky chodí různě dlouhé — podle počtu slov se modal rozšíří (CSS).
   const words = bio ? bio.split(/\s+/).length : 0;
-  const size = words > 110 ? ' is-xlong' : words > 65 ? ' is-long' : '';
+  const size = words > 130 ? ' is-xlong' : words > 70 ? ' is-long' : '';
   // Odstavce lze v data.js oddělit prázdným řádkem.
   const paragraphs = bio ? bio.split(/\n\s*\n/) : [];
   return (
