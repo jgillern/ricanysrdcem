@@ -98,7 +98,7 @@ Render flow:
 | `MemberModal` | Centrovaný modal s portrétem + medailonkem |
 | `Footer` | „Společná kandidátka [TOP 09] [KDU·ČSL] a nezávislých kandidátů" |
 
-**Helper `renderRichText`** rozparsuje markdown‑style `**bold**` v textu odstavců na `<strong>`.
+**Helper `renderRichText`** rozparsuje markdown‑style `**bold**` v textu odstavců na `<strong>`. V obsahu ho ale **nepoužíváme** — viz [Tučné zvýraznění](#tučné-zvýraznění).
 
 ### Auth (`/preview` gate)
 
@@ -168,7 +168,7 @@ window.RS_DATA = {
         {
           heading: null,                                   // úvodní odstavec bez nadpisu
           paragraphs: [
-            'Text odstavce **s tučnou částí** uprostřed.',  // string s markdown bold
+            'Text odstavce bez zvýraznění.',                // v prioritách se netučňuje
           ]
         },
         {
@@ -197,7 +197,7 @@ window.RS_DATA = {
 - `n` = pořadí na kandidátce (1 = lídryně, neopakuje se v `top6`)
 - **Bez akademických titulů** v `name` (rozhodli jsme dříve)
 - `role` = pracovní pozice malými písmeny, ne oblast jako „Doprava a infrastruktura"
-- Markdown `**bold**` funguje **jen v `paragraphs` priority drawer** (ne v `lead`, `bio`, `intro`)
+- **Tučné se nepoužívá** — texty priorit jdou na web bez `**…**` (viz [Tučné zvýraznění](#tučné-zvýraznění)). Parser by ho v `paragraphs` zvládl, ale obsah ho nemá.
 
 ---
 
@@ -282,37 +282,26 @@ Aby šel obsah namapovat bez ručního dolaďování, drží autoři tuto strukt
 | `## Anotace` + text pod ní | `priority.lead` (1 věta) |
 | `## Hlavní text`, první odstavec (bez `###`) | `sections[0]` s `heading: null` |
 | `### Subnadpis` + odstavce pod ním | další `sections[]` (`heading` + `paragraphs`) |
-| **Tučné** (Ctrl+B) | markdown `**…**` v `paragraphs` |
+| **Tučné** (Ctrl+B) | **nepřenáší se** — viz [Tučné zvýraznění](#tučné-zvýraznění) |
 
 **Co se do webu nepřenáší / vynechává:**
 - řádky **Garant / Autor** a `@zmínky` nahoře (interní metadata)
 - autorské poznámky a otázky vložené do textu (např. „Funguje to takhle?")
 - obrázky vložené jen jako interní `blob:` URL z editoru — nejsou veřejně dostupné; obrázek je potřeba zvlášť exportovat do `preview/images/` a doplnit ručně (viz [Obrázky uvnitř priorit](#obrázky-uvnitř-priorit))
 
-### Pravidla pro tučné zvýraznění
+### Tučné zvýraznění
 
-Tučné z Confluence **nepřebírej jedna ku jedné.** Každou prioritu píše někdo jiný, takže syrové tučné kolísá od nuly po deset zvýraznění na prioritu a v draweru to pak působí nahodile. Při importu ho srovnej na tato pravidla:
+**V textech priorit se netučňuje.** Tučné, které autoři v Confluence použili (Ctrl+B), se do `data.js` **nepřebírá** — při importu ho zahoď.
 
-1. **Tučně jen název konkrétního opatření, nástroje nebo pravidla** — jmenná fráze do ~6 slov (`centrální databáze projektů`, `program adopce předzahrádek`, `Plán udržitelné městské mobility`). Ne slovesná fráze („zapojíme hned na samém začátku"), ne celá věta, ne obecný princip.
-2. **Nejvýš jedno tučné na odstavec.** Když jich autor nabízí víc, vyhrává to nejkonkrétnější; u pojmenovaných programů („Překvapte Říčany 2.0", Datová výzva Říčany) vyhrává název.
-3. **V úvodním odstavci** (`heading: null`) se netučňuje — je to shrnutí priority, ne výčet opatření.
-4. **Cíl 3–6 tučných na prioritu.** Sekce, která žádné konkrétní opatření nepojmenovává, klidně zůstane bez tučného; naopak priorita bez jediného zvýraznění vypadá vedle ostatních plochá — tam nějaké doplň.
+Důvod: každou prioritu píše někdo jiný, takže syrové zvýraznění kolísalo od nuly po jedenáct kusů na prioritu, míchaly se v něm názvy opatření se slovesnými frázemi i celými větami a v draweru to působilo nahodile. Sjednocovat to podle nějakého klíče znamená rozhodovat za autory, které z jejich myšlenek jsou důležitější — proto radši rovnou žádné. Text priorit tak drží jednotnou barvu a důraz nesou nadpisy sekcí a `lead`.
 
-Kontrola po importu:
+Kontrola po importu (nesmí nic vypsat):
 
 ```sh
-node -e 'global.window={}; require("./preview/data.js");
-  global.window.RS_DATA.priorities.forEach(p => {
-    let n = 0;
-    p.sections.forEach((s, si) => s.paragraphs.forEach(x => {
-      if (typeof x !== "string") return;
-      const m = x.match(/\*\*[^*]+\*\*/g) || []; n += m.length;
-      if (m.length > 1) console.log("p" + p.n + ": víc tučných v jednom odstavci");
-      if (m.length && si === 0 && !s.heading) console.log("p" + p.n + ": tučné v úvodním odstavci");
-    }));
-    console.log("p" + p.n + " → " + n + (n < 3 || n > 6 ? "  ← mimo rozsah 3–6" : ""));
-  });'
+grep -n '\*\*' preview/data.js
 ```
+
+> Podpora `**bold**` v `app.jsx` (helper `renderRichText`) zůstává funkční pro případ, že by se rozhodnutí někdy změnilo — jen ji nepoužíváme.
 
 ### Postup (krok za krokem)
 
@@ -321,7 +310,7 @@ node -e 'global.window={}; require("./preview/data.js");
 3. **Stáhni obsah** každé podstránky přes `getConfluencePage` s `contentFormat: "markdown"` a urči, které jsou vyplněné.
 4. **Namapuj** obsah na strukturu z [Datového modelu](#datový-model): `title`, `lead`, `sections[].{heading, paragraphs}`. Pořadí `n` podle `childPosition`.
 5. **Typografie:** české uvozovky `„…"`, em‑dash `—`, nezalomitelná mezera (` `, U+00A0) po jednopísmenných předložkách/spojkách (`k s v z o u a i`). Nezalomitelnou mezeru aplikuj **jen v upravovaných prioritách**, ať nevzniká šum v nezměněných částech souboru.
-6. **Srovnej tučné** podle [pravidel výše](#pravidla-pro-tučné-zvýraznění) — syrové tučné z Confluence se nepřebírá.
+6. **Zahoď tučné** — viz [Tučné zvýraznění](#tučné-zvýraznění). Do `data.js` jde text bez `**…**`.
 7. **Zachovej všech 10 položek** v `priorities` — měň jen vyplněné, prázdné nech jako placeholder.
 8. **Commit + push** na pracovní branch (`git push -u origin <branch>`), **bez** otevírání PR, pokud o něj není výslovně požádáno. Do commit message stručně, které priority se nahrály.
 9. **Reportuj** zpět: které priority naplněné, které zůstaly placeholder, a cokoliv, co v Confluence chybělo nebo nešlo jednoznačně namapovat (chybějící anotace, 2větné `lead`, garbled text, vynechané obrázky/poznámky, drobné opravené překlepy).
