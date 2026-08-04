@@ -10,7 +10,7 @@ window.RS_DATA = {
     job: 'ředitelka MAS Říčansko, galeristka',
     photo: '/preview/photos/leader-team.webp',
     photoHero: '/preview/photos/leader-hero.webp',
-    bio: '',
+    bio: 'Říčany znám nejen jako místo, kde žiji s rodinou, ale i jako město, pro které dlouhodobě pracuji. Proto mi záleží na tom, jaké prostředí společně vytváříme pro současné i budoucí generace.\n\nVystudovala jsem Management a řízení lidských zdrojů na Univerzitě Jana Amose Komenského v Praze. Jako ředitelka Místní akční skupiny už řadu let propojuji obce, podnikatele, spolky i aktivní občany a pomáhám připravovat a realizovat projekty, které zlepšují život v našem regionu. Dlouhodobě se věnuji také kultuře a veřejnému prostoru. Stojím za projektem VIDÍM SOCHY, který každoročně přináší současné umění do ulic Říčan a proměňuje město v otevřenou galerii. Podílela jsem se také na výstavním programu Galerie ME GA a věřím, že kvalitní veřejný prostor a kultura posilují vztah lidí k místu, kde žijí.\n\nKandiduji v čele kandidátky, protože chci do vedení města přinést novou energii, otevřenou komunikaci a spolupráci založenou na respektu. Mým cílem je město, které naslouchá lidem, podporuje aktivní komunitní život a rozvíjí se s dlouhodobou vizí.',
     intro: 'Říčany jsou pro mě domov. Místo, kde znám souseda, kam vodím děti do školy a kde si chci v sobotu sednout s kamarády na náměstí. Mám tohle město ráda a věřím v jeho lidi i v jeho potenciál. Přeju si živé náměstí pro setkávání, víc zeleně a stínu v ulicích a radnici, která s vámi mluví na rovinu a zapojuje vás do rozhodování. Proto jsme se sešli jako lidé, kteří město znají a mají ho rádi, a jsme připraveni pro něj pracovat. Otevřeně, slušně, a hlavně srdcem.'
   },
 

@@ -36,7 +36,7 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 | `ricanysrdcem.cz/preview` | **Plnohodnotný náhled** finálního webu (Hero, Priority, Tým, Footer) | heslo `Volby2026!` (jen heslo, jméno se ignoruje) |
 | `ricanysrdcem.cz/preview/login` | login form pro `/preview` | volné GET, POST validuje heslo |
 
-Obsah na `/preview` je reálný — priority, seznam kandidátů, fotky i medailonky top10 jsou finální. Chybí už jen medailonek lídryně (viz [Plány do budoucna](#plány-do-budoucna)).
+Obsah na `/preview` je reálný a finální — priority, seznam kandidátů, fotky i medailonky top10. Co zbývá dodělat, je v [Plánech do budoucna](#plány-do-budoucna) (hlavně reálné odkazy na FB/IG a SEO před spuštěním).
 
 ---
 
@@ -454,18 +454,25 @@ Ucelená verze tohoto je v chatu, tady stručná tabulka:
 | `priority.sections` (hlavní text celkem) | 250–400 slov | 600 slov |
 | Jeden odstavec | 30–70 slov | 100 slov |
 | Subnadpis | 2–5 slov | — |
-| `leader.bio` (medailonek lídryně) | 40–60 slov | 130 slov |
-| `top6[].bio` / `rest[].bio` | 30–45 slov | 130 slov |
+| `leader.bio` (medailonek lídryně) | 120–170 slov | 180 slov |
+| `top6[].bio` / `rest[].bio` | 80–110 slov | 130 slov |
 
-**Medailonky chodí různě dlouhé, takže se jim modal přizpůsobuje** — podle počtu slov přepne mezi třemi šířkami (`MemberModal` v `app.jsx` nasadí třídu, zbytek je CSS v `preview/index.html`):
+**Medailonky chodí různě dlouhé, takže se jim modal přizpůsobuje** — podle počtu slov přepne mezi třemi velikostmi (`MemberModal` v `app.jsx` nasadí třídu, zbytek je CSS v `preview/index.html`):
 
-| Délka `bio` | Třída | Šířka modalu | Fotka |
+| Délka `bio` | Třída | Šířka modalu | Sloupec s fotkou |
 |---|---|---|---|
-| do 65 slov | — | 720 px | 220 px |
-| 66–110 slov | `is-long` | 880 px | 260 px |
-| 111+ slov | `is-xlong` | 980 px | 300 px |
+| do 70 slov | — | 720 px | 220 px |
+| 71–130 slov | `is-long` | 900 px | 270 px |
+| 131+ slov | `is-xlong` | 1040 px | 340 px |
 
-Cílem je držet řádek v čitelných ~55–75 znacích a nenechat dlouhý text ve úzkém sloupci vedle malé fotky. Nad ~130 slov už se modal roluje (křížek je sticky, takže zůstává po ruce) a text začne vizuálně přebíjet fotku — tam už je lepší medailonek zkrátit. Delší text se dobře čte rozdělený na odstavce: v `data.js` je stačí oddělit prázdným řádkem (`\n\n`).
+Prahy jsou nastavené podle **reálné délky finálních medailonků**: kandidáti č. 2–10 mají 82–113 slov, takže padnou všichni do `is-long` a při proklikávání týmu se modal nezvětšuje a nezmenšuje. Lídryně má 160 slov a je jediná v `is-xlong`.
+
+Dvě věci, které prahy hlídají:
+
+- **Délka řádku ~60–70 znaků.** Kdyby se dlouhý text nechal v úzkém sloupci vedle malé fotky, naroste do 20+ řádků; naopak roztažený přes celý široký modal by měl přes 90 znaků na řádek.
+- **Výška textu vs. fotky.** U finálních textů je text o 64–133 px vyšší než fotka, takže vlevo dole nezůstává velká díra.
+
+Nad ~180 slov (na mobilu dřív) se modal začne rolovat — křížek je sticky, takže zůstává po ruce, ale text už fotku vizuálně přebíjí; tam je lepší medailonek zkrátit. Delší text se dobře čte rozdělený na odstavce: v `data.js` je stačí oddělit prázdným řádkem (`\n\n`).
 
 ---
 
@@ -474,7 +481,7 @@ Cílem je držet řádek v čitelných ~55–75 znacích a nenechat dlouhý text
 Seřazeno přibližně podle priority:
 
 - [x] **Reálné texty priorit** z Confluence (Rovo MCP) — všech 10 nahráno
-- [ ] **Medailonky** z Confluence — hotovo č. 2–10 (finální verze); **chybí už jen lídryně**
+- [x] **Medailonky** z Confluence — finální verze všech top10 včetně lídryně
 - [x] **Reálné fotky top10** — top7 ze studia (transparentní WebP), č. 8–10 vlastní (JPG)
 - [ ] **Reálné URL Facebooku a Instagramu** v navigaci
 - [ ] **Kontaktní e‑mail** (kontaktní sekce nebo footer)
@@ -496,7 +503,7 @@ Seřazeno přibližně podle priority:
 Až dorazí čas přepnout `ricanysrdcem.cz` z teaseru na finální stránku (cca pár měsíců před volbami):
 
 ### Příprava obsahu
-- [ ] Doplněný medailonek lídryně — viz [Import medailonků](#import-medailonků-z-confluence)
+- [x] Medailonky top10 — viz [Import medailonků](#import-medailonků-z-confluence)
 - [x] Fotky top10 v `preview/photos/` (od č. 11 se fotky ani medailonky nedělají)
 - [ ] Reálné URL u FB/IG ikon v `app.jsx` (Nav komponenta)
 - [ ] Kontaktní e‑mail doplněn (footer / kontaktní sekce)

@@ -445,8 +445,8 @@
   /* Medailonky mají různou délku — modal se jí přizpůsobuje ve třech stupních
      (viz `size` v MemberModal): širší modal + větší fotka, ať dlouhý text
      nezůstane v úzkém sloupci vedle malé fotky a řádek nemá přes 75 znaků. */
-  .modal.is-long { max-width: 880px; }
-  .modal.is-xlong { max-width: 980px; }
+  .modal.is-long { max-width: 900px; }
+  .modal.is-xlong { max-width: 1040px; }
   @keyframes pop { from { transform: translateY(12px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
   /* Sticky, aby křížek zůstal po ruce i u dlouhého medailonku, který se roluje.
      Záporný spodní margin = v toku nezabírá výšku, layout je stejný jako dřív. */
@@ -458,8 +458,8 @@
   }
   .modal-close:hover { background: var(--rs-blue-tint); }
   .modal-grid { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 36px; align-items: start; }
-  .modal.is-long .modal-grid { grid-template-columns: 260px 1fr; gap: 40px; }
-  .modal.is-xlong .modal-grid { grid-template-columns: 300px 1fr; gap: 44px; }
+  .modal.is-long .modal-grid { grid-template-columns: 270px 1fr; gap: 40px; }
+  .modal.is-xlong .modal-grid { grid-template-columns: 340px 1fr; gap: 44px; }
   .modal-photo { aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center; }
   .modal-photo img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
   .modal-photo-placeholder {
@@ -483,6 +483,9 @@
   .modal-bio + .modal-bio { margin-top: 14px; }
 
   /* Užší okno → zpět na základní šířku sloupců, ať se fotka a text vejdou. */
+  @media (max-width: 1080px) {
+    .modal.is-xlong .modal-grid { grid-template-columns: 270px 1fr; gap: 40px; }
+  }
   @media (max-width: 1000px) {
     .modal.is-long .modal-grid,
     .modal.is-xlong .modal-grid { grid-template-columns: 220px 1fr; gap: 32px; }
