@@ -4,8 +4,8 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 
 - **Doména:** [ricanysrdcem.cz](https://ricanysrdcem.cz) (registrátor: forpsi.com)
 - **Hosting:** Vercel (deployment z GitHub repa, branch `claude/implement-ricany-teaser-QFIUX`)
-- **Veřejná stránka (`/`):** teaser „Již brzy" s pulzujícím srdcem a countdownem
-- **Náhled finální stránky (`/preview`):** chráněný heslem `Volby2026!`
+- **Veřejná stránka (`/`):** finální web — Hero, priority, tým, kontakt
+- **Teaser** („Již brzy" s countdownem) a **heslem chráněný náhled `/preview`** už neexistují — nahradil je finální web, viz [Cutover](#cutover-z-teaseru-na-finální-web-hotovo)
 
 ---
 
@@ -24,19 +24,25 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 11. [Analytics (Plausible)](#analytics-plausible)
 12. [Limity a doporučené délky textů](#limity-a-doporučené-délky-textů)
 13. [Plány do budoucna](#plány-do-budoucna)
-14. [Checklist pro spuštění do produkce](#checklist-pro-spuštění-do-produkce)
+14. [Cutover z teaseru na finální web (hotovo)](#cutover-z-teaseru-na-finální-web-hotovo)
 
 ---
 
 ## Aktuální stav
 
+**Web je ostrý.** Finální stránka běží na `/`, teaser i heslem chráněný náhled `/preview` byly zrušené.
+
 | URL | Co je tam | Přístup |
 |---|---|---|
-| `ricanysrdcem.cz/` | **Teaser** — pulzující srdce, datum voleb, countdown | veřejné |
-| `ricanysrdcem.cz/preview` | **Plnohodnotný náhled** finálního webu (Hero, Priority, Tým, Footer) | heslo `Volby2026!` (jen heslo, jméno se ignoruje) |
-| `ricanysrdcem.cz/preview/login` | login form pro `/preview` | volné GET, POST validuje heslo |
+| `ricanysrdcem.cz/` | **Finální web** — Hero, Priority, Tým, Kontakt, Footer | veřejné, indexovatelné |
+| `ricanysrdcem.cz/ttpa/*.pdf` | prohlášení o transparentnosti (EU 2024/900) | veřejné |
+| `ricanysrdcem.cz/robots.txt`, `/sitemap.xml` | pro vyhledávače | veřejné |
 
-Obsah na `/preview` je reálný a finální — priority, seznam kandidátů, fotky i medailonky top10. Co zbývá dodělat, je v [Plánech do budoucna](#plány-do-budoucna) (hlavně reálné odkazy na FB/IG a SEO před spuštěním).
+Obsah je reálný a finální — priority, seznam kandidátů, fotky i medailonky top10.
+
+**Co ještě chybí** (nic z toho nebrání provozu, detaily v [Plánech do budoucna](#plány-do-budoucna)):
+- **Odkazy na sociální sítě** — ikony FB/IG jsou z navigace dočasně odstraněné, protože reálné profily zatím nemáme. Až budou, vrátí se (návod níže).
+- Registrace webu v Google Search Console / Bing Webmaster Tools.
 
 ---
 
@@ -44,26 +50,30 @@ Obsah na `/preview` je reálný a finální — priority, seznam kandidátů, fo
 
 ```
 /
-├── README.md                  # tento dokument
-├── index.html                 # teaser stránka (veřejná)
-├── middleware.js              # Vercel Edge Middleware — gate na /preview
+├── README.md                  # tento dokument (na web se nenasazuje, viz .vercelignore)
+├── index.html                 # finální stránka — CSS, meta/OG, React+Babel CDN, mount point
+├── app.jsx                    # React komponenty (Nav, Hero, Priorities, Team, Contact, Footer)
+├── data.js                    # veškerý obsah (window.RS_DATA)
+├── robots.txt                 # povoluje indexaci, odkazuje na sitemapu
+├── sitemap.xml                # jedna URL — web je single‑page
 ├── package.json               # marker pro Vercel, žádné deps
+├── .vercelignore              # co se nemá nasazovat (README, tools/, uploads/)
+├── photos/                    # hotové portréty použité na webu (<id>.webp / <id>.jpg)
+├── uploads/                   # surové fotky, ze kterých se ty hotové generují (nenasazuje se)
+├── assets/
+│   ├── logo-new.webp          # logo v navigaci
+│   ├── og-image.png           # 1200×630 náhled pro sociální sítě
+│   ├── top09.png              # logo TOP 09 (footer)
+│   ├── lidovci_logo_rgb_black-kdu.svg   # logo KDU·ČSL (footer)
+│   └── kducsl.png, logo.jpg   # starší nepoužívané varianty log (záloha)
 ├── ttpa/                      # prohlášení o transparentnosti (nařízení EU 2024/900)
 │   ├── rengl.pdf              # → ricanysrdcem.cz/ttpa/rengl.pdf
 │   └── maks.pdf               # → ricanysrdcem.cz/ttpa/maks.pdf
 ├── brand/                     # logo v křivkách (SVG/PDF/PNG) + manuál, viz brand/README.md
-├── tools/                     # pomocné skripty (nejsou součástí webu)
-│   ├── process-photos.py      # ořez fotek kandidátů 8+ na 4:5 → preview/photos/
-│   └── gen_logo.py, export_logo.py
-└── preview/
-    ├── index.html             # shell stránky (CSS, React+Babel CDN, mount point)
-    ├── app.jsx                # React komponenty (Nav, Hero, Priorities, Team, Footer …)
-    ├── data.js                # veškerý obsah (window.RS_DATA)
-    ├── photos/                # hotové portréty použité na webu (<id>.webp / <id>.jpg)
-    ├── uploads/               # surové fotky, ze kterých se ty hotové generují
-    ├── logo-new.webp          # logo v navigaci
-    ├── top09.png              # logo TOP 09 (footer)
-    └── lidovci_logo_rgb_black-kdu.svg   # logo KDU·ČSL (footer)
+└── tools/                     # pomocné skripty (nejsou součástí webu)
+    ├── process-photos.py      # ořez fotek kandidátů 8+ na 4:5 → photos/
+    ├── make-og-image.mjs      # generátor assets/og-image.png (Playwright + Chromium)
+    └── gen_logo.py, export_logo.py
 ```
 
 **Žádný build krok** — soubory se servírují přímo Vercelem jako statika; React/Babel se načítají z CDN, JSX se transformuje za běhu v prohlížeči (vhodné pro tuto velikost projektu, viz [Plány do budoucna](#plány-do-budoucna)).
@@ -72,17 +82,10 @@ Obsah na `/preview` je reálný a finální — priority, seznam kandidátů, fo
 
 ## Architektura
 
-### Teaser (`/`)
-
-- Plain HTML/CSS/JS, žádný framework
-- Pulzující červené srdce s datem voleb („Komunální volby / 9.–10. října 2026")
-- Tagline + živý countdown (cíl 2026‑10‑09 14:00 CEST)
-- Favicon je inline SVG srdce (data URI)
-
-### Náhled (`/preview/*`)
+### Stránka (`/`)
 
 Render flow:
-1. `preview/index.html` načte CSS, fonty (PT Serif + PT Sans), React + ReactDOM + Babel z unpkg CDN
+1. `index.html` načte CSS, fonty (PT Serif + PT Sans), React + ReactDOM + Babel z unpkg CDN
 2. Inline `<script>` nastaví `--heart-mask` data URI pro CSS masku srdce
 3. `data.js` (plain JS) nastaví `window.RS_DATA = {...}`
 4. `app.jsx` (`type="text/babel"`) je za běhu transformován Babelem a mountovaný do `<div id="app">`
@@ -90,7 +93,7 @@ Render flow:
 **Komponenty v `app.jsx`:**
 | Komponenta | Účel |
 |---|---|
-| `Nav` | Sticky horní lišta — logo, scroll spy, hamburger menu, ikony FB+IG |
+| `Nav` | Sticky horní lišta — logo, kotvy na sekce, hamburger menu na mobilu (ikony FB/IG zatím vypnuté, viz níže) |
 | `Hero` | „Říčany srdcem", úvodní slovo lídryně, fotka, dvě CTA (priority / tým) |
 | `Priorities` + `PriorityCard` | Mřížka 10 karet (číslo, titulek, anotace) |
 | `PriorityDrawer` | Pravostranný drawer s detailem priority (head fixed, body scrolluje) |
@@ -100,26 +103,33 @@ Render flow:
 
 **Helper `renderRichText`** rozparsuje markdown‑style `**bold**` v textu odstavců na `<strong>`. V obsahu ho ale **nepoužíváme** — viz [Tučné zvýraznění](#tučné-zvýraznění).
 
-### Auth (`/preview` gate)
+**Knihovny z CDN** se načítají s `integrity` (SRI) — React i ReactDOM v **produkčním** buildu (`*.production.min.js`), Babel standalone pro runtime transformaci JSX. Při změně verze je potřeba spočítat nový SRI hash, jinak prohlížeč skript odmítne:
 
-Implementace v `middleware.js` (Vercel Edge Middleware, runtime Web API):
+```sh
+# hash přesně toho souboru, který unpkg servíruje (unpkg = obsah npm balíčku)
+npm pack react@18.3.1 && tar xzf react-18.3.1.tgz
+openssl dgst -sha384 -binary package/umd/react.production.min.js | openssl base64 -A
+```
 
-1. **Matcher** — middleware běží jen na `/preview` a `/preview/:path*`
-2. **GET bez cookie** → vrátí inline HTML formulář (jediné pole *Heslo*)
-3. **POST `/preview/login`** → ověří heslo proti `process.env.PREVIEW_PASSWORD`
-4. Při úspěchu vystaví **HttpOnly Secure SameSite=Lax cookie** `rs_preview=<timestamp>.<hmac>` s `Path=/preview` a `Max-Age=30 dní`
-5. **HMAC SHA‑256** podpis přes `crypto.subtle.sign`, klíč z `PREVIEW_SECRET` (fallback `PREVIEW_PASSWORD`)
-6. Při dalším requestu middleware ověří podpis i stáří cookie a buď pustí dál, nebo znova vykreslí login formulář
+### Ikony sociálních sítí (dočasně vypnuté)
 
-**Env vary na Vercelu** (Project → Settings → Environment Variables):
-- `PREVIEW_PASSWORD` (povinné) — aktuálně `Volby2026!`
-- `PREVIEW_SECRET` (volitelné) — separátní HMAC klíč; pokud není, použije se `PREVIEW_PASSWORD` (změnou hesla pak invaliduješ všechny existující sessiony)
+FB/IG profily zatím neexistují, takže ikony **nejsou** v navigaci — odkazovaly na `#` a nikam nevedly. Připravené zůstává všechno okolo:
+
+- CSS `.nav-social` v `index.html`
+- Plausible eventy `Social: Facebook` / `Social: Instagram` (helper `track()` v `app.jsx`)
+- Komentář na správném místě v komponentě `Nav` (`app.jsx`)
+
+**Až profily vzniknou**, vrátí se do `Nav` mezi `<nav className="nav-links">` a `.nav-burger` blok s reálnými `href` (historickou podobu markupu má git — commit před cutoverem).
+
+### Heslem chráněný náhled (zrušeno)
+
+Do cutoveru běžel na `/preview` heslem chráněný náhled (Vercel Edge Middleware v `middleware.js`, HMAC podepsaná cookie). Po spuštění ostrého webu byl smazaný. Kdyby byla potřeba znova (např. pracovní verze pro klienta), je v gitu — stačí vrátit `middleware.js`, změnit `matcher` na jinou cestu a doplnit env var `PREVIEW_PASSWORD` ve Vercelu.
 
 ---
 
 ## Datový model
 
-Vše v `preview/data.js` jako `window.RS_DATA`. Struktura:
+Vše v `data.js` jako `window.RS_DATA`. Struktura:
 
 ```js
 window.RS_DATA = {
@@ -128,7 +138,7 @@ window.RS_DATA = {
     name:  'Eva Nováková',                                // bez titulů
     role:  'Lídryně kandidátky',                            // bez „kandidátka na starostku“ — tak jsme se dohodli
     job:   'ředitelka neziskové organizace',              // 1-4 slova malými písmeny
-    photo: 'URL nebo /preview/photos/...',                // výchozí 4:5 portrét — použije se všude, kde není override
+    photo: 'URL nebo /photos/...',                // výchozí 4:5 portrét — použije se všude, kde není override
     photoHero: '...',                                      // VOLITELNÉ — fotka jen pro Hero (úvod)
     photoTeam: '...',                                      // VOLITELNÉ — fotka jen pro kartu v Týmu + modal
     bio:   '...',                                          // medailonek v modálu; odstavce oddělit prázdným řádkem (\n\n)
@@ -176,7 +186,7 @@ window.RS_DATA = {
           paragraphs: [
             'První odstavec…',
             {
-              image:   '/preview/images/foto.jpg',          // OBRÁZEK uprostřed textu
+              image:   '/images/foto.jpg',          // OBRÁZEK uprostřed textu
               alt:     'Popis pro screen reader / SEO',
               caption: 'Volitelný popisek pod obrázkem'
             },
@@ -203,16 +213,16 @@ window.RS_DATA = {
 
 ## Jak měnit obsah
 
-Pro 95 % změn stačí editovat **`preview/data.js`** a pushnout. Vercel zdetekuje commit a redeployne (~30 s).
+Pro 95 % změn stačí editovat **`data.js`** a pushnout. Vercel zdetekuje commit a redeployne (~30 s).
 
 **Pár pravidel:**
 - Zachovat strukturu klíčů (`leader`, `top6`, `rest`, `priorities`)
 - Zachovat počet kandidátů (1 + 6 + 14 = **21**, nebo upravit i v komentáři)
 - Zachovat počet priorit (**10**) — design počítá s 2×5 mřížkou
 - Texty s česktými uvozovkami (`„…"`), em‑dash (`—`), nebreakovatelnou mezerou (` `) tam, kde nemá zlomit
-- Foto URL může být absolutní (https://…) nebo relativní (`/preview/photos/jmeno.png`)
+- Foto URL může být absolutní (https://…) nebo relativní (`/photos/jmeno.png`)
 
-**Strukturální změny** (komponenty, layout, animace) se dělají v `preview/app.jsx` + CSS v `preview/index.html`.
+**Strukturální změny** (komponenty, layout, animace) se dělají v `app.jsx` + CSS v `index.html`.
 
 ---
 
@@ -231,17 +241,17 @@ Pro 95 % změn stačí editovat **`preview/data.js`** a pushnout. Vercel zdeteku
 
 ### Workflow při importu
 
-Surové fotky patří do `preview/uploads/` pod názvem `<id>-raw.jpg` (`<id>` = `id` kandidáta z `data.js`), hotové do `preview/photos/`.
+Surové fotky patří do `uploads/` pod názvem `<id>-raw.jpg` (`<id>` = `id` kandidáta z `data.js`), hotové do `photos/`.
 
 **Pro kandidáty 8+** je na to skript `tools/process-photos.py` (Python + Pillow) — ořízne na 4:5, zmenší na 600 × 750 px a uloží jako JPEG:
 
 ```sh
 pip install Pillow
-python3 tools/process-photos.py preview/uploads/dominik-bren-raw.jpg dominik-bren
+python3 tools/process-photos.py uploads/dominik-bren-raw.jpg dominik-bren
 # volitelně: --face-x 0.48 (vodorovný střed obličeje) a --top 0.3 (svislé posazení výřezu)
 ```
 
-Pak už jen doplnit `photo: '/preview/photos/<id>.jpg'` do `data.js`.
+Pak už jen doplnit `photo: '/photos/<id>.jpg'` do `data.js`.
 
 **Pro top7** (ateliér, odebrané pozadí) skript není — vznikaly zvlášť přes [`rembg`](https://github.com/danielgatis/rembg), postup níže:
 
@@ -253,17 +263,17 @@ Pak už jen doplnit `photo: '/preview/photos/<id>.jpg'` do `data.js`.
    - lídryně Hero: **1200 × 1500 px** → `leader-hero.webp` (`leader.photoHero`)
    - lídryně tým: **800 × 1000 px** → `leader-team.webp` (`leader.photoTeam`)
    - top6: **800 × 1000 px** (grid)
-5. Uložení do `preview/photos/<id>.webp` (transparentní WebP — alfa kanál jako PNG, ale ~10× menší; `<img src>` ho bere ve všech moderních prohlížečích, projekt už WebP používá i pro logo)
+5. Uložení do `photos/<id>.webp` (transparentní WebP — alfa kanál jako PNG, ale ~10× menší; `<img src>` ho bere ve všech moderních prohlížečích, projekt už WebP používá i pro logo)
 
 ### Obrázky uvnitř priorit
 
-Drop do `preview/images/` jako JPG/WebP, šířka ≥ 1200 px, poměr 16:9 nebo 3:2. Reference v `data.js` jako `image: '/preview/images/<nazev>.jpg'`.
+Drop do `images/` jako JPG/WebP, šířka ≥ 1200 px, poměr 16:9 nebo 3:2. Reference v `data.js` jako `image: '/images/<nazev>.jpg'`.
 
 ---
 
 ## Import textů priorit z Confluence (Rovo MCP)
 
-**Toto je standardní (primární) způsob aktualizace textů priorit.** Finální texty priorit píší autoři v Confluence; odtud je taháme přes **Atlassian Rovo MCP** konektor a mapujeme do pole `priorities` v `preview/data.js`.
+**Toto je standardní (primární) způsob aktualizace textů priorit.** Finální texty priorit píší autoři v Confluence; odtud je taháme přes **Atlassian Rovo MCP** konektor a mapujeme do pole `priorities` v `data.js`.
 
 ### Zdroj v Confluence
 
@@ -287,7 +297,7 @@ Aby šel obsah namapovat bez ručního dolaďování, drží autoři tuto strukt
 **Co se do webu nepřenáší / vynechává:**
 - řádky **Garant / Autor** a `@zmínky` nahoře (interní metadata)
 - autorské poznámky a otázky vložené do textu (např. „Funguje to takhle?")
-- obrázky vložené jen jako interní `blob:` URL z editoru — nejsou veřejně dostupné; obrázek je potřeba zvlášť exportovat do `preview/images/` a doplnit ručně (viz [Obrázky uvnitř priorit](#obrázky-uvnitř-priorit))
+- obrázky vložené jen jako interní `blob:` URL z editoru — nejsou veřejně dostupné; obrázek je potřeba zvlášť exportovat do `images/` a doplnit ručně (viz [Obrázky uvnitř priorit](#obrázky-uvnitř-priorit))
 
 ### Tučné zvýraznění
 
@@ -298,7 +308,7 @@ Důvod: každou prioritu píše někdo jiný, takže syrové zvýraznění kolí
 Kontrola po importu (nesmí nic vypsat):
 
 ```sh
-grep -n '\*\*' preview/data.js
+grep -n '\*\*' data.js
 ```
 
 > Podpora `**bold**` v `app.jsx` (helper `renderRichText`) zůstává funkční pro případ, že by se rozhodnutí někdy změnilo — jen ji nepoužíváme.
@@ -319,7 +329,7 @@ grep -n '\*\*' preview/data.js
 
 ```sh
 # Ověření, že data.js je validní a má 10 priorit
-node -e 'global.window={}; require("./preview/data.js");
+node -e 'global.window={}; require("./data.js");
   const d=global.window.RS_DATA;
   console.log("priorit:", d.priorities.length);
   d.priorities.forEach(p=>console.log("n"+p.n, p.title));'
@@ -352,7 +362,7 @@ U některých kandidátů je pod základní verzí ještě odstavec **„Prodlou
 ### Kontrola po importu
 
 ```sh
-node -e 'global.window={}; require("./preview/data.js");
+node -e 'global.window={}; require("./data.js");
   const d=global.window.RS_DATA;
   [d.leader, ...d.top6, ...d.rest].forEach(m => console.log(
     String(m.n || 1).padStart(2), m.name,
@@ -393,8 +403,8 @@ Nařízení EU o **transparentnosti a cílení politické reklamy** (Regulation 
 
 ### Proč `ttpa/` v rootu
 
-- **Odkazy jsou stabilní přes celý životní cyklus webu.** Cesta `/ttpa/…` žije v rootu repa, **mimo** teaser (`index.html`) i náhled (`preview/`). [Cutover z teaseru na finální web](#checklist-pro-spuštění-do-produkce) se složky `ttpa/` **vůbec nedotkne** — URL na letácích tak fungují dnes i po přepnutí, **bez jakékoli úpravy**.
-- **Middleware je mimo hru.** `middleware.js` má matcher jen na `/preview` — `/ttpa/*` není heslem chráněné, je veřejně dostupné (tak to má být).
+- **Odkazy jsou stabilní přes celý životní cyklus webu.** Cesta `/ttpa/…` žije v rootu repa, **mimo** stránku samotnou. [Cutover z teaseru na finální web](#cutover-z-teaseru-na-finální-web-hotovo) se složky `ttpa/` **vůbec nedotkl** — URL na letácích fungují dál, **bez jakékoli úpravy**.
+- **Nic to nechrání ani neblokuje.** `/ttpa/*` je veřejně dostupné (tak to má být) a `.vercelignore` se ho netýká.
 
 ### Aktualizace částek / obsahu (stejný název souboru)
 
@@ -417,8 +427,8 @@ Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)**
 
 ### Jak je to zapojené
 
-- **Skript** (`<script defer data-domain="ricanysrdcem.cz" src="https://plausible.io/js/script.js">`) je v `<head>` obou stránek — `index.html` (teaser) i `preview/index.html`. Na `/preview` je navíc inicializační fronta pro `window.plausible`.
-- **Custom events** se posílají z `preview/app.jsx` přes helper `track(name, props)` (no-op, když skript nenaběhne / je blokovaný adblockem). Web je v podstatě jedna stránka a priority/kandidáti se otevírají v draweru/modálu **bez změny URL**, takže bez těchto událostí by se prokliky nezměřily.
+- **Skript** (`<script defer data-domain="ricanysrdcem.cz" src="https://plausible.io/js/script.js">`) je v `<head>` stránky `index.html` — právě jednou. Hned za ním je inicializační fronta pro `window.plausible`, aby se neztratily eventy odpálené dřív, než se skript stáhne.
+- **Custom events** se posílají z `app.jsx` přes helper `track(name, props)` (no-op, když skript nenaběhne / je blokovaný adblockem). Web je v podstatě jedna stránka a priority/kandidáti se otevírají v draweru/modálu **bez změny URL**, takže bez těchto událostí by se prokliky nezměřily.
 
 ### Události, které se posílají
 
@@ -427,7 +437,7 @@ Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)**
 | `Priorita: <název priority>` | otevření karty priority | 10 samostatných událostí, název = titulek priority |
 | `Kandidát otevřen` | otevření medailonku kandidáta | jméno je v props (rozpad jen na Business tarifu) |
 | `Hero CTA: Priority` / `Hero CTA: Tým` | klik na tlačítka v Hero | |
-| `Social: Facebook` / `Social: Instagram` | klik na ikony v navigaci | funguje i po doplnění reálných URL |
+| `Social: Facebook` / `Social: Instagram` | klik na ikony v navigaci | **zatím se neposílá** — ikony jsou do doby, než budou reálné profily, z navigace odstraněné |
 | `Kontakt e-mail` | klik na kontaktní e-mail | |
 
 ### Co je potřeba udělat v účtu Plausible (jednorázově, ruční)
@@ -447,8 +457,8 @@ Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)**
    - `Kandidát otevřen`
    - `Hero CTA: Priority`
    - `Hero CTA: Tým`
-   - `Social: Facebook`
-   - `Social: Instagram`
+   - `Social: Facebook` *(až budou ikony zpět v navigaci)*
+   - `Social: Instagram` *(dtto)*
    - `Kontakt e-mail`
 
 > ⚠️ Názvy priorit v událostech = titulky z `data.js`. **Když prioritu přejmenuješ** (např. při importu z Confluence), uprav i název odpovídajícího goalu v Plausible (nebo přidej nový). Aktuální titulky ověříš příkazem z [kontroly po importu](#kontrola-po-importu).
@@ -472,7 +482,7 @@ Ucelená verze tohoto je v chatu, tady stručná tabulka:
 | `leader.bio` (medailonek lídryně) | 120–170 slov | 180 slov |
 | `top6[].bio` / `rest[].bio` | 80–110 slov | 130 slov |
 
-**Medailonky chodí různě dlouhé, takže se jim modal přizpůsobuje** — podle počtu slov přepne mezi třemi velikostmi (`MemberModal` v `app.jsx` nasadí třídu, zbytek je CSS v `preview/index.html`):
+**Medailonky chodí různě dlouhé, takže se jim modal přizpůsobuje** — podle počtu slov přepne mezi třemi velikostmi (`MemberModal` v `app.jsx` nasadí třídu, zbytek je CSS v `index.html`):
 
 | Délka `bio` | Třída | Šířka modalu | Sloupec s fotkou |
 |---|---|---|---|
@@ -498,69 +508,60 @@ Seřazeno přibližně podle priority:
 - [x] **Reálné texty priorit** z Confluence (Rovo MCP) — všech 10 nahráno
 - [x] **Medailonky** z Confluence — finální verze všech top10 včetně lídryně
 - [x] **Reálné fotky top10** — top7 ze studia (transparentní WebP), č. 8–10 vlastní (JPG)
-- [ ] **Reálné URL Facebooku a Instagramu** v navigaci
-- [ ] **Kontaktní e‑mail** (kontaktní sekce nebo footer)
-- [ ] **OG image + SEO meta** pro náhled na sociálních sítích (1200×630, srdce + nadpis)
-- [ ] **Sitemap.xml + robots.txt** pro produkci
-- [x] **Analytics** — nasazen **Plausible** (cookieless, EU) na teaseru i `/preview`, viz [Analytics (Plausible)](#analytics-plausible)
+- [ ] **Reálné URL Facebooku a Instagramu** v navigaci — **jediná otevřená věc z obsahu**, viz [Ikony sociálních sítí](#ikony-sociálních-sítí-dočasně-vypnuté)
+- [x] **Kontaktní e‑mail** — sekce *Kontakt* odkazuje na `info@ricanysrdcem.cz`
+- [x] **OG image + SEO meta** — `assets/og-image.png` (1200×630) + description / OG / Twitter meta v `index.html`
+- [x] **Sitemap.xml + robots.txt** pro produkci
+- [ ] **Registrace v Google Search Console + Bing Webmaster Tools** (mimo repo, viz [Co zbývá udělat ručně](#co-zbývá-udělat-ručně-mimo-repo))
+- [x] **Analytics** — nasazen **Plausible** (cookieless, EU), viz [Analytics (Plausible)](#analytics-plausible)
 - [x] **Cookie banner** — **není potřeba**, Plausible je cookieless (žádné cookies ani localStorage)
-- [ ] **Lightoptimalizace** — náhrada React+Babel CDN za buildovaný bundle (Vite + esbuild) — sníží time‑to‑interactive z ~1.5s na ~200ms
+- [ ] **Lightoptimalizace** — náhrada Babelu z CDN buildovaným bundlem (Vite + esbuild). React/ReactDOM už jedou v produkčním buildu, největší zbytek je Babel standalone (~3 MB), který v prohlížeči překládá `app.jsx` za běhu.
 - [ ] **Image lazy loading** + `srcset`/`sizes` pro responsivní fotky
 - [ ] **A11y audit** — kontrast, focus states, aria atributy, screen reader test
 - [ ] **Lighthouse score** ≥ 95 ve všech kategoriích
 - [ ] **Error/404 stránka** s odkazem zpět
-- [ ] **Cross‑browser test** — Chrome / Firefox / Safari / mobilní Safari + Chrome
+- [ ] **Cross‑browser test** — Chrome / Firefox / Safari / mobilní Safari + Chrome (automatizovaně proběhl Chromium desktop 1440×900 i mobil 390×844)
+- [ ] Připravit „post‑volební" verzi stránky (poděkování, výsledky, …) — minimálně hrubá šablona, ať není tlak po volbách
 
 ---
 
-## Checklist pro spuštění do produkce
+## Cutover z teaseru na finální web (hotovo)
 
-Až dorazí čas přepnout `ricanysrdcem.cz` z teaseru na finální stránku (cca pár měsíců před volbami):
+Přepnutí `ricanysrdcem.cz` z teaseru na finální stránku proběhlo **4. 8. 2026**. Původní teaser i heslem chráněný náhled `/preview` tím zanikly; obojí zůstává v gitu (commit před cutoverem).
 
-### Příprava obsahu
-- [x] Medailonky top10 — viz [Import medailonků](#import-medailonků-z-confluence)
-- [x] Fotky top10 v `preview/photos/` (od č. 11 se fotky ani medailonky nedělají)
-- [ ] Reálné URL u FB/IG ikon v `app.jsx` (Nav komponenta)
-- [ ] Kontaktní e‑mail doplněn (footer / kontaktní sekce)
-- [ ] Termíny voleb (9.–10. října 2026) zkontrolované všude (Hero kicker, Footer)
-- [ ] Logy stran ve footeru ověřené (oficiální verze)
-- [ ] Korektura jazyka — překlepy, interpunkce, jednotnost stylu
+### Co se udělalo v repu
+- [x] `preview/index.html` → root `index.html` (teaser smazán); Plausible skript je ve výsledku **právě jednou**
+- [x] `preview/app.jsx` → `app.jsx`, `preview/data.js` → `data.js`, `preview/photos/` → `photos/`, `preview/uploads/` → `uploads/`, loga → `assets/`
+- [x] Všechny absolutní cesty přepsané `/preview/…` → `/…` (`app.jsx`, `data.js`, `index.html`)
+- [x] **Ikony FB/IG odstraněné** z navigace — vedly na `#`; CSS i eventy zůstávají připravené
+- [x] Smazaný `middleware.js` (gate na `/preview`)
+- [x] Odstraněné `<meta name="robots" content="noindex, nofollow">`
+- [x] Doplněné `description`, `canonical`, OG a Twitter meta + `assets/og-image.png` (1200×630, generuje `tools/make-og-image.mjs`)
+- [x] `robots.txt` (povoluje indexaci, odkazuje na sitemapu) a `sitemap.xml`
+- [x] `.vercelignore` — README, `tools/` a `uploads/` se na web nenasazují (surové fotky byly dřív schované za heslem, teď by jinak visely veřejně)
+- [x] React + ReactDOM přepnuté z `development` na **produkční** build (`*.production.min.js`) vč. přepočítaných SRI hashů
+- [x] Opravená mobilní navigace — zavřené menu prosvítalo pod hlavičkou (padding/border se nepočítají do `max-height: 0`)
+- [x] `package.json` **ponechán** — Vercel podle něj projekt detekuje, deps žádné nemá
 
-### Technická příprava
-- [ ] Otestováno na **mobilu** (Safari iOS, Chrome Android) i **desktopu** (Chrome, Firefox, Safari)
-- [ ] Drawer scrolluje hladce i při dlouhém obsahu na mobilu
-- [ ] Modal se zavírá ESC i klikem mimo
-- [ ] Všechny obrázky se načítají (žádné 404)
-- [ ] Všechny interní kotvy (`#uvod`, `#priority`, `#tym`) scrollují správně
-- [ ] Lighthouse score ≥ 90 (Performance, Accessibility, Best Practices, SEO)
+### Co se ověřilo (Chromium, desktop 1440×900 + mobil 390×844)
+- [x] Stránka se vykreslí, **žádná chyba v konzoli**, žádný request se statusem 4xx/5xx
+- [x] Všechny obrázky se načtou (10 portrétů, logo, obě loga stran) — žádné `naturalWidth === 0`
+- [x] 10 priorit, karta lídryně, 6 karet, 14 řádků dalších kandidátů, z toho 3 klikací (č. 8–10)
+- [x] Drawer priority se otevře a zavře ESC; modal kandidáta se zavře ESC i klikem mimo
+- [x] Kotvy `#priority`, `#tym`, `#kontakt` scrollují; mobilní menu se po kliku zavře
+- [x] Žádné horizontální přetečení (desktop i mobil)
+- [x] V DOM nezůstal **žádný odkaz na `#`** ani zbytek `.nav-social`
+- [x] Plausible skript právě jednou, `<meta name="robots">` pryč, titulek stránky finální
 
-### SEO + analytics
-- [ ] **Odstranit `<meta name="robots" content="noindex, nofollow">`** v `preview/index.html`
-- [ ] Doplnit `<meta name="description">`, OG/Twitter meta, OG image (1200×630)
-- [ ] Vytvořit `robots.txt` (povolit indexaci)
-- [ ] Vytvořit `sitemap.xml` (root, vč. `#priority`, `#tym`)
-- [ ] Submit do Google Search Console + Bing Webmaster Tools
-- [x] Přidat analytics — **Plausible** nasazen (cookieless, bez cookie banneru); zbývá jen založit účet + přidat goals, viz [Analytics (Plausible)](#analytics-plausible)
+> Test běžel proti lokálnímu `python3 -m http.server` s podstrčenými soubory z CDN (unpkg je ze sandboxu nedostupný). Že SRI hashe sedí, potvrdilo právě to, že se stránka s podstrčenými soubory vykreslila.
 
-### Cutover (samotné přepnutí)
-- [ ] **Git tag** `v-pre-launch` na aktuálním commitu (možnost rollbacku)
-- [ ] Sloučit `preview/index.html` → root `index.html` (původní teaser zazálohovat jako `teaser.html` nebo smazat)
-  - [ ] **Analytics:** ve výsledném `index.html` nechat Plausible skript **právě jednou** — bývalé `preview/index.html` ho už obsahuje (vč. inicializační fronty `window.plausible`), skript ze starého teaseru zmizí s ním. Ověřit, že tam není dvakrát.
-- [ ] Updatovat všechny absolutní cesty v `app.jsx` a `data.js`: `/preview/...` → `/...`
-  - [ ] **Analytics:** `src` Plausible skriptu je absolutní URL na `plausible.io` — přepisu cest se **netýká**, nech ho být. Custom events v `app.jsx` jsou nezávislé na cestě, taky se nemění.
-- [ ] Přesunout `preview/app.jsx`, `preview/data.js`, `preview/photos/`, `preview/images/`, `preview/top09.png`, `preview/kducsl.png` do rootu nebo do `assets/`
-- [ ] **Smazat `middleware.js`** (nebo upravit matcher na nějakou staging cestu, kdyby chtěl klient nadále mít heslem chráněnou „pracovní" verzi)
-- [ ] **Smazat env var `PREVIEW_PASSWORD`** ve Vercelu (a `PREVIEW_SECRET`, pokud byla)
-- [ ] Smazat `package.json` (pokud nebudou potřeba další build dependencies)
-- [ ] Push do `main` (nebo merge `claude/...` → `main`) a redeploy
-- [ ] Otestovat `ricanysrdcem.cz` v inkognito okně (žádné cache, žádné cookie)
-  - [ ] **Analytics:** v *DevTools → Network* ověřit request na `plausible.io/api/event` (status 202) a v Plausible *Realtime* živého návštěvníka; kliknout na prioritu a ověřit, že dorazí event `Priorita: …`.
-
-### Po spuštění
-- [ ] Na sociálních sítích sdílet odkaz a ověřit OG preview (Facebook Sharing Debugger, Twitter Card Validator)
-- [ ] Sledovat Vercel Analytics nebo Plausible pro chyby a anomálie
-- [ ] **Analytics — kontinuita dat:** `data-domain` zůstává `ricanysrdcem.cz`, takže historie navazuje. V „Top Pages" se návštěvy jen přesunou z `/preview` na `/` (cíle/prokliky priorit jsou na cestě nezávislé, neutrpí). Pokud po cutoveru `/preview` úplně zanikne, přestane se do statistik počítat interní testovací provoz — čísla se tím zpřesní.
-- [ ] Připravit „post‑volební" verzi stránky (poděkování, výsledky, …) — minimálně mít hrubou šablonu, ať není tlak po volbách
+### Co zbývá udělat ručně (mimo repo)
+- [ ] **Ve Vercelu smazat env var `PREVIEW_PASSWORD`** (a `PREVIEW_SECRET`, pokud byla) — bez middlewaru už nic nedělají
+- [ ] Otestovat `ricanysrdcem.cz` v inkognito okně; v *DevTools → Network* ověřit request na `plausible.io/api/event` (202) a v Plausible *Realtime* živého návštěvníka
+- [ ] Submit `sitemap.xml` do **Google Search Console** + Bing Webmaster Tools
+- [ ] Ověřit náhled odkazu ve **Facebook Sharing Debugger** / Twitter Card Validator (OG image je `https://ricanysrdcem.cz/assets/og-image.png`)
+- [ ] Případný **git tag** `v-pre-launch` na commitu **před** cutoverem, kdyby byl potřeba rychlý rollback
+- [ ] Korektura jazyka (překlepy, interpunkce) a kontrola oficiálních verzí log stran ve footeru — obsahové, ne technické
 
 ### Co NEŘEŠIT (Vercel to dělá za nás)
 - ✓ HTTPS / SSL certifikát (Let's Encrypt, auto‑renewal)
@@ -573,24 +574,25 @@ Až dorazí čas přepnout `ricanysrdcem.cz` z teaseru na finální stránku (cc
 ## Užitečné příkazy
 
 ```sh
-# Lokální preview (jen statika, bez middleware)
-npx serve .
+# Lokální náhled (statika, stačí cokoli, co servíruje aktuální adresář)
+python3 -m http.server 8765     # → http://127.0.0.1:8765/
+npx serve .                     # alternativa
 
-# Spustit s middlewarem lokálně (vyžaduje Vercel CLI)
-npm i -g vercel
-vercel dev
-# … pak nastav PREVIEW_PASSWORD ve `.env.local`
+# Regenerace OG image (viz hlavička skriptu, potřebuje Playwright + Chromium)
+node tools/make-og-image.mjs
 
 # Manuální deploy přes Vercel CLI (jindy GitHub push stačí)
-vercel --prod
+npx vercel --prod
 ```
+
+> Stránka tahá React a Babel z unpkg.com a fonty z Google Fonts — lokální náhled proto potřebuje internet.
 
 ---
 
 ## Kontext pro budoucí session / dev
 
 - Repo je na GitHubu jako `jgillern/ricanysrdcem`, branch **`claude/implement-ricany-teaser-QFIUX`**
-- Žádný build pipeline, žádné `node_modules` — `package.json` existuje jen aby Vercel zaregistroval middleware
-- Při změně `data.js` / `app.jsx` / `index.html` v `preview/` se automaticky redeployne
+- Žádný build pipeline, žádné `node_modules` — `package.json` je jen marker, aby Vercel projekt detekoval
+- Při změně `data.js` / `app.jsx` / `index.html` v rootu se automaticky redeployne
 - Pillow + python‑docx nainstalované v sandbox prostředí pro foto/Word pipeline (bude se reinstalovat při každé nové session)
 - **Hlavní reference:** tento README + chat historie. Pokud něco nedává smysl, podívat se na commit history (`git log --oneline`) — commit messages popisují, co se dělalo a proč.

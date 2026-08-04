@@ -5,7 +5,7 @@ import os
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 
-# --- značkové konstanty (1:1 s preview/index.html) ---
+# --- značkové konstanty (1:1 s index.html) ---
 RED   = "#d93434"   # --rs-red    (srdce)
 BLUE  = "#2492d6"   # --rs-blue   (slovo 'srdcem')
 INK   = "#142235"   # --rs-ink    (slovo 'Říčany')
