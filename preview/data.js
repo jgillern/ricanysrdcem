@@ -67,7 +67,7 @@ window.RS_DATA = {
       name: 'Sylvie Kubálková',
       role: 'učitelka, majitelka kočičího hotelu',
       photo: '/preview/photos/sylvie-kubalkova.jpg',
-      bio: 'Jsem učitelka a zároveň podnikám jako OSVČ, kde se věnuji péči o domácí mazlíčky. Práce se zvířaty je pro mě nejen povoláním, ale i dlouholetou zálibou a posláním.\n\nV Říčanech dlouhodobě pomáhám opuštěným a zatoulaným zvířatům a ráda bych podpořila vznik funkčního systému pomoci, který bude spolupracovat s městem, dobrovolníky i veřejností.\n\nŘíčany jsou mým domovem a záleží mi na tom, aby byly příjemným místem pro všechny — nejen pro nás, ale i pro zvířata, která jsou nedílnou součástí života ve městě.'
+      bio: 'Jsem učitelka a zároveň podnikám jako OSVČ, kde se věnuji péči o domácí mazlíčky. Práce se zvířaty je pro mě nejen povoláním, ale i dlouholetou zálibou a posláním. V Říčanech dlouhodobě pomáhám opuštěným a zatoulaným zvířatům a ráda bych podpořila vznik funkčního systému pomoci, který bude spolupracovat s městem, dobrovolníky i veřejností. Říčany jsou mým domovem a záleží mi na tom, aby byly příjemným místem pro všechny — nejen pro nás, ale i pro zvířata, která jsou nedílnou součástí života ve městě.'
     },
     {
       id: 'peter-vercimak',    n:  9,
