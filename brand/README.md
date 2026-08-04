@@ -42,6 +42,6 @@ dodány v RGB; běžná tiskárna si je do CMYK převede sama.
 
 ## Jak byly podklady vytvořeny / jak je přegenerovat
 
-Logo je 1:1 odvozené ze zdrojového kódu webu (`preview/index.html`, `preview/app.jsx`) —
+Logo je 1:1 odvozené ze zdrojového kódu webu (`index.html`, `app.jsx`) —
 stejná křivka srdce, stejné barvy, font **PT Serif Bold** („Říčany") a **PT Serif Bold Italic**
 („srdcem"). Generátor je `tools/gen_logo.py` (+ export do PDF/PNG `tools/export_logo.py`).

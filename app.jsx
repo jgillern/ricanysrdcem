@@ -54,7 +54,7 @@ function Nav() {
     <header className={'nav ' + (scrolled ? 'is-scrolled' : '')}>
       <div className="nav-inner">
         <a className="nav-logo" href="#uvod" onClick={(e) => click(e, 'uvod')} aria-label="Říčany srdcem">
-          <img className="nav-logo-img" src="/preview/logo-new.webp" alt="Říčany srdcem" />
+          <img className="nav-logo-img" src="/assets/logo-new.webp" alt="Říčany srdcem" />
         </a>
         <div className="nav-end">
           <nav className={'nav-links ' + (open ? 'open' : '')}>
@@ -62,20 +62,11 @@ function Nav() {
               <a key={i.id} href={'#' + i.id} onClick={(e) => click(e, i.id)}>{i.label}</a>
             ))}
           </nav>
-          <div className="nav-social">
-            <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer" onClick={() => track('Social: Facebook')}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-              </svg>
-            </a>
-            <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer" onClick={() => track('Social: Instagram')}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5"/>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-            </a>
-          </div>
+          {/* Ikony sociálních sítí (FB/IG) jsou dočasně pryč — reálné URL zatím
+              nemáme a odkaz na „#" nikam nevede. Až profily vzniknou, vrátí se
+              sem <div className="nav-social"> s odkazy; CSS `.nav-social`
+              v index.html i Plausible eventy `Social: …` na to čekají
+              připravené (viz README, sekce Plány do budoucna). */}
           <button className="nav-burger" aria-label="Menu" onClick={() => setOpen(o => !o)}>
             <span></span><span></span><span></span>
           </button>
@@ -382,8 +373,8 @@ function Footer() {
     <footer className="footer">
       <div className="footer-partners">
         <span className="footer-partners-label">Společná kandidátka</span>
-        <img className="footer-partner-logo footer-partner-logo--top09" src="/preview/top09.png" alt="TOP 09" />
-        <img className="footer-partner-logo footer-partner-logo--kdu" src="/preview/lidovci_logo_rgb_black-kdu.svg" alt="KDU·ČSL" />
+        <img className="footer-partner-logo footer-partner-logo--top09" src="/assets/top09.png" alt="TOP 09" />
+        <img className="footer-partner-logo footer-partner-logo--kdu" src="/assets/lidovci_logo_rgb_black-kdu.svg" alt="KDU·ČSL" />
         <span className="footer-partners-tail">a&nbsp;nezávislých kandidátů</span>
       </div>
     </footer>
