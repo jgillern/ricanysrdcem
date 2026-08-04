@@ -36,7 +36,7 @@ Volební web pro **komunální volby v Říčanech 9.–10. října 2026**. Kand
 | `ricanysrdcem.cz/preview` | **Plnohodnotný náhled** finálního webu (Hero, Priority, Tým, Footer) | heslo `Volby2026!` (jen heslo, jméno se ignoruje) |
 | `ricanysrdcem.cz/preview/login` | login form pro `/preview` | volné GET, POST validuje heslo |
 
-Obsah na `/preview` je z velké části reálný — priority i seznam kandidátů jsou finální, fotky a medailonky doplňujeme průběžně (viz [Plány do budoucna](#plány-do-budoucna)).
+Obsah na `/preview` je reálný — priority, seznam kandidátů, fotky i medailonky top10 jsou finální. Chybí už jen medailonek lídryně (viz [Plány do budoucna](#plány-do-budoucna)).
 
 ---
 
@@ -320,6 +320,8 @@ Medailonky kandidátů sbírají autoři ve stejném prostoru Confluence jako pr
 
 **Sbíráme je jen za top10** (lídryně + č. 2–10) — na stránce je pro každého z nich jeden nadpis `## <příjmení>`, pod ním text medailonku. Prázdný nadpis = medailonek zatím nedorazil, v `data.js` zůstane `bio: ''`.
 
+U některých kandidátů je pod základní verzí ještě odstavec **„Prodloužená alternativa:"** a pod ním delší varianta téhož textu. **Na web patří ta prodloužená** — tak jsme se dohodli; modal si s ní poradí.
+
 ### Postup
 
 1. `getConfluencePage` na `pageId: 105086977` (`cloudId: top09ricany.atlassian.net`), `contentFormat: "markdown"`.
@@ -330,7 +332,7 @@ Medailonky kandidátů sbírají autoři ve stejném prostoru Confluence jako pr
 6. Hlídat [délku](#limity-a-doporučené-délky-textů) — modal se přizpůsobí do ~130 slov, nad to už je lepší text zkrátit. Co přetéká, **nezkracovat na vlastní pěst** — je to autorský text o konkrétním člověku; nahlásit to a nechat rozhodnutí na kandidátovi.
 7. Commit + push na pracovní branch, bez PR (pokud o něj není výslovně požádáno).
 
-> Existuje ještě starší stránka **„Medailonky“ (ID `102858761`)**, kterou si založil Vojtěch Vytiska, než vznikla ta oficiální. Jsou na ní medailonky Ondřeje Tomáše (č. 4) a Vojtěcha Vytisky (č. 16). Při importu se hodí do ní kouknout — na oficiální stránce může stejný text chybět.
+> Existuje ještě starší stránka **„Medailonky“ (ID `102858761`)**, kterou si založil Vojtěch Vytiska, než vznikla ta oficiální. Jsou na ní starší verze medailonku Ondřeje Tomáše (č. 4) a medailonek Vojtěcha Vytisky (č. 16, mimo top10 → na web nejde). **Zdrojem pravdy je oficiální stránka**, k té starší se vracet netřeba.
 
 ### Kontrola po importu
 
@@ -472,7 +474,7 @@ Cílem je držet řádek v čitelných ~55–75 znacích a nenechat dlouhý text
 Seřazeno přibližně podle priority:
 
 - [x] **Reálné texty priorit** z Confluence (Rovo MCP) — všech 10 nahráno
-- [ ] **Medailonky** z Confluence — hotovo č. 2, 3, 4, 7, 9; **chybí lídryně a č. 5, 6, 8, 10**
+- [ ] **Medailonky** z Confluence — hotovo č. 2–10 (finální verze); **chybí už jen lídryně**
 - [x] **Reálné fotky top10** — top7 ze studia (transparentní WebP), č. 8–10 vlastní (JPG)
 - [ ] **Reálné URL Facebooku a Instagramu** v navigaci
 - [ ] **Kontaktní e‑mail** (kontaktní sekce nebo footer)
@@ -494,7 +496,7 @@ Seřazeno přibližně podle priority:
 Až dorazí čas přepnout `ricanysrdcem.cz` z teaseru na finální stránku (cca pár měsíců před volbami):
 
 ### Příprava obsahu
-- [ ] Doplněné zbývající medailonky top10 (lídryně, č. 5, 6, 8, 10) — viz [Import medailonků](#import-medailonků-z-confluence)
+- [ ] Doplněný medailonek lídryně — viz [Import medailonků](#import-medailonků-z-confluence)
 - [x] Fotky top10 v `preview/photos/` (od č. 11 se fotky ani medailonky nedělají)
 - [ ] Reálné URL u FB/IG ikon v `app.jsx` (Nav komponenta)
 - [ ] Kontaktní e‑mail doplněn (footer / kontaktní sekce)
