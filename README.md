@@ -289,6 +289,31 @@ Aby šel obsah namapovat bez ručního dolaďování, drží autoři tuto strukt
 - autorské poznámky a otázky vložené do textu (např. „Funguje to takhle?")
 - obrázky vložené jen jako interní `blob:` URL z editoru — nejsou veřejně dostupné; obrázek je potřeba zvlášť exportovat do `preview/images/` a doplnit ručně (viz [Obrázky uvnitř priorit](#obrázky-uvnitř-priorit))
 
+### Pravidla pro tučné zvýraznění
+
+Tučné z Confluence **nepřebírej jedna ku jedné.** Každou prioritu píše někdo jiný, takže syrové tučné kolísá od nuly po deset zvýraznění na prioritu a v draweru to pak působí nahodile. Při importu ho srovnej na tato pravidla:
+
+1. **Tučně jen název konkrétního opatření, nástroje nebo pravidla** — jmenná fráze do ~6 slov (`centrální databáze projektů`, `program adopce předzahrádek`, `Plán udržitelné městské mobility`). Ne slovesná fráze („zapojíme hned na samém začátku"), ne celá věta, ne obecný princip.
+2. **Nejvýš jedno tučné na odstavec.** Když jich autor nabízí víc, vyhrává to nejkonkrétnější; u pojmenovaných programů („Překvapte Říčany 2.0", Datová výzva Říčany) vyhrává název.
+3. **V úvodním odstavci** (`heading: null`) se netučňuje — je to shrnutí priority, ne výčet opatření.
+4. **Cíl 3–6 tučných na prioritu.** Sekce, která žádné konkrétní opatření nepojmenovává, klidně zůstane bez tučného; naopak priorita bez jediného zvýraznění vypadá vedle ostatních plochá — tam nějaké doplň.
+
+Kontrola po importu:
+
+```sh
+node -e 'global.window={}; require("./preview/data.js");
+  global.window.RS_DATA.priorities.forEach(p => {
+    let n = 0;
+    p.sections.forEach((s, si) => s.paragraphs.forEach(x => {
+      if (typeof x !== "string") return;
+      const m = x.match(/\*\*[^*]+\*\*/g) || []; n += m.length;
+      if (m.length > 1) console.log("p" + p.n + ": víc tučných v jednom odstavci");
+      if (m.length && si === 0 && !s.heading) console.log("p" + p.n + ": tučné v úvodním odstavci");
+    }));
+    console.log("p" + p.n + " → " + n + (n < 3 || n > 6 ? "  ← mimo rozsah 3–6" : ""));
+  });'
+```
+
 ### Postup (krok za krokem)
 
 1. **Ověř dostupnost Rovo MCP** — musí být k dispozici nástroje `mcp__Atlassian_Rovo__*` (Confluence). Pokud nejsou, dál nepokračuj naslepo.
@@ -296,9 +321,10 @@ Aby šel obsah namapovat bez ručního dolaďování, drží autoři tuto strukt
 3. **Stáhni obsah** každé podstránky přes `getConfluencePage` s `contentFormat: "markdown"` a urči, které jsou vyplněné.
 4. **Namapuj** obsah na strukturu z [Datového modelu](#datový-model): `title`, `lead`, `sections[].{heading, paragraphs}`. Pořadí `n` podle `childPosition`.
 5. **Typografie:** české uvozovky `„…"`, em‑dash `—`, nezalomitelná mezera (` `, U+00A0) po jednopísmenných předložkách/spojkách (`k s v z o u a i`). Nezalomitelnou mezeru aplikuj **jen v upravovaných prioritách**, ať nevzniká šum v nezměněných částech souboru.
-6. **Zachovej všech 10 položek** v `priorities` — měň jen vyplněné, prázdné nech jako placeholder.
-7. **Commit + push** na pracovní branch (`git push -u origin <branch>`), **bez** otevírání PR, pokud o něj není výslovně požádáno. Do commit message stručně, které priority se nahrály.
-8. **Reportuj** zpět: které priority naplněné, které zůstaly placeholder, a cokoliv, co v Confluence chybělo nebo nešlo jednoznačně namapovat (chybějící anotace, 2větné `lead`, garbled text, vynechané obrázky/poznámky, drobné opravené překlepy).
+6. **Srovnej tučné** podle [pravidel výše](#pravidla-pro-tučné-zvýraznění) — syrové tučné z Confluence se nepřebírá.
+7. **Zachovej všech 10 položek** v `priorities` — měň jen vyplněné, prázdné nech jako placeholder.
+8. **Commit + push** na pracovní branch (`git push -u origin <branch>`), **bez** otevírání PR, pokud o něj není výslovně požádáno. Do commit message stručně, které priority se nahrály.
+9. **Reportuj** zpět: které priority naplněné, které zůstaly placeholder, a cokoliv, co v Confluence chybělo nebo nešlo jednoznačně namapovat (chybějící anotace, 2větné `lead`, garbled text, vynechané obrázky/poznámky, drobné opravené překlepy).
 
 ### Kontrola po importu
 
