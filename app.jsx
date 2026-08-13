@@ -153,6 +153,9 @@ function PriorityCard({ p, onOpen }) {
 }
 
 function PriorityDrawer({ priority, onClose }) {
+  const drawerRef = useRef(null);
+  const backdropRef = useRef(null);
+
   useEffect(() => {
     if (!priority) return;
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -163,9 +166,99 @@ function PriorityDrawer({ priority, onClose }) {
       document.body.style.overflow = '';
     };
   }, [priority, onClose]);
+
+  // Zavření swipem doprava. Panel drží prst, po puštění se buď dozavře, nebo
+  // se vrátí zpátky. Listenery jsou navěšené ručně (ne přes onTouchMove),
+  // protože React registruje touch handlery jako pasivní a `preventDefault`
+  // by v nich nefungoval — svislý scroll uvnitř panelu by nešel zastavit.
+  useEffect(() => {
+    const el = drawerRef.current;
+    if (!el || !priority) return;
+
+    let startX = 0, startY = 0, startT = 0, dx = 0;
+    let axis = null;      // 'x' = táhneme panelem, 'y' = necháme scrollovat
+    let tracking = false;
+
+    const paint = (px) => {
+      el.style.transition = 'none';
+      el.style.transform = `translateX(${px}px)`;
+      const bd = backdropRef.current;
+      if (bd) {
+        // Podklad má vlastní .3s tranzici — po dobu gesta musí pryč, jinak by
+        // ztmavení kulhalo za prstem.
+        bd.style.transition = 'none';
+        const t = Math.min(1, px / (el.offsetWidth || 1));
+        bd.style.background = `rgba(20, 34, 53, ${(0.45 * (1 - t)).toFixed(3)})`;
+      }
+    };
+
+    // Vrátí řízení CSS tranzici: nejdřív obnovit `transition`, pak si vynutit
+    // přepočet stylu (aby se posunutá pozice brala jako výchozí) a teprve pak
+    // pustit inline transform — jinak by panel skočil bez animace.
+    const release = () => {
+      el.style.transition = '';
+      const bd = backdropRef.current;
+      if (bd) bd.style.transition = '';
+      void el.offsetWidth;
+      el.style.transform = '';
+      if (bd) bd.style.background = '';
+    };
+
+    const onStart = (e) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      startT = Date.now();
+      dx = 0; axis = null; tracking = true;
+    };
+
+    const onMove = (e) => {
+      if (!tracking) return;
+      const ddx = e.touches[0].clientX - startX;
+      const ddy = e.touches[0].clientY - startY;
+      if (!axis) {
+        // Směr se určí až po pár pixelech, ať krátké ťuknutí nic nerozjede.
+        if (Math.abs(ddx) < 8 && Math.abs(ddy) < 8) return;
+        axis = Math.abs(ddx) > Math.abs(ddy) * 1.3 ? 'x' : 'y';
+        if (axis === 'y') { tracking = false; return; }
+        // Žádný `return` — panel se má rozjet hned v tomhle gestu, ne až
+        // při dalším touchmove.
+      }
+      dx = Math.max(0, ddx);   // doleva panel netáhneme, tam už žádný není
+      if (e.cancelable) e.preventDefault();
+      paint(dx);
+    };
+
+    const onEnd = () => {
+      if (!tracking || axis !== 'x') { tracking = false; return; }
+      tracking = false;
+      const width = el.offsetWidth || 1;
+      const speed = dx / Math.max(1, Date.now() - startT);   // px/ms
+      release();
+      // Zavře se po třetině šířky, nebo po rychlém švihnutí i z kratší dráhy.
+      if (dx > width * 0.33 || speed > 0.5) onClose();
+    };
+
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('touchmove', onMove, { passive: false });
+    el.addEventListener('touchend', onEnd);
+    el.addEventListener('touchcancel', onEnd);
+    return () => {
+      el.removeEventListener('touchstart', onStart);
+      el.removeEventListener('touchmove', onMove);
+      el.removeEventListener('touchend', onEnd);
+      el.removeEventListener('touchcancel', onEnd);
+      // Panel je sdílený mezi otevřeními — nesmí si nést posun z minula.
+      el.style.transition = '';
+      el.style.transform = '';
+      const bd = backdropRef.current;
+      if (bd) { bd.style.transition = ''; bd.style.background = ''; }
+    };
+  }, [priority, onClose]);
+
   return (
-    <div className={'drawer-backdrop ' + (priority ? 'is-open' : '')} onClick={onClose} aria-hidden={!priority}>
-      <aside className={'drawer ' + (priority ? 'is-open' : '')} onClick={(e) => e.stopPropagation()} role="dialog">
+    <div ref={backdropRef} className={'drawer-backdrop ' + (priority ? 'is-open' : '')} onClick={onClose} aria-hidden={!priority}>
+      <aside ref={drawerRef} className={'drawer ' + (priority ? 'is-open' : '')} onClick={(e) => e.stopPropagation()} role="dialog">
         {priority && (
           <>
             <div className="drawer-head">

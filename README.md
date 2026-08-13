@@ -96,7 +96,7 @@ Render flow:
 | `Nav` | Sticky horní lišta — logo, kotvy na sekce, hamburger menu na mobilu (ikony FB/IG zatím vypnuté, viz níže) |
 | `Hero` | „Říčany srdcem", úvodní slovo lídryně, fotka, dvě CTA (priority / tým) |
 | `Priorities` + `PriorityCard` | Mřížka 10 karet (číslo, titulek, anotace) |
-| `PriorityDrawer` | Pravostranný drawer s detailem priority (head fixed, body scrolluje) |
+| `PriorityDrawer` | Pravostranný drawer s detailem priority (head fixed, body scrolluje); na dotykových zařízeních jde zavřít **swipem doprava**, viz níže |
 | `Team` + `TeamCardLeader` + `TeamCard` + `TeamRow` | Velká karta lídryně, grid kandidátů 2–7, řádkový list 8–21 (řádky 8–10 jsou klikací — mají fotku/medailonek) |
 | `MemberModal` | Centrovaný modal s portrétem + medailonkem |
 | `Footer` | „Společná kandidátka [TOP 09] [KDU·ČSL] a nezávislých kandidátů" |
@@ -115,6 +115,19 @@ Render flow:
 | `≤ 480px` | Menší kolečka fotek (150 px) a písmo v kartách kandidátů — mřížka **zůstává dvousloupcová** až do 320 px |
 
 Ověřeno bez horizontálního přetečení v rozsahu 320–1280 px. Modal i drawer používají `dvh` (na `vh` fallback), aby je neořízla vysouvací lišta mobilního prohlížeče.
+
+### Zavření draweru swipem
+
+Drawer priority jde na dotyku zavřít **tažením doprava** — panel drží prst a po puštění se buď dozavře, nebo pruží zpět. Logika je v `PriorityDrawer` (`app.jsx`), pár věcí je na ní ošemetných:
+
+- **Listenery se věší ručně** (`el.addEventListener`), ne přes `onTouchMove`. React registruje touch handlery jako **pasivní**, takže by v nich `preventDefault()` nefungoval a svislý scroll uvnitř panelu by při vodorovném gestu ujížděl.
+- **Osa gesta se určí až po 8 px** a poměrem `|dx| > |dy| × 1.3`. Dokud je gesto svislé, skript se nechá být a panel normálně scrolluje.
+- **`touch-action: pan-y pinch-zoom`** na `.drawer` (CSS) nechává prohlížeči svislý scroll a zoom, vodorovné gesto si bere skript.
+- **Prahy pro zavření:** dráha > ⅓ šířky panelu, **nebo** rychlost > 0,5 px/ms (švihnutí z kratší dráhy).
+- Po puštění se řízení vrací CSS tranzici v pořadí `transition` → vynucený reflow (`void el.offsetWidth`) → smazání inline `transform`. Bez toho reflow by panel skočil bez animace.
+- Podklad má vlastní `.3s` tranzici, po dobu tažení se vypíná, jinak by ztmavení kulhalo za prstem.
+
+Ověřeno v Chromiu s emulací dotyku: dlouhý swipe zavře, krátký pomalý pruží zpět, svislý tah scrolluje (panel zůstává), tah doleva nedělá nic, po znovuotevření si panel nenese posun z minula, křížek i ESC fungují dál.
 
 **Knihovny z CDN** se načítají s `integrity` (SRI) — React i ReactDOM v **produkčním** buildu (`*.production.min.js`), Babel standalone pro runtime transformaci JSX. Při změně verze je potřeba spočítat nový SRI hash, jinak prohlížeč skript odmítne:
 

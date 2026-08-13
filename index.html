@@ -308,6 +308,9 @@
     transition: transform .35s cubic-bezier(.4, 0, .2, 1);
     display: flex; flex-direction: column;
     overflow: hidden;
+    /* Svislý scroll a pinch-zoom nechává prohlížeči, vodorovné gesto si bere
+       skript (zavření swipem doprava, viz PriorityDrawer v app.jsx). */
+    touch-action: pan-y pinch-zoom;
   }
   .drawer.is-open { transform: translateX(0); }
   .drawer-head {
