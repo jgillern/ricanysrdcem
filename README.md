@@ -96,9 +96,9 @@ Render flow:
 | `Nav` | Sticky horní lišta — logo, kotvy na sekce, hamburger menu na mobilu (ikony FB/IG zatím vypnuté, viz níže) |
 | `Hero` | „Říčany srdcem", úvodní slovo lídryně, fotka, dvě CTA (priority / tým) |
 | `Priorities` + `PriorityCard` | Mřížka 10 karet (číslo, titulek, anotace) |
-| `PriorityDrawer` | Pravostranný drawer s detailem priority (head fixed, body scrolluje); na dotykových zařízeních jde zavřít **swipem doprava**, viz níže |
+| `PriorityDrawer` | Pravostranný drawer s detailem priority (head fixed, body scrolluje); na dotyku jde zavřít **swipem doprava**, viz níže |
 | `Team` + `TeamCardLeader` + `TeamCard` + `TeamRow` | Velká karta lídryně, grid kandidátů 2–7, řádkový list 8–21 (řádky 8–10 jsou klikací — mají fotku/medailonek) |
-| `MemberModal` | Centrovaný modal s portrétem + medailonkem |
+| `MemberModal` | Centrovaný modal s portrétem + medailonkem; na dotyku jde zavřít **tažením na koncích scrollu**, viz níže |
 | `Footer` | „Společná kandidátka [TOP 09] [KDU·ČSL] a nezávislých kandidátů" |
 
 **Helper `renderRichText`** rozparsuje markdown‑style `**bold**` v textu odstavců na `<strong>`. V obsahu ho ale **nepoužíváme** — viz [Tučné zvýraznění](#tučné-zvýraznění).
@@ -116,18 +116,28 @@ Render flow:
 
 Ověřeno bez horizontálního přetečení v rozsahu 320–1280 px. Modal i drawer používají `dvh` (na `vh` fallback), aby je neořízla vysouvací lišta mobilního prohlížeče.
 
-### Zavření draweru swipem
+### Zavření tažením (drawer i modal)
 
-Drawer priority jde na dotyku zavřít **tažením doprava** — panel drží prst a po puštění se buď dozavře, nebo pruží zpět. Logika je v `PriorityDrawer` (`app.jsx`), pár věcí je na ní ošemetných:
+Obojí jde na dotyku zavřít gestem — prvek drží prst a po puštění se buď dozavře, nebo pruží zpět. Společnou mechaniku (osa, směr, prahy) řeší hook **`useDragToDismiss`** v `app.jsx`, vzhled a konec gesta si každá komponenta říká sama v `paint` / `release`.
 
-- **Listenery se věší ručně** (`el.addEventListener`), ne přes `onTouchMove`. React registruje touch handlery jako **pasivní**, takže by v nich `preventDefault()` nefungoval a svislý scroll uvnitř panelu by při vodorovném gestu ujížděl.
-- **Osa gesta se určí až po 8 px** a poměrem `|dx| > |dy| × 1.3`. Dokud je gesto svislé, skript se nechá být a panel normálně scrolluje.
-- **`touch-action: pan-y pinch-zoom`** na `.drawer` (CSS) nechává prohlížeči svislý scroll a zoom, vodorovné gesto si bere skript.
-- **Prahy pro zavření:** dráha > ⅓ šířky panelu, **nebo** rychlost > 0,5 px/ms (švihnutí z kratší dráhy).
-- Po puštění se řízení vrací CSS tranzici v pořadí `transition` → vynucený reflow (`void el.offsetWidth`) → smazání inline `transform`. Bez toho reflow by panel skočil bez animace.
-- Podklad má vlastní `.3s` tranzici, po dobu tažení se vypíná, jinak by ztmavení kulhalo za prstem.
+| Prvek | Gesto | Kdy zabírá |
+|---|---|---|
+| `PriorityDrawer` | tažení **doprava** | vždy (panel se svisle scrolluje, vodorovné gesto je volné) |
+| `MemberModal` | tažení **dolů i nahoru** | **jen na koncích scrollu** — nahoře dolů, dole nahoru |
 
-Ověřeno v Chromiu s emulací dotyku: dlouhý swipe zavře, krátký pomalý pruží zpět, svislý tah scrolluje (panel zůstává), tah doleva nedělá nic, po znovuotevření si panel nenese posun z minula, křížek i ESC fungují dál.
+Modal se roluje (medailonek lídryně má na mobilu 1234 px obsahu v 796px okně), takže gesto nesmí soupeřit se scrollem. Proto zabírá jen na okrajích — využívá přesně ten „přetah", který by jinak jen gumově odskočil. Dočtený medailonek se tak zavře tahem nahoru, bez nutnosti vyjet zpátky na začátek. Krátký medailonek, který se neroluje, zavírají oba směry.
+
+Pár věcí je na tom ošemetných:
+
+- **Listenery se věší ručně** (`el.addEventListener` s `{ passive: false }`), ne přes `onTouchMove`. React registruje touch handlery jako **pasivní**, takže by v nich `preventDefault()` nefungoval a obsah by při gestu zároveň scrolloval.
+- **Callbacky drží ref**, ne závislosti efektu — jinak by se listenery převěšovaly při každém renderu.
+- **Směr se určí až po 8 px** a poměrem `|podél| > |napříč| × 1.3`. Dokud gesto míří jinam (nebo směrem, který prvek zrovna nepřijímá), skript se nechá být a obsah normálně scrolluje.
+- **`touch-action: pan-y pinch-zoom`** na `.drawer` i `.modal` (CSS) nechává prohlížeči svislý scroll a zoom.
+- **Prahy pro zavření:** drawer > ⅓ šířky panelu, modal > 110 px; u obou navíc rychlost > 0,5 px/ms (švihnutí z kratší dráhy).
+- Drawer má odchozí stav v CSS (`transform: translateX(100%)`), takže po puštění stačí vrátit řízení tranzici — v pořadí `transition` → vynucený reflow (`void el.offsetWidth`) → smazání inline `transform`. Bez toho reflow by prvek skočil bez animace. **Modal odchozí stav nemá** (po zavření mizí z DOM), takže si cestu za okraj odanimuje sám a `onClose` volá se zpožděním 200 ms.
+- Podklad má vlastní tranzici, po dobu tažení se vypíná, jinak by ztmavení kulhalo za prstem.
+
+Ověřeno v Chromiu s emulací dotyku — drawer: dlouhý swipe zavře, krátký pomalý pruží zpět, svislý tah scrolluje, tah doleva nedělá nic, po znovuotevření si panel nenese posun z minula. Modal: nahoře zavírá tah dolů, dole tah nahoru, uprostřed textu ani jeden směr nezavírá, krátký tah pruží zpět, u nerolujícího medailonku fungují oba směry. Křížek, klik mimo i ESC fungují u obojího dál.
 
 **Knihovny z CDN** se načítají s `integrity` (SRI) — React i ReactDOM v **produkčním** buildu (`*.production.min.js`), Babel standalone pro runtime transformaci JSX. Při změně verze je potřeba spočítat nový SRI hash, jinak prohlížeč skript odmítne:
 
