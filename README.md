@@ -120,10 +120,15 @@ Ověřeno bez horizontálního přetečení v rozsahu 320–1280 px. Modal i dra
 
 Obojí jde na dotyku zavřít gestem — prvek drží prst a po puštění se buď dozavře, nebo pruží zpět. Společnou mechaniku (osa, směr, prahy) řeší hook **`useDragToDismiss`** v `app.jsx`, vzhled a konec gesta si každá komponenta říká sama v `paint` / `release`.
 
-| Prvek | Gesto | Kdy zabírá |
-|---|---|---|
-| `PriorityDrawer` | tažení **doprava** | vždy (panel se svisle scrolluje, vodorovné gesto je volné) |
-| `MemberModal` | tažení **dolů i nahoru** | **jen na koncích scrollu** — nahoře dolů, dole nahoru |
+| Prvek | Gesto | Co dělá | Kdy zabírá |
+|---|---|---|---|
+| `PriorityDrawer` | tažení **doprava** | zavře | vždy (panel se svisle scrolluje, vodorovné gesto je volné) |
+| `MemberModal` | tažení **dolů i nahoru** | zavře | **jen na koncích scrollu** — nahoře dolů, dole nahoru |
+| `MemberModal` | tažení **do stran** | **listuje mezi kandidáty** (doleva další, doprava předchozí) | vždy — vodorovně se nic neroluje |
+
+**Listování v modalu** jde po pořadí `MODAL_MEMBERS` (`app.jsx`): lídryně, karty 2–7 a ti z dalších kandidátů, kdo mají medailonek — v praxi **top10**. Na koncích seznamu klade tažení odpor a vrátí se zpět. Totéž obsluhují **šipky ←/→** na klávesnici (desktop swipe nemá). Přepnutí nechává stejný DOM prvek, takže se ručně resetuje `scrollTop` — jinak by nový medailonek začínal v místě, kam byl odrolovaný ten předchozí.
+
+Vodorovné gesto je schválně **listování, ne zavírání**: zavírat vším směrem by znamenalo, že palcový oblouk na začátku scrollu (prvních ~10 px bývá vodorovných) odveze modal pryč, místo aby scrolloval.
 
 Modal se roluje (medailonek lídryně má na mobilu 1234 px obsahu v 796px okně), takže gesto nesmí soupeřit se scrollem. Proto zabírá jen na okrajích — využívá přesně ten „přetah", který by jinak jen gumově odskočil. Dočtený medailonek se tak zavře tahem nahoru, bez nutnosti vyjet zpátky na začátek. Krátký medailonek, který se neroluje, zavírají oba směry.
 
@@ -133,11 +138,14 @@ Pár věcí je na tom ošemetných:
 - **Callbacky drží ref**, ne závislosti efektu — jinak by se listenery převěšovaly při každém renderu.
 - **Směr se určí až po 8 px** a poměrem `|podél| > |napříč| × 1.3`. Dokud gesto míří jinam (nebo směrem, který prvek zrovna nepřijímá), skript se nechá být a obsah normálně scrolluje.
 - **`touch-action: pan-y pinch-zoom`** na `.drawer` i `.modal` (CSS) nechává prohlížeči svislý scroll a zoom.
-- **Prahy pro zavření:** drawer > ⅓ šířky panelu, modal > 110 px; u obou navíc rychlost > 0,5 px/ms (švihnutí z kratší dráhy).
+- **Prahy:** zavření — drawer > ⅓ šířky panelu, modal > 110 px; přepnutí kandidáta > 80 px. U všech navíc rychlost > 0,5 px/ms (švihnutí z kratší dráhy).
+- Modal má hook **navěšený dvakrát** (osa `y` = zavření, osa `x` = listování). Nekolidují spolu: každý si sáhne po gestu jen když jeho osa převáží tu druhou o 30 %, což může platit vždy nanejvýš pro jednu z nich. Šikmé gesto nespustí ani jedno a zůstane prohlížeči.
 - Drawer má odchozí stav v CSS (`transform: translateX(100%)`), takže po puštění stačí vrátit řízení tranzici — v pořadí `transition` → vynucený reflow (`void el.offsetWidth`) → smazání inline `transform`. Bez toho reflow by prvek skočil bez animace. **Modal odchozí stav nemá** (po zavření mizí z DOM), takže si cestu za okraj odanimuje sám a `onClose` volá se zpožděním 200 ms.
 - Podklad má vlastní tranzici, po dobu tažení se vypíná, jinak by ztmavení kulhalo za prstem.
 
-Ověřeno v Chromiu s emulací dotyku — drawer: dlouhý swipe zavře, krátký pomalý pruží zpět, svislý tah scrolluje, tah doleva nedělá nic, po znovuotevření si panel nenese posun z minula. Modal: nahoře zavírá tah dolů, dole tah nahoru, uprostřed textu ani jeden směr nezavírá, krátký tah pruží zpět, u nerolujícího medailonku fungují oba směry. Křížek, klik mimo i ESC fungují u obojího dál.
+Ověřeno v Chromiu s emulací dotyku — drawer: dlouhý swipe zavře, krátký pomalý pruží zpět, svislý tah scrolluje, tah doleva nedělá nic, po znovuotevření si panel nenese posun z minula. Modal (zavírání): nahoře zavírá tah dolů, dole tah nahoru, uprostřed textu ani jeden směr nezavírá, krátký tah pruží zpět, u nerolujícího medailonku fungují oba směry. Modal (listování): tažením doleva projde 01 → 10 a na konci se zastaví, doprava zpátky na 01, šipky ←/→ dělají totéž, nový medailonek začíná odshora, šikmé gesto nespustí nic. Křížek, klik mimo i ESC fungují u obojího dál.
+
+> **Zatím bez vizuálního vodítka.** Že se dá listovat, nic na stránce neukazuje — na dotyku to čtenář objeví jen náhodou. Kdyby to mělo být vidět, nabízí se decentní „02 / 10" se šipkami pod medailonkem (šipky by rovnou obsloužily i myš). Je to ale zásah do vzhledu modalu, proto to tam zatím není.
 
 **Knihovny z CDN** se načítají s `integrity` (SRI) — React i ReactDOM v **produkčním** buildu (`*.production.min.js`), Babel standalone pro runtime transformaci JSX. Při změně verze je potřeba spočítat nový SRI hash, jinak prohlížeč skript odmítne:
 
