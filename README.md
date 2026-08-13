@@ -103,6 +103,19 @@ Render flow:
 
 **Helper `renderRichText`** rozparsuje markdown‑style `**bold**` v textu odstavců na `<strong>`. V obsahu ho ale **nepoužíváme** — viz [Tučné zvýraznění](#tučné-zvýraznění).
 
+**Helper `scrollToId`** obsluhuje všechny odskoky na kotvy (navigace i CTA v Heru). Offset se počítá z **reálné výšky** `.nav` (`offsetHeight + 12`), ne z konstanty — hlavička je na mobilu a na desktopu různě vysoká. Respektuje i `prefers-reduced-motion`.
+
+### Responzivita — kde jsou zlomy
+
+| Zlom | Co se mění |
+|---|---|
+| `≤ 860px` | Hamburger menu místo odkazů, logo v hlavičce 116 → 56 px; Hero se zalomí pod sebe a **fotka lídryně se řadí mezi titulek a perex** (`.hero-text { display: contents }` + `order`); karta lídryně a mřížka kandidátů na 2 sloupce |
+| `≤ 720px` | Svislé mezery sekcí 96 → 56 px, Hero padding 56/64 → 32/40 px; priority přepnou na `auto-fit`/`minmax(260px, 1fr)` (podle šířky 1–2 sloupce) |
+| `≤ 640px` | Řádky „Dalších kandidátů" se zalomí do dvou pater (jméno / funkce), tečkovaný vodič zmizí |
+| `≤ 480px` | Menší kolečka fotek (150 px) a písmo v kartách kandidátů — mřížka **zůstává dvousloupcová** až do 320 px |
+
+Ověřeno bez horizontálního přetečení v rozsahu 320–1280 px. Modal i drawer používají `dvh` (na `vh` fallback), aby je neořízla vysouvací lišta mobilního prohlížeče.
+
 **Knihovny z CDN** se načítají s `integrity` (SRI) — React i ReactDOM v **produkčním** buildu (`*.production.min.js`), Babel standalone pro runtime transformaci JSX. Při změně verze je potřeba spočítat nový SRI hash, jinak prohlížeč skript odmítne:
 
 ```sh
@@ -516,8 +529,9 @@ Seřazeno přibližně podle priority:
 - [x] **Analytics** — nasazen **Plausible** (cookieless, EU), viz [Analytics (Plausible)](#analytics-plausible)
 - [x] **Cookie banner** — **není potřeba**, Plausible je cookieless (žádné cookies ani localStorage)
 - [ ] **Lightoptimalizace** — náhrada Babelu z CDN buildovaným bundlem (Vite + esbuild). React/ReactDOM už jedou v produkčním buildu, největší zbytek je Babel standalone (~3 MB), který v prohlížeči překládá `app.jsx` za běhu.
-- [ ] **Image lazy loading** + `srcset`/`sizes` pro responsivní fotky
-- [ ] **A11y audit** — kontrast, focus states, aria atributy, screen reader test
+- [x] **Image lazy loading** — `loading="lazy"` na fotkách týmu a obrázcích v draweru; Hero fotka má `fetchpriority="high"` a `width`/`height` (rezervuje místo, žádný layout shift)
+- [ ] **`srcset`/`sizes`** pro responsivní fotky — na mobilu se pořád stahuje plná velikost (kolečko 150 px dostane 800px zdroj)
+- [ ] **A11y audit** — kontrast, focus states, aria atributy, screen reader test (hotové dílčí věci: dotykový cíl hamburgeru 44×44, `prefers-reduced-motion`)
 - [ ] **Lighthouse score** ≥ 95 ve všech kategoriích
 - [ ] **Error/404 stránka** s odkazem zpět
 - [ ] **Cross‑browser test** — Chrome / Firefox / Safari / mobilní Safari + Chrome (automatizovaně proběhl Chromium desktop 1440×900 i mobil 390×844)

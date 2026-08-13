@@ -9,6 +9,20 @@ function track(name, props) {
   }
 }
 
+// Odskok na kotvu. Offset se měří z reálné výšky hlavičky — ta je jinak vysoká
+// na mobilu a na desktopu, natvrdo zapsané číslo by část sekce schovalo pod ni.
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const nav = document.querySelector('.nav');
+  const offset = (nav ? nav.offsetHeight : 80) + 12;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({
+    top: el.getBoundingClientRect().top + window.scrollY - offset,
+    behavior: reduce ? 'auto' : 'smooth'
+  });
+}
+
 function renderRichText(text) {
   if (!text.includes('**')) return text;
   return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
@@ -46,8 +60,7 @@ function Nav() {
   ];
   const click = (e, id) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+    scrollToId(id);
     setOpen(false);
   };
   return (
@@ -80,40 +93,45 @@ function Hero() {
   return (
     <section id="uvod" className="hero">
       <div className="hero-grid">
+        {/* `.hero-text` je na desktopu normální sloupec, na mobilu se z něj přes
+            `display: contents` stane průhledný obal — hlavička a tělo se pak
+            řadí jako samostatné buňky gridu a fotka se vejde mezi ně (CSS). */}
         <div className="hero-text">
-          <div className="kicker">
-            <span className="kicker-line"></span>
-            <span>Komunální volby · 9.–10. října 2026</span>
+          <div className="hero-head">
+            <div className="kicker">
+              <span className="kicker-line"></span>
+              <span>Komunální volby · 9.–10. října 2026</span>
+            </div>
+            <h1 className="hero-title">Říčany<br /><em>srdcem</em></h1>
           </div>
-          <h1 className="hero-title">Říčany<br /><em>srdcem</em></h1>
-          <p className="hero-lead">{D.leader.intro}</p>
-          <div className="hero-sign">
-            <div className="sig-name">{D.leader.name}</div>
-            <div className="sig-role">{D.leader.role}</div>
-          </div>
-          <div className="hero-ctas">
-            <a href="#priority" className="hero-cta" onClick={(e) => {
-              e.preventDefault();
-              track('Hero CTA: Priority');
-              const el = document.getElementById('priority');
-              if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-            }}>
-              Naše priority
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-            </a>
-            <a href="#tym" className="hero-cta hero-cta-secondary" onClick={(e) => {
-              e.preventDefault();
-              track('Hero CTA: Tým');
-              const el = document.getElementById('tym');
-              if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-            }}>
-              Náš tým
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-            </a>
+          <div className="hero-body">
+            <p className="hero-lead">{D.leader.intro}</p>
+            <div className="hero-sign">
+              <div className="sig-name">{D.leader.name}</div>
+              <div className="sig-role">{D.leader.role}</div>
+            </div>
+            <div className="hero-ctas">
+              <a href="#priority" className="hero-cta" onClick={(e) => {
+                e.preventDefault();
+                track('Hero CTA: Priority');
+                scrollToId('priority');
+              }}>
+                Naše priority
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+              </a>
+              <a href="#tym" className="hero-cta hero-cta-secondary" onClick={(e) => {
+                e.preventDefault();
+                track('Hero CTA: Tým');
+                scrollToId('tym');
+              }}>
+                Náš tým
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+              </a>
+            </div>
           </div>
         </div>
         <div className="hero-photo">
-          <img src={D.leader.photoHero || D.leader.photo} alt={D.leader.name} />
+          <img src={D.leader.photoHero || D.leader.photo} alt={D.leader.name} width="1024" height="1536" fetchpriority="high" />
         </div>
       </div>
     </section>
@@ -169,7 +187,7 @@ function PriorityDrawer({ priority, onClose }) {
                     if (item && item.image) {
                       return (
                         <figure key={j} className="drawer-figure">
-                          <img src={item.image} alt={item.alt || ''} />
+                          <img src={item.image} alt={item.alt || ''} loading="lazy" decoding="async" />
                           {item.caption && <figcaption>{item.caption}</figcaption>}
                         </figure>
                       );
@@ -262,7 +280,7 @@ function TeamCardLeader({ leader, onOpen }) {
   return (
     <button className="team-leader" onClick={() => onOpen({ ...leader, photo })}>
       <div className="team-leader-photo">
-        <img src={photo} alt={leader.name} />
+        <img src={photo} alt={leader.name} width="1000" height="1250" loading="lazy" decoding="async" />
       </div>
       <div className="team-leader-text">
         <div className="team-num">01</div>
@@ -282,7 +300,7 @@ function TeamCard({ m, onOpen }) {
   return (
     <button className="team-card" onClick={onOpen}>
       <div className="team-card-photo">
-        <img src={m.photo} alt={m.name} />
+        <img src={m.photo} alt={m.name} loading="lazy" decoding="async" />
       </div>
       <div className="team-card-num">{String(m.n).padStart(2, '0')}</div>
       <div className="team-card-name">{m.name}</div>

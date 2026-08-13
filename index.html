@@ -101,7 +101,8 @@
     transition: transform .25s ease;
   }
   .nav-links a:hover::after { transform: scaleX(1); }
-  .nav-burger { display: none; width: 36px; height: 36px; flex-direction: column; justify-content: center; gap: 5px; align-items: center; }
+  /* 44×44 je doporučené minimum pro dotyk; proužky uvnitř zůstávají 22px. */
+  .nav-burger { display: none; width: 44px; height: 44px; flex-direction: column; justify-content: center; gap: 5px; align-items: center; margin-right: -4px; }
   .nav-burger span { display: block; width: 22px; height: 2px; background: var(--rs-ink); }
 
   .nav-end { display: flex; align-items: center; gap: 24px; }
@@ -116,11 +117,15 @@
   }
   .nav-social a:hover { background: var(--rs-blue-tint); color: var(--rs-blue); }
 
-  @media (max-width: 720px) {
+  /* Hlavička je sticky, takže její výška ubírá z obrazovky po celou dobu čtení.
+     Zlom je stejný jako u heru (860px) — jinak by na tabletu byla desktopová
+     navigace nad už zalomeným, jednosloupcovým heroem. */
+  @media (max-width: 860px) {
     .nav-burger { display: flex; }
     .nav-heart { width: 36px; height: 36px; }
     .nav-name { font-size: 20px; }
-    .nav-logo-img { height: 80px; }
+    .nav-logo-img { height: 56px; }
+    .nav-inner { padding: 8px 24px; }
     .nav-end { gap: 4px; }
     .nav-social a { width: 32px; height: 32px; }
     .nav-social a svg { width: 18px; height: 18px; }
@@ -162,6 +167,7 @@
 
   .hero { max-width: var(--max); margin: 0 auto; padding: 56px 24px 64px; }
   .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+  .hero-head, .hero-body { min-width: 0; }
   .hero-title {
     font-family: "PT Serif", Georgia, serif; font-weight: 700;
     font-size: clamp(54px, 7.5vw, 96px); line-height: 0.95;
@@ -218,8 +224,26 @@
   }
 
   @media (max-width: 860px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-    .hero-photo { max-width: 480px; margin: 0 auto; width: 100%; }
+    /* Fotka lídryně patří na mobilu nad perex — jinak je až na druhé obrazovce.
+       `display: contents` rozpustí obal `.hero-text`, takže hlavička, fotka
+       a tělo textu jsou tři samostatné buňky gridu a jdou seřadit. */
+    .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+    .hero-text { display: contents; }
+    .hero-head { order: 1; }
+    .hero-photo { order: 2; max-width: 480px; margin: 0 auto; width: 100%; }
+    .hero-body { order: 3; }
+    .hero-title { margin-bottom: 0; }
+  }
+
+  @media (max-width: 720px) {
+    /* Desktopový vertikální rytmus je na telefonu příliš rozvolněný —
+       mezi sekcemi bylo 192px, tj. skoro čtvrtina obrazovky prázdna. */
+    .hero { padding: 32px 24px 40px; }
+    .section { padding: 56px 24px; }
+    .section-head { margin-bottom: 36px; }
+    /* Zvýšená specificita kvůli `.section-team` / `.section-contact` níže. */
+    .section.section-team, .section.section-contact { padding-top: 24px; }
+    .footer { margin-top: 40px; }
   }
 
   .pri-grid {
@@ -257,8 +281,12 @@
   }
   .pri-card:hover .pri-card-more { gap: 12px; }
 
+  /* Pod 720px se počet sloupců řídí dostupnou šířkou, ne pevným zlomem — na
+     telefonu vyjde jeden sloupec, na širším mobilu/tabletu na výšku dva.
+     Nad 720px zůstává napevno dvojice, aby se na desktopu nevytvořily tři. */
   @media (max-width: 720px) {
-    .pri-grid { grid-template-columns: 1fr; }
+    .pri-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .pri-card { padding: 24px 22px 20px; }
   }
 
   .drawer-backdrop {
@@ -269,7 +297,10 @@
   }
   .drawer-backdrop.is-open { background: rgba(20, 34, 53, 0.45); pointer-events: auto; }
   .drawer {
-    position: fixed; top: 0; right: 0; height: 100%;
+    position: fixed; top: 0; right: 0;
+    /* `dvh` = skutečně viditelná výška; s `100%`/`100vh` konec panelu mizí pod
+       adresním řádkem mobilního prohlížeče. `vh` zůstává jako fallback. */
+    height: 100vh; height: 100dvh;
     width: min(620px, 92vw);
     background: var(--rs-bg-card);
     box-shadow: -20px 0 60px -30px rgba(20, 34, 53, 0.4);
@@ -299,6 +330,7 @@
   .drawer-close:hover { background: var(--rs-blue-tint); }
   .drawer-body {
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 32px;
     flex: 1;
   }
@@ -395,6 +427,10 @@
   .team-card {
     text-align: left; padding: 14px;
     border-radius: 18px;
+    /* Bez explicitního flexu si <button> obsah vycentruje na výšku, takže
+       karty s delší funkcí posunou fotku vedlejší karty v řádku o pár pixelů
+       níž. Ve dvousloupcové mřížce na mobilu je to nápadné. */
+    display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start;
     transition: background .2s ease, transform .25s ease;
   }
   .team-card:hover { background: var(--rs-bg-soft); transform: translateY(-3px); }
@@ -414,12 +450,20 @@
 
   @media (max-width: 860px) {
     .team-leader { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
-    .team-leader-photo { max-width: 320px; margin: 0 auto; }
+    /* Explicitní šířka je nutná: s `margin: 0 auto` se box jinak smrskne podle
+       obsahu, a dokud se (lazy) fotka nenačte, má nulové rozměry. */
+    .team-leader-photo { width: 100%; max-width: 320px; margin: 0 auto; }
     .team-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
   }
+  /* Jednosloupcová mřížka tu byla nejdražší místo celé stránky: šest karet
+     zabralo přes 2100px a vedle 200px kolečka zůstávalo prázdno. Dva sloupce
+     drží i na 360px a scrollování zkrátí zhruba na polovinu. */
   @media (max-width: 480px) {
-    .team-grid { grid-template-columns: 1fr; }
-    .team-card-photo { max-width: 200px; }
+    .team-grid { gap: 20px 12px; margin-bottom: 48px; }
+    .team-card { padding: 8px; }
+    .team-card-photo { width: 100%; max-width: 150px; margin-bottom: 12px; }
+    .team-card-name { font-size: 19px; }
+    .team-card-role { font-size: 14px; }
   }
 
   .team-rest { border-top: 1px solid var(--rs-line); padding-top: 32px; }
@@ -446,13 +490,25 @@
   .team-row-role { color: var(--rs-ink-soft); font-size: 15px; }
   .team-row-arrow { color: var(--rs-blue); display: inline-flex; align-items: center; }
 
+  /* Na úzkém displeji se řádek zalomí do dvou pater (jméno / funkce) místo
+     toho, aby se funkce schovala — u kandidátů 8+ je to jediná informace
+     kromě jména, kterou o nich stránka dává. */
   @media (max-width: 640px) {
-    .team-row { grid-template-columns: 36px 1fr 20px; gap: 12px; }
-    .team-row-dots, .team-row-role { display: none; }
+    .team-row {
+      grid-template-columns: 36px 1fr 20px;
+      gap: 2px 12px; align-items: center;
+      padding: 12px 8px;
+    }
+    .team-row-num { grid-column: 1; grid-row: 1 / span 2; }
+    .team-row-name { grid-column: 2; grid-row: 1; }
+    .team-row-role { grid-column: 2; grid-row: 2; font-size: 13.5px; line-height: 1.35; }
+    .team-row-arrow { grid-column: 3; grid-row: 1 / span 2; }
+    .team-row-dots { display: none; }
   }
 
   .modal-backdrop {
     position: fixed; inset: 0; z-index: 100;
+    height: 100vh; height: 100dvh;
     background: rgba(20, 34, 53, 0.55);
     backdrop-filter: blur(4px);
     display: flex; align-items: center; justify-content: center;
@@ -463,7 +519,8 @@
   .modal {
     background: var(--rs-bg-card);
     border-radius: 20px;
-    max-width: 720px; width: 100%; max-height: calc(100vh - 48px); overflow: auto;
+    max-width: 720px; width: 100%; overflow: auto; overscroll-behavior: contain;
+    max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px);
     position: relative;
     display: flex; flex-direction: column;
     animation: pop .25s cubic-bezier(.2,.7,.4,1.2);
@@ -520,7 +577,7 @@
     .modal-grid,
     .modal.is-long .modal-grid,
     .modal.is-xlong .modal-grid { grid-template-columns: 1fr; padding: 24px; gap: 20px; }
-    .modal-photo { max-width: 200px; margin: 0 auto; }
+    .modal-photo { width: 100%; max-width: 200px; margin: 0 auto; }
     .modal-text { padding-right: 28px; }
   }
 
@@ -551,6 +608,19 @@
   .footer-partner-logo { display: inline-block; width: auto; }
   .footer-partner-logo--top09 { height: 46px; }
   .footer-partner-logo--kdu { height: 26px; }
+
+  /* Uživatel, který má v systému omezené animace, dostane statickou stránku —
+     včetně tepajícího srdce v heru a plynulého odskoku na kotvu (ten hlídá
+     i `scrollToId` v app.jsx). */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero-photo::after { animation: none; }
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
 </style>
 </head>
 <body>
