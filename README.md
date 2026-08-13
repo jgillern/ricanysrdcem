@@ -130,10 +130,10 @@ Obojí jde na dotyku zavřít gestem — prvek drží prst a po puštění se bu
 
 Ovládat se dá třemi způsoby, všechny vedou přes `slideTo()`, takže vypadají stejně:
 - **swipe** do stran (dotyk),
-- **lišta `‹ 02 / 10 ›`** dole v modalu (`.modal-nav`) — drží ji `position: sticky; bottom: 0`, protože scrollovací kontejner je sám `.modal`. Kdyby byla jen na konci obsahu, dozvěděl by se o listování jen ten, kdo dočte až dolů. Nad lištou je jemné prolnutí (`::before` s gradientem), ať text nekončí useknutý v půlce řádku. Šipka na kraji seznamu je `disabled`.
+- **lišta se šipkami `‹ ›`** dole v modalu (`.modal-nav`) — drží ji `position: sticky; bottom: 0`, protože scrollovací kontejner je sám `.modal`. Kdyby byla jen na konci obsahu, dozvěděl by se o listování jen ten, kdo dočte až dolů. Nad lištou je jemné prolnutí (`::before` s gradientem), ať text nekončí useknutý v půlce řádku. Šipka na kraji seznamu je `disabled`.
 - **šipky ←/→** na klávesnici.
 
-Čítač ukazuje **pozici v seznamu**, ne číslo kandidáta — dnes je to totéž (seznam je přesně 1–10), ale kdyby medailonek dostal třeba č. 15, ukáže se `11 / 11` a nahoře v modalu pořád `15`.
+Lišta **záměrně neukazuje čítač** typu `02 / 10`: kandidátka má 21 lidí, takže „z deseti" mate. Číslo kandidáta je stejně vidět nahoře v modalu.
 
 Tažení, které začne **na šipce**, kandidáta nepřeskočí dvakrát: zrušený `touchmove` potlačí i následný `click`, takže se uplatní jen gesto.
 

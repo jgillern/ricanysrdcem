@@ -355,7 +355,7 @@ function Priorities({ onOpen }) {
   );
 }
 
-function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext, position, total }) {
+function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext }) {
   const modalRef = useRef(null);
   const backdropRef = useRef(null);
   const exitTimer = useRef(null);
@@ -529,7 +529,6 @@ function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext, position, 
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 5l-7 7 7 7"/></svg>
             </button>
-            <span className="modal-nav-count">{position} / {total}</span>
             <button
               className="modal-nav-btn"
               onClick={() => slideTo(1)}
@@ -706,8 +705,6 @@ function App() {
         onNavigate={goToMember}
         hasPrev={index > 0}
         hasNext={index >= 0 && index < MODAL_MEMBERS.length - 1}
-        position={String(index + 1).padStart(2, '0')}
-        total={MODAL_MEMBERS.length}
       />
       <PriorityDrawer priority={priority} onClose={() => setPriority(null)} />
     </>

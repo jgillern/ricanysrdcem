@@ -577,7 +577,7 @@
   .modal-nav {
     position: sticky; bottom: 0; z-index: 1;
     flex: none; margin-top: auto;
-    display: flex; align-items: center; justify-content: center; gap: 14px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
     padding: 10px 24px;
     background: var(--rs-bg-card);
     border-top: 1px solid var(--rs-line);
@@ -596,13 +596,6 @@
   }
   .modal-nav-btn:hover:not(:disabled) { background: var(--rs-blue-tint); color: var(--rs-blue); }
   .modal-nav-btn:disabled { opacity: .25; cursor: default; }
-  .modal-nav-count {
-    font-family: "PT Sans", sans-serif; font-weight: 700;
-    font-size: 12px; letter-spacing: 0.14em;
-    color: var(--rs-ink-soft);
-    font-variant-numeric: tabular-nums;   /* ať šipky při přepnutí neposkakují */
-    min-width: 62px; text-align: center;
-  }
 
   /* Užší okno → zpět na základní šířku sloupců, ať se fotka a text vejdou. */
   @media (max-width: 1080px) {
