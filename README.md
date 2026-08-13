@@ -126,7 +126,16 @@ Obojí jde na dotyku zavřít gestem — prvek drží prst a po puštění se bu
 | `MemberModal` | tažení **dolů i nahoru** | zavře | **jen na koncích scrollu** — nahoře dolů, dole nahoru |
 | `MemberModal` | tažení **do stran** | **listuje mezi kandidáty** (doleva další, doprava předchozí) | vždy — vodorovně se nic neroluje |
 
-**Listování v modalu** jde po pořadí `MODAL_MEMBERS` (`app.jsx`): lídryně, karty 2–7 a ti z dalších kandidátů, kdo mají medailonek — v praxi **top10**. Na koncích seznamu klade tažení odpor a vrátí se zpět. Totéž obsluhují **šipky ←/→** na klávesnici (desktop swipe nemá). Přepnutí nechává stejný DOM prvek, takže se ručně resetuje `scrollTop` — jinak by nový medailonek začínal v místě, kam byl odrolovaný ten předchozí.
+**Listování v modalu** jde po pořadí `MODAL_MEMBERS` (`app.jsx`): lídryně, karty 2–7 a ti z dalších kandidátů, kdo mají medailonek — v praxi **top10**. Na koncích seznamu klade tažení odpor a vrátí se zpět. Přepnutí nechává stejný DOM prvek, takže se ručně resetuje `scrollTop` — jinak by nový medailonek začínal v místě, kam byl odrolovaný ten předchozí.
+
+Ovládat se dá třemi způsoby, všechny vedou přes `slideTo()`, takže vypadají stejně:
+- **swipe** do stran (dotyk),
+- **lišta `‹ 02 / 10 ›`** dole v modalu (`.modal-nav`) — drží ji `position: sticky; bottom: 0`, protože scrollovací kontejner je sám `.modal`. Kdyby byla jen na konci obsahu, dozvěděl by se o listování jen ten, kdo dočte až dolů. Nad lištou je jemné prolnutí (`::before` s gradientem), ať text nekončí useknutý v půlce řádku. Šipka na kraji seznamu je `disabled`.
+- **šipky ←/→** na klávesnici.
+
+Čítač ukazuje **pozici v seznamu**, ne číslo kandidáta — dnes je to totéž (seznam je přesně 1–10), ale kdyby medailonek dostal třeba č. 15, ukáže se `11 / 11` a nahoře v modalu pořád `15`.
+
+Tažení, které začne **na šipce**, kandidáta nepřeskočí dvakrát: zrušený `touchmove` potlačí i následný `click`, takže se uplatní jen gesto.
 
 Vodorovné gesto je schválně **listování, ne zavírání**: zavírat vším směrem by znamenalo, že palcový oblouk na začátku scrollu (prvních ~10 px bývá vodorovných) odveze modal pryč, místo aby scrolloval.
 
@@ -143,9 +152,9 @@ Pár věcí je na tom ošemetných:
 - Drawer má odchozí stav v CSS (`transform: translateX(100%)`), takže po puštění stačí vrátit řízení tranzici — v pořadí `transition` → vynucený reflow (`void el.offsetWidth`) → smazání inline `transform`. Bez toho reflow by prvek skočil bez animace. **Modal odchozí stav nemá** (po zavření mizí z DOM), takže si cestu za okraj odanimuje sám a `onClose` volá se zpožděním 200 ms.
 - Podklad má vlastní tranzici, po dobu tažení se vypíná, jinak by ztmavení kulhalo za prstem.
 
-Ověřeno v Chromiu s emulací dotyku — drawer: dlouhý swipe zavře, krátký pomalý pruží zpět, svislý tah scrolluje, tah doleva nedělá nic, po znovuotevření si panel nenese posun z minula. Modal (zavírání): nahoře zavírá tah dolů, dole tah nahoru, uprostřed textu ani jeden směr nezavírá, krátký tah pruží zpět, u nerolujícího medailonku fungují oba směry. Modal (listování): tažením doleva projde 01 → 10 a na konci se zastaví, doprava zpátky na 01, šipky ←/→ dělají totéž, nový medailonek začíná odshora, šikmé gesto nespustí nic. Křížek, klik mimo i ESC fungují u obojího dál.
+Ověřeno v Chromiu s emulací dotyku — drawer: dlouhý swipe zavře, krátký pomalý pruží zpět, svislý tah scrolluje, tah doleva nedělá nic, po znovuotevření si panel nenese posun z minula. Modal (zavírání): nahoře zavírá tah dolů, dole tah nahoru, uprostřed textu ani jeden směr nezavírá, krátký tah pruží zpět, u nerolujícího medailonku fungují oba směry. Modal (listování): tažením doleva projde 01 → 10 a na konci se zastaví, doprava zpátky na 01, lišta i šipky ←/→ dělají totéž, nový medailonek začíná odshora, šikmé gesto nespustí nic, tažení začínající na šipce nepřeskočí dva kandidáty. Křížek, klik mimo i ESC fungují u obojího dál.
 
-> **Zatím bez vizuálního vodítka.** Že se dá listovat, nic na stránce neukazuje — na dotyku to čtenář objeví jen náhodou. Kdyby to mělo být vidět, nabízí se decentní „02 / 10" se šipkami pod medailonkem (šipky by rovnou obsloužily i myš). Je to ale zásah do vzhledu modalu, proto to tam zatím není.
+Ověřeno i to, že lišta drží u spodní hrany i po odrolování, šipky se na krajích seznamu vypínají a ťuknutí na šipku listuje stejně jako tažení.
 
 **Knihovny z CDN** se načítají s `integrity` (SRI) — React i ReactDOM v **produkčním** buildu (`*.production.min.js`), Babel standalone pro runtime transformaci JSX. Při změně verze je potřeba spočítat nový SRI hash, jinak prohlížeč skript odmítne:
 

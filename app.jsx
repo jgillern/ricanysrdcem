@@ -355,19 +355,23 @@ function Priorities({ onOpen }) {
   );
 }
 
-function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext }) {
+function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext, position, total }) {
   const modalRef = useRef(null);
   const backdropRef = useRef(null);
   const exitTimer = useRef(null);
   const enterFrom = useRef(0);   // odkud má přijet nově vybraný medailonek
+  // Aktuální obsluha kláves; přes ref, aby se listener nepřevěšoval s každým
+  // renderem (a `slideTo` níž se stihlo definovat).
+  const keys = useRef(null);
 
   useEffect(() => {
     if (!member) return;
     const onKey = (e) => {
-      if (e.key === 'Escape') onClose();
+      const n = keys.current;
+      if (e.key === 'Escape') n.onClose();
       // Totéž co swipe do stran, jen z klávesnice (na desktopu myš swipe nemá).
-      if (e.key === 'ArrowRight' && hasNext) onNavigate(1);
-      if (e.key === 'ArrowLeft' && hasPrev) onNavigate(-1);
+      if (e.key === 'ArrowRight' && n.hasNext) n.slideTo(1);
+      if (e.key === 'ArrowLeft' && n.hasPrev) n.slideTo(-1);
     };
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
@@ -376,7 +380,7 @@ function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext }) {
       document.body.style.overflow = '';
       clearTimeout(exitTimer.current);
     };
-  }, [member, onClose, onNavigate, hasPrev, hasNext]);
+  }, [member]);
 
   // Zavření tažením — na obou koncích scrollu. Medailonek se roluje, takže
   // gesto nesmí soupeřit se scrollem: nahoře zabírá tah dolů, dole tah nahoru
@@ -427,6 +431,21 @@ function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext }) {
   // dalšího v pořadí, doprava předchozího.
   const stepFor = (dx) => (dx < 0 ? 1 : -1);
   const canGo = (dx) => (stepFor(dx) > 0 ? hasNext : hasPrev);
+
+  // Přepnutí kandidáta: karta odjede ven, prohodí se obsah a přijede z druhé
+  // strany. Sdílí to swipe, šipky v liště i klávesnice, ať to vypadá stejně.
+  const slideTo = (step) => {
+    const el = modalRef.current;
+    if (!el) return;
+    const out = (el.offsetWidth + 40) * (step > 0 ? -1 : 1);   // další odjíždí doleva
+    el.style.transition = 'transform .18s ease-in';
+    el.style.transform = `translateX(${out}px)`;
+    enterFrom.current = -out;
+    clearTimeout(exitTimer.current);
+    exitTimer.current = setTimeout(() => onNavigate(step), 180);
+  };
+  keys.current = { slideTo, onClose, hasPrev, hasNext };
+
   useDragToDismiss(modalRef, {
     active: !!member,
     axis: 'x',
@@ -439,18 +458,11 @@ function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext }) {
       el.style.transform = `translateX(${shift}px)`;
     },
     release: (dx, speed) => {
-      const el = modalRef.current;
       if (canGo(dx) && (Math.abs(dx) > 80 || speed > 0.5)) {
-        // Odjet ven, prohodit obsah a přijet z druhé strany.
-        const out = (el.offsetWidth + 40) * Math.sign(dx);
-        el.style.transition = 'transform .18s ease-in';
-        el.style.transform = `translateX(${out}px)`;
-        enterFrom.current = -out;
-        const step = stepFor(dx);
-        exitTimer.current = setTimeout(() => onNavigate(step), 180);
+        slideTo(stepFor(dx));
         return;
       }
-      releaseToCss(el, null);
+      releaseToCss(modalRef.current, null);
     }
   });
 
@@ -505,6 +517,29 @@ function MemberModal({ member, onClose, onNavigate, hasPrev, hasNext }) {
               : <p className="modal-bio">Medailonek zatím připravujeme, brzy ho tu najdete.</p>}
           </div>
         </div>
+        {(hasPrev || hasNext) && (
+          // Lišta drží u spodní hrany i u dlouhého medailonku — jinak by se
+          // o listování dozvěděl jen ten, kdo dočte až na konec.
+          <div className="modal-nav">
+            <button
+              className="modal-nav-btn"
+              onClick={() => slideTo(-1)}
+              disabled={!hasPrev}
+              aria-label="Předchozí kandidát"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <span className="modal-nav-count">{position} / {total}</span>
+            <button
+              className="modal-nav-btn"
+              onClick={() => slideTo(1)}
+              disabled={!hasNext}
+              aria-label="Další kandidát"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -671,6 +706,8 @@ function App() {
         onNavigate={goToMember}
         hasPrev={index > 0}
         hasNext={index >= 0 && index < MODAL_MEMBERS.length - 1}
+        position={String(index + 1).padStart(2, '0')}
+        total={MODAL_MEMBERS.length}
       />
       <PriorityDrawer priority={priority} onClose={() => setPriority(null)} />
     </>
