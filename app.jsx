@@ -23,6 +23,89 @@ function scrollToId(id) {
   });
 }
 
+// Sdílená mechanika „táhni a zavři" pro drawer i modal. Hook řeší jen
+// rozpoznání gesta — osu, směr, prahy pro zavření. Jak prvek při tažení
+// vypadá a co se stane po puštění, si každá komponenta říká sama
+// v `paint` / `release`.
+//
+// Listenery se věší ručně, ne přes `onTouchMove`: React registruje touch
+// handlery jako pasivní, takže by v nich `preventDefault()` mlčky nefungoval
+// a stránka by při gestu zároveň scrollovala.
+function useDragToDismiss(elRef, { active, axis, canDrag, paint, release }) {
+  // Callbacky se mění s každým renderem; přes ref je efekt nemusí mít
+  // v závislostech a listenery zůstávají navěšené po celou dobu gesta.
+  const fns = useRef(null);
+  fns.current = { canDrag, paint, release };
+
+  useEffect(() => {
+    const el = elRef.current;
+    if (!el || !active) return;
+
+    let startX = 0, startY = 0, startT = 0, dist = 0;
+    let locked = false, tracking = false;
+
+    const onStart = (e) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      startT = Date.now();
+      dist = 0; locked = false; tracking = true;
+    };
+
+    const onMove = (e) => {
+      if (!tracking) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      const along = axis === 'x' ? dx : dy;
+      const across = axis === 'x' ? dy : dx;
+      if (!locked) {
+        // Směr se pozná až po pár pixelech, ať krátké ťuknutí nic nerozjede.
+        if (Math.abs(along) < 8 && Math.abs(across) < 8) return;
+        // Gesto napříč — nebo směr, který prvek zrovna nepřijímá — patří
+        // prohlížeči (scroll uvnitř panelu).
+        if (Math.abs(along) <= Math.abs(across) * 1.3 || !fns.current.canDrag(Math.sign(along))) {
+          tracking = false;
+          return;
+        }
+        locked = true;
+        // Žádný `return` — prvek se má rozjet hned v tomhle gestu.
+      }
+      dist = along;
+      if (e.cancelable) e.preventDefault();
+      fns.current.paint(dist);
+    };
+
+    const onEnd = () => {
+      if (!tracking || !locked) { tracking = false; return; }
+      tracking = false;
+      const speed = Math.abs(dist) / Math.max(1, Date.now() - startT);   // px/ms
+      fns.current.release(dist, speed);
+    };
+
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('touchmove', onMove, { passive: false });
+    el.addEventListener('touchend', onEnd);
+    el.addEventListener('touchcancel', onEnd);
+    return () => {
+      el.removeEventListener('touchstart', onStart);
+      el.removeEventListener('touchmove', onMove);
+      el.removeEventListener('touchend', onEnd);
+      el.removeEventListener('touchcancel', onEnd);
+    };
+  }, [elRef, active, axis]);
+}
+
+// Vrátí řízení CSS tranzici: nejdřív obnovit `transition`, pak si vynutit
+// přepočet stylu (aby se posunutá pozice brala jako výchozí) a teprve pak
+// pustit inline transform — jinak by prvek skočil bez animace.
+function releaseToCss(el, backdrop) {
+  el.style.transition = '';
+  if (backdrop) backdrop.style.transition = '';
+  void el.offsetWidth;
+  el.style.transform = '';
+  if (backdrop) backdrop.style.background = '';
+}
+
 function renderRichText(text) {
   if (!text.includes('**')) return text;
   return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
@@ -167,94 +250,41 @@ function PriorityDrawer({ priority, onClose }) {
     };
   }, [priority, onClose]);
 
-  // Zavření swipem doprava. Panel drží prst, po puštění se buď dozavře, nebo
-  // se vrátí zpátky. Listenery jsou navěšené ručně (ne přes onTouchMove),
-  // protože React registruje touch handlery jako pasivní a `preventDefault`
-  // by v nich nefungoval — svislý scroll uvnitř panelu by nešel zastavit.
-  useEffect(() => {
-    const el = drawerRef.current;
-    if (!el || !priority) return;
-
-    let startX = 0, startY = 0, startT = 0, dx = 0;
-    let axis = null;      // 'x' = táhneme panelem, 'y' = necháme scrollovat
-    let tracking = false;
-
-    const paint = (px) => {
+  // Zavření swipem doprava. Panel drží prst, po puštění se buď dozavře
+  // (CSS tranzice ho dotáhne za okraj), nebo pruží zpátky.
+  useDragToDismiss(drawerRef, {
+    active: !!priority,
+    axis: 'x',
+    canDrag: (dir) => dir > 0,          // doleva panel netáhneme, tam už žádný není
+    paint: (dx) => {
+      const el = drawerRef.current, bd = backdropRef.current;
       el.style.transition = 'none';
-      el.style.transform = `translateX(${px}px)`;
-      const bd = backdropRef.current;
+      el.style.transform = `translateX(${Math.max(0, dx)}px)`;
       if (bd) {
         // Podklad má vlastní .3s tranzici — po dobu gesta musí pryč, jinak by
         // ztmavení kulhalo za prstem.
         bd.style.transition = 'none';
-        const t = Math.min(1, px / (el.offsetWidth || 1));
+        const t = Math.min(1, Math.max(0, dx) / (el.offsetWidth || 1));
         bd.style.background = `rgba(20, 34, 53, ${(0.45 * (1 - t)).toFixed(3)})`;
       }
-    };
-
-    // Vrátí řízení CSS tranzici: nejdřív obnovit `transition`, pak si vynutit
-    // přepočet stylu (aby se posunutá pozice brala jako výchozí) a teprve pak
-    // pustit inline transform — jinak by panel skočil bez animace.
-    const release = () => {
-      el.style.transition = '';
-      const bd = backdropRef.current;
-      if (bd) bd.style.transition = '';
-      void el.offsetWidth;
-      el.style.transform = '';
-      if (bd) bd.style.background = '';
-    };
-
-    const onStart = (e) => {
-      if (e.touches.length !== 1) return;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      startT = Date.now();
-      dx = 0; axis = null; tracking = true;
-    };
-
-    const onMove = (e) => {
-      if (!tracking) return;
-      const ddx = e.touches[0].clientX - startX;
-      const ddy = e.touches[0].clientY - startY;
-      if (!axis) {
-        // Směr se určí až po pár pixelech, ať krátké ťuknutí nic nerozjede.
-        if (Math.abs(ddx) < 8 && Math.abs(ddy) < 8) return;
-        axis = Math.abs(ddx) > Math.abs(ddy) * 1.3 ? 'x' : 'y';
-        if (axis === 'y') { tracking = false; return; }
-        // Žádný `return` — panel se má rozjet hned v tomhle gestu, ne až
-        // při dalším touchmove.
-      }
-      dx = Math.max(0, ddx);   // doleva panel netáhneme, tam už žádný není
-      if (e.cancelable) e.preventDefault();
-      paint(dx);
-    };
-
-    const onEnd = () => {
-      if (!tracking || axis !== 'x') { tracking = false; return; }
-      tracking = false;
+    },
+    release: (dx, speed) => {
+      const el = drawerRef.current;
       const width = el.offsetWidth || 1;
-      const speed = dx / Math.max(1, Date.now() - startT);   // px/ms
-      release();
+      releaseToCss(el, backdropRef.current);
       // Zavře se po třetině šířky, nebo po rychlém švihnutí i z kratší dráhy.
       if (dx > width * 0.33 || speed > 0.5) onClose();
-    };
+    }
+  });
 
-    el.addEventListener('touchstart', onStart, { passive: true });
-    el.addEventListener('touchmove', onMove, { passive: false });
-    el.addEventListener('touchend', onEnd);
-    el.addEventListener('touchcancel', onEnd);
-    return () => {
-      el.removeEventListener('touchstart', onStart);
-      el.removeEventListener('touchmove', onMove);
-      el.removeEventListener('touchend', onEnd);
-      el.removeEventListener('touchcancel', onEnd);
-      // Panel je sdílený mezi otevřeními — nesmí si nést posun z minula.
-      el.style.transition = '';
-      el.style.transform = '';
-      const bd = backdropRef.current;
-      if (bd) { bd.style.transition = ''; bd.style.background = ''; }
-    };
-  }, [priority, onClose]);
+  // Panel je v DOM i zavřený a sdílí se mezi otevřeními — nesmí si nést
+  // posun z minulého gesta.
+  useEffect(() => {
+    if (priority) return;
+    const el = drawerRef.current, bd = backdropRef.current;
+    if (el) { el.style.transition = ''; el.style.transform = ''; }
+    if (bd) { bd.style.transition = ''; bd.style.background = ''; }
+  }, [priority]);
 
   return (
     <div ref={backdropRef} className={'drawer-backdrop ' + (priority ? 'is-open' : '')} onClick={onClose} aria-hidden={!priority}>
@@ -320,6 +350,10 @@ function Priorities({ onOpen }) {
 }
 
 function MemberModal({ member, onClose }) {
+  const modalRef = useRef(null);
+  const backdropRef = useRef(null);
+  const exitTimer = useRef(null);
+
   useEffect(() => {
     if (!member) return;
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -328,8 +362,53 @@ function MemberModal({ member, onClose }) {
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
+      clearTimeout(exitTimer.current);
     };
   }, [member, onClose]);
+
+  // Zavření tažením — na obou koncích scrollu. Medailonek se roluje, takže
+  // gesto nesmí soupeřit se scrollem: nahoře zabírá tah dolů, dole tah nahoru
+  // (krátký text scroll nemá, tam fungují oba směry). Využívá se tím přesně
+  // ten „přetah", který by jinak jen gumově odskočil.
+  useDragToDismiss(modalRef, {
+    active: !!member,
+    axis: 'y',
+    canDrag: (dir) => {
+      const el = modalRef.current;
+      if (!el) return false;
+      const atTop = el.scrollTop <= 0;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+      return dir > 0 ? atTop : atBottom;
+    },
+    paint: (dy) => {
+      const el = modalRef.current, bd = backdropRef.current;
+      el.style.transition = 'none';
+      el.style.transform = `translateY(${dy}px)`;
+      if (bd) {
+        bd.style.transition = 'none';
+        const t = Math.min(1, Math.abs(dy) / 260);
+        bd.style.background = `rgba(20, 34, 53, ${(0.55 * (1 - t)).toFixed(3)})`;
+      }
+    },
+    release: (dy, speed) => {
+      const el = modalRef.current, bd = backdropRef.current;
+      // Modal nemá odchozí CSS stav (po zavření mizí z DOM), takže si cestu
+      // za okraj musí odanimovat sám a zavřít se až potom.
+      if (Math.abs(dy) > 110 || speed > 0.5) {
+        const out = dy > 0 ? window.innerHeight : -window.innerHeight;
+        el.style.transition = 'transform .2s ease-out';
+        el.style.transform = `translateY(${out}px)`;
+        if (bd) {
+          bd.style.transition = 'background .2s ease-out';
+          bd.style.background = 'rgba(20, 34, 53, 0)';
+        }
+        exitTimer.current = setTimeout(onClose, 200);
+        return;
+      }
+      releaseToCss(el, bd);
+    }
+  });
+
   if (!member) return null;
   const num = member.n != null ? String(member.n).padStart(2, '0') : '01';
   const bio = (member.bio || '').trim();
@@ -339,8 +418,8 @@ function MemberModal({ member, onClose }) {
   // Odstavce lze v data.js oddělit prázdným řádkem.
   const paragraphs = bio ? bio.split(/\n\s*\n/) : [];
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className={'modal' + size} onClick={(e) => e.stopPropagation()}>
+    <div ref={backdropRef} className="modal-backdrop" onClick={onClose}>
+      <div ref={modalRef} className={'modal' + size} onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Zavřít">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 6l12 12M18 6l-12 12"/></svg>
         </button>
