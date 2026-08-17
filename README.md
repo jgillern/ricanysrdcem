@@ -68,7 +68,8 @@ Obsah je reálný a finální — priority, seznam kandidátů, fotky i medailon
 │   └── kducsl.png, logo.jpg   # starší nepoužívané varianty log (záloha)
 ├── ttpa/                      # prohlášení o transparentnosti (nařízení EU 2024/900)
 │   ├── rengl.pdf              # → ricanysrdcem.cz/ttpa/rengl.pdf
-│   └── maks.pdf               # → ricanysrdcem.cz/ttpa/maks.pdf
+│   ├── maks.pdf               # → ricanysrdcem.cz/ttpa/maks.pdf
+│   └── trojhrany.pdf          # → ricanysrdcem.cz/ttpa/trojhrany.pdf
 ├── brand/                     # logo v křivkách (SVG/PDF/PNG) + manuál, viz brand/README.md
 └── tools/                     # pomocné skripty (nejsou součástí webu)
     ├── process-photos.py      # ořez fotek kandidátů 8+ na 4:5 → photos/
@@ -453,6 +454,7 @@ Nařízení EU o **transparentnosti a cílení politické reklamy** (Regulation 
 |---|---|
 | `ttpa/rengl.pdf` | `www.ricanysrdcem.cz/ttpa/rengl.pdf` |
 | `ttpa/maks.pdf` | `www.ricanysrdcem.cz/ttpa/maks.pdf` |
+| `ttpa/trojhrany.pdf` | `www.ricanysrdcem.cz/ttpa/trojhrany.pdf` |
 
 ### Proč `ttpa/` v rootu
 
