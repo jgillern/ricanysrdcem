@@ -140,7 +140,7 @@ window.RS_DATA = {
     {
       n: 2,
       title: 'Transparentní a digitální radnice',
-      lead: 'Všechny informace o chodu města, financích a projektech najdete snadno a rychle na jednom místě. Co není tajné, musí být ze zákona veřejné.',
+      lead: 'Všechny informace o chodu města, financích a projektech najdete snadno a rychle na jednom místě. Co není ze zákona tajné, musí být veřejné.',
       sections: [
         {
           heading: null,
