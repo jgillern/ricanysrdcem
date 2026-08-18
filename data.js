@@ -206,8 +206,8 @@ window.RS_DATA = {
     },
     {
       n: 4,
-      title: 'Klidnější centrum díky jižnímu obchvatu',
-      lead: 'Masarykovo náměstí má patřit lidem, ne kolonám aut. Maximálně urychlíme přípravu jižního obchvatu a odvedeme tranzitní dopravu z centra.',
+      title: 'Jižní obchvat pro klidnější centrum',
+      lead: 'Masarykovo náměstí má patřit lidem, ne kolonám aut. Maximálně urychlíme přípravu jižního obchvatu, který pomůže odvést tranzitní dopravu z centra.',
       sections: [
         {
           heading: null,
@@ -225,8 +225,8 @@ window.RS_DATA = {
         {
           heading: 'Jižní obchvat musí být prioritou',
           paragraphs: [
-            'Jižní obchvat Říčan vnímáme jako naprostou prioritu pro dopravní úlevu celého města. Nebudeme vám slibovat vzdušné zámky ani to, že se zítra začne stavět, rozhodně ale nebudeme ztrácet čas. V nejkratším možném termínu zadáme zpracování odborné studie, která potvrdí účelnost stavby a zároveň prověří možné varianty trasování.',
-            'Jakmile studie potvrdí tu nejlepší možnou variantu, urychlíme všechny navazující přípravné procesy a neprodleně zahájíme intenzivní jednání se Středočeským krajem o financování samotné výstavby.'
+            'Jižní obchvat Říčan vnímáme jako zásadní krok k dopravní úlevě celého města. Občané v participativním rozpočtu jasně podpořili zpracování odborné studie, která má prověřit jeho smysluplnost a možné trasování. Jsme rádi, že se díky jejich hlasům příprava posouvá. Podnět občanů je důležitý, aktivní příprava klíčové dopravní infrastruktury však musí být především odpovědností města.',
+            'Nebudeme slibovat, že se začne stavět ze dne na den. Budeme ale prosazovat, aby město studii aktivně dotáhlo, její závěry projednalo s veřejností a bez zbytečných prodlev navázalo dalšími kroky. Pokud studie ukáže proveditelnou variantu, nesmí skončit v šuplíku. Město musí soustavně pracovat na tom, aby se z dlouho diskutovaného záměru stalo skutečné alternativní spojení mimo centrum.'
           ]
         },
         {

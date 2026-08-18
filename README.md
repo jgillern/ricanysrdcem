@@ -502,7 +502,7 @@ Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)**
    - `Priorita: Otevřená a naslouchající radnice`
    - `Priorita: Transparentní a digitální radnice`
    - `Priorita: Koncepční rozvoj dopravy na základě dat`
-   - `Priorita: Klidnější centrum díky jižnímu obchvatu`
+   - `Priorita: Jižní obchvat pro klidnější centrum`
    - `Priorita: Město bez bariér pro každého`
    - `Priorita: Moderní a dostupné sociální služby`
    - `Priorita: Zelené město odolné proti horku`
