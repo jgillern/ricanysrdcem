@@ -100,7 +100,7 @@ window.RS_DATA = {
     {
       n: 1,
       title: 'Otevřená a naslouchající radnice',
-      lead: 'Chceme s vámi partnersky diskutovat, usnadnit jednání s úřadem a zapojit vás do skutečného rozhodování o budoucnosti našeho města.',
+      lead: 'Budeme s vámi partnersky diskutovat, usnadníme vám jednání s úřadem a zapojíme vás do skutečného rozhodování o budoucnosti našeho města.',
       sections: [
         {
           heading: null,
@@ -140,7 +140,7 @@ window.RS_DATA = {
     {
       n: 2,
       title: 'Transparentní a digitální radnice',
-      lead: 'Všechny informace o chodu města, financích a projektech najdete snadno a rychle na jednom místě. Co není ze zákona tajné, musí být veřejné.',
+      lead: 'Informace o chodu města, financích a projektech najdete přehledně na jednom místě. Co není ze zákona tajné, musí být veřejné a snadno dohledatelné.',
       sections: [
         {
           heading: null,
@@ -172,8 +172,8 @@ window.RS_DATA = {
     },
     {
       n: 3,
-      title: 'Koncepční rozvoj dopravy na základě dat',
-      lead: 'Skoncujeme s nahodilými dopravními experimenty. Vytvoříme moderní plán mobility, který se opře o reálná data a zapojení občanů.',
+      title: 'Dopravní koncepce založená na datech',
+      lead: 'Skoncujeme s nahodilými dopravními experimenty. Připravíme ucelenou dopravní koncepci opřenou o reálná data a zapojení občanů.',
       sections: [
         {
           heading: null,
@@ -241,7 +241,7 @@ window.RS_DATA = {
     {
       n: 5,
       title: 'Město bez bariér pro každého',
-      lead: 'Vytvoříme bezpečný a dostupný veřejný prostor, kde věk ani zdravotní omezení nebudou překážkou pro plnohodnotný a aktivní život.',
+      lead: 'Uděláme veřejný prostor bezpečnější a dostupnější, aby věk ani zdravotní omezení nebyly překážkou pro plnohodnotný a aktivní život.',
       sections: [
         {
           heading: null,
@@ -280,7 +280,7 @@ window.RS_DATA = {
     {
       n: 6,
       title: 'Moderní a dostupné sociální služby',
-      lead: 'Vybudujeme moderní a spolehlivou síť péče, díky které nezůstane žádný občan ve složité životní situaci nebo ve stáří bez pomoci.',
+      lead: 'Rozšíříme a lépe propojíme síť sociálních služeb, aby žádný občan ve stáří ani ve složité životní situaci nezůstal bez pomoci.',
       sections: [
         {
           heading: null,
@@ -314,7 +314,7 @@ window.RS_DATA = {
     {
       n: 7,
       title: 'Zelené město odolné proti horku',
-      lead: 'Ochráníme město před letním horkem. Přineseme do ulic více stínu, osvěžující vodní prvky a podpoříme omezování odpadu.',
+      lead: 'Ochráníme město před letním horkem. Zpracujeme mapu horka, stínu a vody a přineseme do ulic více stínu, pítek a mlžítek.',
       sections: [
         {
           heading: null,
@@ -353,7 +353,7 @@ window.RS_DATA = {
     {
       n: 8,
       title: 'Živý veřejný prostor',
-      lead: 'Vytvoříme živý a kultivovaný veřejný prostor, který nabídne místa pro setkávání, kulturu i odpočinek všem generacím.',
+      lead: 'Oživíme veřejná prostranství tak, aby nabízela více míst pro setkávání, kulturu i odpočinek všech generací.',
       sections: [
         {
           heading: null,
@@ -395,8 +395,8 @@ window.RS_DATA = {
     },
     {
       n: 9,
-      title: 'Kvalita od školky po školu',
-      lead: 'Dáme školám jasný standard, rodičům lepší informace a dětem prostředí, kde se učí v klidu.',
+      title: 'Kvalitní školy pro budoucnost města',
+      lead: 'Zavedeme jasný standard kvality školek a škol, rodičům dáme lepší informace a dětem lepší podmínky pro učení i každodenní život.',
       sections: [
         {
           heading: null,
@@ -435,7 +435,7 @@ window.RS_DATA = {
     {
       n: 10,
       title: 'Podpora místních podnikatelů',
-      lead: 'Podpora lokálních živnostníků a firem je klíčová pro oživení města. Vytvoříme moderní a partnerské prostředí s minimem byrokracie.',
+      lead: 'Místní živnostníci a firmy pomáhají udržovat město živé. Nabídneme jim praktický servis, pomoc s propagací a nové příležitosti ke spolupráci.',
       sections: [
         {
           heading: null,

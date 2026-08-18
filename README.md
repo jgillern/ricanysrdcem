@@ -501,13 +501,13 @@ Návštěvnost a chování měříme přes **[Plausible](https://plausible.io)**
 2. V **Site Settings → Goals → + Add goal → Custom event** přidat tyto názvy (musí sedět **přesně**, jinak se událost nezobrazí):
    - `Priorita: Otevřená a naslouchající radnice`
    - `Priorita: Transparentní a digitální radnice`
-   - `Priorita: Koncepční rozvoj dopravy na základě dat`
+   - `Priorita: Dopravní koncepce založená na datech`
    - `Priorita: Jižní obchvat pro klidnější centrum`
    - `Priorita: Město bez bariér pro každého`
    - `Priorita: Moderní a dostupné sociální služby`
    - `Priorita: Zelené město odolné proti horku`
    - `Priorita: Živý veřejný prostor`
-   - `Priorita: Kvalita od školky po školu`
+   - `Priorita: Kvalitní školy pro budoucnost města`
    - `Priorita: Podpora místních podnikatelů`
    - `Kandidát otevřen`
    - `Hero CTA: Priority`
