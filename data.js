@@ -218,8 +218,8 @@ window.RS_DATA = {
         {
           heading: 'Chybějící propojení',
           paragraphs: [
-            'Centrum Říčan dnes nese dopravní zátěž, která do něj dlouhodobě nepatří. Masarykovo náměstí a Jizerská ulice slouží jako hlavní propojení mezi Říčanskou a Širokou, a proto se tudy soustředí velká část průjezdné dopravy.',
-            'O propojení mimo centrum se mluví už desítky let. Původní představa jižního obchvatu počítala zejména se Solnou stezkou a napojením na Pražský okruh. Solná stezka ale dlouhodobě nemá podporu okolních obcí a její napojení na Pražský okruh už není reálné. Pro město proto musí být absolutní prioritou prověřit možnost jiné alternativní spojnice. Jako nejjednodušší a nejefektivnější řešení se nabízí lokální varianta jižního obchvatu, která by Říčanskou a Širokou propojila mimo hranice města.'
+            'V obytných ulicích podporujeme zklidňující opatření, například vyvýšené přechody a křižovatky nebo menší poloměry zatáček, která odrazují od tranzitního průjezdu. Fungovat ale mohou jen tam, kde existuje vhodnější trasa. V centru Říčan dnes taková alternativa chybí. Masarykovo náměstí a Jizerská ulice slouží jako hlavní propojení mezi Říčanskou a Širokou, a proto se tudy soustředí velká část průjezdné dopravy.',
+            'O propojení mimo centrum se mluví už desítky let. Původní představa jižního obchvatu počítala zejména se Solnou stezkou a napojením na Pražský okruh. Solná stezka ale dlouhodobě nemá podporu okolních obcí a její napojení na Pražský okruh už není reálné. Pro město proto musí být absolutní prioritou prověřit možnost alternativní spojnice. Jako nejvhodnější varianta k prověření se nabízí lokální varianta jižního obchvatu, která by Říčanskou a Širokou propojila mimo hranice města.'
           ]
         },
         {
