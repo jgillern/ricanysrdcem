@@ -172,8 +172,8 @@ window.RS_DATA = {
     },
     {
       n: 3,
-      title: 'Dopravní koncepce založená na datech',
-      lead: 'Skoncujeme s nahodilými dopravními experimenty. Připravíme ucelenou dopravní koncepci opřenou o reálná data a zapojení občanů.',
+      title: 'Koncepční rozvoj dopravy',
+      lead: 'Připravíme ucelenou dopravní koncepci založenou na reálných datech a potřebách obyvatel. Lepší spojení po městě podpoříme dalším rozšířením provozu říčanské MHD.',
       sections: [
         {
           heading: null,
