@@ -178,7 +178,7 @@ window.RS_DATA = {
         {
           heading: null,
           paragraphs: [
-            'Doprava ve městě už nesmí fungovat jako laboratoř pro nahodilé experimenty. Chceme trvale opustit drahou metodu „pokus-omyl“, kdy se nejrůznější opatření a zákazy zavádějí naslepo a následně se s dalšími náklady zase ruší. Městu dlouhodobě chybí jasná a ucelená dopravní vize. Než začneme cokoliv dalšího měnit v ulicích, musíme svá rozhodnutí opřít o tvrdá data a skutečné potřeby obyvatel.'
+            'Doprava ve městě už nesmí fungovat jako laboratoř pro nahodilé experimenty. Chceme trvale opustit drahou metodu „pokus–omyl“, kdy se nejrůznější opatření a zákazy zavádějí naslepo a následně se s dalšími náklady zase ruší. Městu dlouhodobě chybí jasná a ucelená dopravní vize, která by jednotlivé změny zasadila do širších souvislostí. Potřebujeme proto plán, který určí dlouhodobý směr dopravy a zároveň bude podkladem pro průběžné rozhodování o konkrétních opatřeních.'
           ]
         },
         {
@@ -191,15 +191,15 @@ window.RS_DATA = {
         {
           heading: 'Od přesných dat k participaci',
           paragraphs: [
-            'Příprava plánu začne důkladným měřením dopravních toků po celém městě. Z těchto reálných informací následně vytvoříme přesný počítačový dopravní model Říčan, ve kterém si každou zamýšlenou změnu nejprve nanečisto nasimulujeme.',
-            'Zároveň do celého procesu aktivně zapojíme veřejnost formou participace. Kvalitní plán nemůže vzniknout jen od stolu za zavřenými dveřmi. Chceme od vás jasně slyšet, kde a jak vás doprava pálí nejvíce, abychom modelová řešení přizpůsobili skutečnému životu v ulicích.'
+            'Příprava plánu začne důkladným měřením dopravních toků po celém městě. Z těchto reálných informací následně vytvoříme počítačový dopravní model Říčan. Ten ukáže, jak spolu doprava v jednotlivých částech města souvisí a jak se významnější změny mohou projevit nejen v místě, kde vzniknou, ale také v navazujících ulicích. Umožní nám porovnávat různé varianty řešení a předem posoudit jejich dopady na fungování dopravy v celém městě.',
+            'Zároveň do celého procesu aktivně zapojíme veřejnost formou participace. Kvalitní plán nemůže vzniknout jen od stolu za zavřenými dveřmi. Chceme od vás jasně slyšet, kde a s jakými problémy se při každodenním pohybu po městě setkáváte, abychom plán přizpůsobili skutečným potřebám obyvatel.'
           ]
         },
         {
           heading: 'Další rozšíření říčanské MHD',
           paragraphs: [
-            'Mezi naše další priority patří další rozšíření provozu říčanské MHD v souladu s aktuálně platným Plánem dopravní obslužnosti.',
-            'Stejně jako u plánu mobility se i zde budeme řídit tvrdými daty. Konkrétní nastavení linek a časů spojů určíme na základě analýzy dat z počítadel cestujících přímo v autobusech na stávajících linkách a na základě participace, díky které zjistíme, v jakých lokalitách lidem jaké spojení nejvíc chybí.'
+            'Mezi naše priority patří další rozšíření provozu říčanské MHD v souladu s aktuálně platným Plánem dopravní obslužnosti. Zároveň prodloužíme provoz MHD do večerních hodin a rozšíříme nabídku spojů o víkendech.',
+            'Stejně jako u plánu mobility se i zde budeme řídit tvrdými daty. Konkrétní nastavení linek a časů spojů určíme na základě analýzy dat z počítadel cestujících přímo v autobusech na stávajících linkách a na základě participace, díky které zjistíme, v jakých lokalitách a časech lidem spojení nejvíce chybí.'
           ]
         }
       ]
