@@ -353,12 +353,12 @@ window.RS_DATA = {
     {
       n: 8,
       title: 'Živý veřejný prostor',
-      lead: 'Oživíme veřejná prostranství tak, aby nabízela více míst pro setkávání, kulturu i odpočinek všech generací.',
+      lead: 'Budeme vytvářet živá i klidná místa pro setkávání, kulturu a odpočinek a jejich proměny připravovat společně s obyvateli. Přesunem sběrného dvora uvolníme prostor pro centrální park.',
       sections: [
         {
           heading: null,
           paragraphs: [
-            'Veřejný prostor je srdcem města. Nejsou to jen ulice, náměstí, parky a cesty, ale místa, kde se odehrává každodenní život. Chceme Říčany, kde se lidé mají kde potkávat a odpočívat, děti si mají kde hrát a všechny generace se mohou cítit dobře a bezpečně. Budeme rozvíjet živá i klidná místa, připravovat proměny veřejných prostranství společně s jejich uživateli a postupně kultivovat jejich vzhled, vybavení i údržbu. Součástí našeho přístupu budou jak drobná každodenní zlepšení, tak dlouhodobé projekty, které mohou městu otevřít nové možnosti pro odpočinek, komunitní život a zeleň.'
+            'Veřejný prostor je místem každodenního života – patří do něj náměstí, parky, menší plácky, ulice i cesty. Chceme, aby se v něm lidé všech generací cítili dobře a bezpečně, měli kde odpočívat, setkávat se a trávit volný čas. Proto budeme rozvíjet živá místa pro komunitní a kulturní život i klidná zákoutí pro odpočinek. Jejich proměny budeme připravovat společně s lidmi, kteří je používají, a zaměříme se na velké projekty i každodenní kvalitu – vzhled, vybavení, čistotu a pravidelnou údržbu.'
           ]
         },
         {
