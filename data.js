@@ -319,7 +319,7 @@ window.RS_DATA = {
         {
           heading: null,
           paragraphs: [
-            'Letní vedra a sucha nás v posledních letech trápí stále častěji. Asfaltové a betonové plochy se nepříjemně přehřívají a na řadě míst chybí tolik potřebný stín. Chceme proto naši stávající zeleň maximálně chránit a dále ji smysluplně rozšiřovat přesně tam, kde je to nejvíce potřeba. Vybudujeme čisté a odolné město, které dokáže efektivně reagovat na letní horka a nabídne příjemné klima pro práci i odpočinek.'
+            'Letní vedra a delší období sucha přicházejí stále častěji. Ve městě je nejvíce pocítíme tam, kde převládá asfalt a beton a chybějí stromy, stín a voda. Budeme proto chránit vzrostlou zeleň, sázet nové stromy tam, kde přinesou největší užitek, lépe zadržovat dešťovou vodu a postupně proměňovat přehřátá místa. Chceme, aby se po Říčanech dalo příjemně pohybovat a trávit čas i během horkých letních dnů.'
           ]
         },
         {
