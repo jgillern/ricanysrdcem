@@ -435,39 +435,41 @@ window.RS_DATA = {
     {
       n: 10,
       title: 'Podpora místních podnikatelů',
-      lead: 'Místní živnostníci a firmy pomáhají udržovat město živé. Nabídneme jim praktický servis, pomoc s propagací a nové příležitosti ke spolupráci.',
+      lead: 'Usnadníme podnikatelům jednání s radnicí, propojíme místní firmy, živnostníky a profesionály a podpoříme obchody a služby, které dávají život všem částem Říčan.',
       sections: [
         {
           heading: null,
           paragraphs: [
-            'Říčany nesmí být jen luxusní „noclehárnou“ pro lidi dojíždějící za prací do Prahy. Pokud chceme mít živé ulice, fungující náměstí i po páté hodině večerní a pestrou nabídku služeb, musíme si hýčkat naše místní živnostníky, obchodníky i stovky nezávislých profesionálů pracujících z domova. Radnice nemá házet podnikatelům klacky pod nohy, ale musí fungovat jako moderní servisní organizace. Prosperující lokální byznys totiž znamená více peněz do městského rozpočtu a lepší život pro všechny.'
+            'Říčany jsou domovem mnoha živnostníků, firem a kvalifikovaných profesionálů. Vedle obchodů, restaurací, služeb a řemesel, které oživují centrum i jednotlivé čtvrti, zde působí mnoho lidí pracujících z domova pro klienty v Praze nebo zahraničí. Přesto o sobě často nevědí a jejich potenciál pro rozvoj města zůstává málo využitý. Chceme jim usnadnit jednání s radnicí, vzájemně je propojit a vytvořit podmínky, aby se jim v Říčanech dobře podnikalo. Silná místní ekonomika znamená pestřejší služby, živější ulice a více příležitostí přímo ve městě.'
           ]
         },
         {
-          heading: 'Podnikatelské kontaktní místo a servisní standard',
+          heading: 'Radnice, která šetří čas',
           paragraphs: [
-            'Zřídíme jedno jasné podnikatelské kontaktní místo. Naším cílem není vytvářet další byrokracii ani dalšího úředníka, který by vás jen kontroloval. Chceme vám naopak šetřit čas. Tento koordinátor vám pomůže zorientovat se v úřadu, poradí s formuláři, povoleními, získáváním dotací, městskými zakázkami, parkováním, reklamou, zábory i pořádáním akcí ve veřejném prostoru.',
-            'Jako praktický doplněk k této pomoci zavedeme servisní standard radnice. U běžných žádostí (např. předzahrádky, vjezdy, stánkový prodej) se podnikatel vždy rychle dozví, zda je jeho žádost kompletní, kdo ji řeší a jaká je orientační lhůta, přičemž připravíme i zjednodušené online postupy a vzorová řešení.'
+            'Zřídíme jedno podnikatelské kontaktní místo pro agendy, které řeší město. Jeho koordinátor pomůže podnikatelům zorientovat se v povoleních, záborech, předzahrádkách, reklamě, parkování, zásobování, městských prostorech nebo pořádání akcí. Zajistí, aby podnikatel nemusel obcházet jednotlivé odbory a složitě zjišťovat, na koho se obrátit.',
+            'U běžných žádostí zavedeme servisní standard radnice. Podnikatel se rychle dozví, zda je jeho žádost kompletní, kdo ji řeší a jaká je předpokládaná lhůta. Pro nejčastější situace zveřejníme jednoduché online postupy, potřebné formuláře a vzorová řešení.'
           ]
         },
         {
-          heading: 'Kampaň Podporuj svého souseda a město jako partner',
+          heading: 'Propojování a spolupráce',
           paragraphs: [
-            'Město má být prvním propagátorem lidí, kteří tu poctivě pracují, zaměstnávají, platí daně a dávají ulicím život. Spustíme proto novou komunikační kampaň „Podporuj svého souseda“. Její myšlenkou je ukázat obyvatelům přínos nakupování u místních firem a propojit podnikatele s děním v sousedství. Nejde přitom jen o líbivý reklamní slogan. Vytvoříme přehlednou online mapu místních obchodů, služeb, řemeslníků a provozoven, budeme je pravidelně představovat v městských kanálech a přímo je propojíme s městskými akcemi.',
-            'Samotné město se také stane pro inovativní firmy partnerem. Budeme vypisovat malé městské výzvy pro řešení našich lokálních problémů — ať už v dopravě, energetice nebo digitalizaci. Místní startupy, odborníci a studenti nám pomohou situaci řešit a my pro ně budeme prvním testovacím místem a cennou referencí.'
+            'Budeme systematicky propojovat místní firmy, drobné živnostníky, provozovatele obchodů a restaurací, lidi pracující na volné noze i začínající podnikatele. Založíme Říčanské podnikatelské fórum – pravidelnou a otevřenou platformu pro jejich spolupráci s městem. Jeho jednání se bude účastnit vedení města a podle tématu také odpovědní pracovníci radnice.',
+            'Na fóru budeme řešit jak problémy podnikatelů, tak připravované investice, dopravní změny, nové služby a další výzvy města, k nimž mohou místní firmy přinést cenné zkušenosti a podněty. Ke konkrétním tématům budeme svolávat pracovní kulaté stoly a z jejich jednání stanovíme další kroky a odpovědnosti.',
+            'Vedle pracovních jednání budeme pořádat neformální setkání pro navazování kontaktů a spolupráce. Podnikatele propojíme také s říčanskými školami prostřednictvím exkurzí, praxí, stáží a společných projektů, které mladým lidem představí profese a příležitosti přímo v jejich městě.'
           ]
         },
         {
-          heading: 'Prostory, setkávání a propojování se školami',
+          heading: 'Obchody a služby, které oživují město',
           paragraphs: [
-            'Na webu vytvoříme transparentní rozcestník prostor pro podnikání, kde se přehledně potká nabídka městských i soukromých nebytových prostor, volných provozoven či coworkingových míst.',
-            'Zavedeme také tematická pracovní setkání, kde u jednoho stolu s městem usednou nejen velké firmy, ale i malé provozovny, restauratéři a OSVČ, abychom prakticky řešili konkrétní témata jako zásobování či parkování. Místní podnikatele navíc propojíme se školami. Děti a studenti by měli formou exkurzí a stáží poznat technologie, řemesla a profese, které v Říčanech skutečně existují.'
+            'Obchod, kavárna, restaurace, řemeslná dílna, salon nebo místní služba nejsou jen místem podnikání. Často jsou také přirozeným místem každodenního setkávání a pomáhají udržovat živé centrum i jednotlivé části Říčan. Při přípravě rekonstrukcí ulic, dopravních změn, parkování, zásobování nebo městských akcí proto budeme s dotčenými provozovnami mluvit včas, ne až ve chvíli, kdy změna začne komplikovat jejich fungování.',
+            'S provozovateli budeme podle místních podmínek řešit také bezprostřední okolí jejich provozoven – možnosti zásobování a krátkodobého zastavení, stojany na kola, orientační značení, posezení nebo bezbariérový přístup. Na trzích, slavnostech a dalších městských akcích vytvoříme za jasných a rovných podmínek více příležitostí pro místní obchodníky, restauratéry, výrobce a poskytovatele služeb.'
           ]
         },
         {
-          heading: 'Praktické vzdělávání zdarma',
+          heading: 'Inovace a odborná pomoc',
           paragraphs: [
-            'Zavedeme pravidelné bezplatné vzdělávání. Pro začínající podnikatele a OSVČ zorganizujeme po vzoru měst jako Tišnov nebo Velvary praktický kurz o několika setkáních, který je provede od ověření prvotního nápadu přes cenotvorbu a digitální marketing až po orientaci v daních a odvodech. Pro zavedené živnostníky zajistíme workshopy o dotačních příležitostech či legislativních novinkách.'
+            'Ve spolupráci se Středočeským inovačním centrem, CzechInvestem, hospodářskou komorou a dalšími odbornými partnery budeme přímo v Říčanech pořádat konzultační dny a praktické workshopy. Jejich zaměření bude vycházet ze skutečného zájmu místních podnikatelů a může se týkat například rozvoje podnikání, financování, digitalizace nebo legislativních změn. Začínajícím a inovativním firmám i živnostníkům tak zpřístupníme mentoring, odborné kontakty a příležitosti ke spolupráci.',
+            'Budeme vypisovat otevřené výzvy k řešení konkrétních potřeb města a vhodná řešení za jasných a rovných podmínek ověřovat v menších pilotních projektech. Může jít například o digitalizaci městských služeb, energetické úspory, péči o veřejný prostor nebo mobilitu. Říčany tak mohou být místem, kde dobrý nápad získá první praktické využití a cennou referenci.'
           ]
         }
       ]
