@@ -314,7 +314,7 @@ window.RS_DATA = {
     {
       n: 7,
       title: 'Zelené město odolné proti horku',
-      lead: 'Ochráníme město před letním horkem. Zpracujeme mapu horka, stínu a vody a přineseme do ulic více stínu, pítek a mlžítek.',
+      lead: 'Připravíme Říčany na stále častější letní vedra. Zpracujeme mapu horka, stínu a vody a podle ní budeme cíleně doplňovat stromy, stínicí prvky, pítka a mlžítka.',
       sections: [
         {
           heading: null,
