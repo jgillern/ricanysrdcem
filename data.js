@@ -380,8 +380,8 @@ window.RS_DATA = {
         {
           heading: 'Přesun sběrného dvora a centrální park',
           paragraphs: [
-            'Za jednu z největších příležitostí pro budoucnost Říčan považujeme území dnešního sběrného dvora v centru města. Okolí Mlýnského rybníka už dnes patří k příjemným místům ve městě. Naším cílem je, aby se tento prostor mohl v budoucnu přirozeně rozšířit právě o místo, které dnes zabírá sběrný dvůr.',
-            'Víme, že přesun sběrného dvora mimo centrum není jednoduchý úkol a nepůjde o rychlé řešení. O to důležitější je začít ho připravovat včas. Budeme hledat vhodnější lokalitu, prověřovat technické, dopravní i majetkové možnosti a připravovat dlouhodobý plán, který umožní, aby toto cenné území jednou sloužilo lidem, odpočinku a veřejnému životu, nikoliv provozu, který do centra města dlouhodobě nepatří.'
+            'Sběrný dvůr je důležitou městskou službou, jeho současné umístění v samotném centru Říčan ale nedává dlouhodobě smysl. Zabírá cenný prostor v bezprostřední blízkosti Mlýnského rybníka, který by mohl mnohem lépe sloužit obyvatelům. Pro sběrný dvůr proto najdeme vhodnější a dobře dostupnou lokalitu na okraji města a jeho dnešní areál proměníme v centrální park.',
+            'Nový park přirozeně naváže na okolí rybníka a vytvoří s ním jeden ucelený zelený prostor. Do přípravy jeho zadání zapojíme obyvatele a nejlepší podobu parku vybereme v otevřené soutěži. Výsledkem bude kvalitní veřejný prostor, který se stane přirozeným místem pro odpočinek, setkávání a komunitní život v centru Říčan.'
           ]
         },
         {
